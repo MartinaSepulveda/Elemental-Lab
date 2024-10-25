@@ -234,8 +234,46 @@ use FTP\Connection;
             }
         }
 
+        public function registrarUsuario($idUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario, $ruta, $claveUsuario) {
+            $objetoConexion = new Conexion();
+            $conexion = $objetoConexion->get_conexion();
+    
+            // Verificar si el usuario ya existe
+            $checkUser = "SELECT COUNT(*) FROM usuarios WHERE idUsuario = :idUsuario";
+            $stmt = $conexion->prepare($checkUser);
+            $stmt->bindParam(":idUsuario", $idUsuario);
+            $stmt->execute();
+    
+            // Comprobar el resultado
+            if ($stmt->fetchColumn() > 0) {
+                // Alerta si el usuario ya existe
+                echo '<script>alert("El usuario ya se encuentra registrado.");</script>';
+                 echo "<script>location.href='../Registro-usuarios.html'</script>";
+                 // Salir del método
+            }
+    
+            // Si el usuario no existe, proceder a registrar
+            $registrarUsuario = "INSERT INTO usuarios (idUsuario, nombresUsuario, apellidosUsuario, correoUsuario, telefonoUsuario, fotoUsuario, claveUsuario) VALUES (:idUsuario, :nombresUsuario, :apellidosUsuario, :correoUsuario, :telefonoUsuario, :fotoUsuario, :claveUsuario)";
+            
+            $result = $conexion->prepare($registrarUsuario);
+    
+            // Vincular parámetros
+            $result->bindParam(":idUsuario", $idUsuario);
+            $result->bindParam(":nombresUsuario", $nombresUsuario);
+            $result->bindParam(":apellidosUsuario", $apellidosUsuario);
+            $result->bindParam(":correoUsuario", $correoUsuario);
+            $result->bindParam(":telefonoUsuario", $telefonoUsuario);
+            $result->bindParam(":fotoUsuario", $ruta);
+            $result->bindParam(":claveUsuario", $claveUsuario);
+    
+            // Ejecutar la consulta
+            $result->execute();
+    
+            // Mensaje de éxito
+            echo '<script>alert("Su cuenta ha sido creada.");</script>';
+            echo "<script>location.href='../login.html';</script>";
+        }
         
-
 
     }
 
