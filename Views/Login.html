@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Inicio de sesión</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/" rel="icon">
+  <link href="assets/img/" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <main id="login">
+    <div class="container">
+
+      <section class="section min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-start">
+            <div class="col-lg-5 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <!-- Logo -->
+              <!-- Fin Logo -->
+
+              <!-- Tarjeta inicio de sesión -->
+              <div class="card mb-3">
+                <div class="d-flex justify-content-center ">
+                  <a href="index.html" class="logo d-flex align-items-center w-auto">
+                    <img src="assets/img/NombreLogoTransparente.png" alt="logo Elemental" height="200px">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <div class="pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Ingresa con tu cuenta</h5>
+                    <p class="text-center small">Ingresa tu identificacion/NIT & tu contraseña</p>
+                  </div>
+                  <!-- Formulario inicio de sesión -->
+                  <form class="row g-3 needs-validation" novalidate>
+
+                    <!-- Campo numéro de documento -->
+                    <div class="col-12">
+                      <label for="numDoc" class="form-label">Número de documento/NIT</label>
+                      <div class="input-group has-validation">
+                        <input type="text" name="numDoc" class="form-control" id="numDoc" required placeholder="Ej: 1002543232">
+                        <div class="invalid-feedback">Ingrese un número de documento/NIT </div>
+                      </div>
+                    </div>
+
+                    <!-- Campo contraseña -->
+                    <div class="col-12 position-relative">
+                      <label for="claveUsu" class="form-label">Contraseña</label>
+                      <div class="position-relative">
+                        <input type="password" name="claveUsu" class="form-control" id="claveUsu" required style="padding-right: 40px;">
+                        <span id="togglePassword" class="position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                          <i class="bi bi-eye" id="eyeIcon"></i>
+                        </span>
+                        <div class="invalid-feedback">Ingresa tu contraseña</div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-12">
+                      <button class="btn  w-100" type="submit">Ingresar</button>
+                    </div>
+                  </form><!-- Fin Formulario inicio de sesión -->
+
+                </div>
+              </div>
+              <!-- Creditos plantilla -->
+              <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+              </div>
+            </div><!-- Fin tarjeta inicio de sesión -->
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Scrip para ocultar/mostrar la contraseña -->
+  <script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const passwordInput = document.querySelector('#claveUsu');
+  const eyeIcon = document.querySelector('#eyeIcon');
+
+  togglePassword.addEventListener('click', function () {
+    // Alterna el tipo de input entre 'password' y 'text'
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+
+    // Cambia el ícono del ojito
+    eyeIcon.classList.toggle('bi-eye');
+    eyeIcon.classList.toggle('bi-eye-slash');
+  });
+  </script>
+
+</body>
+
+</html>
