@@ -1,3 +1,13 @@
+<!-- Cargar las dependencias necesarias -->
+
+<?php
+    require_once("../Models/conexion_db.php");
+    require_once("../Models/consultas_db .php");
+    require_once("../Models/actualizaciones_db.php");
+    require_once("../Controllers/mostrarUsuarios.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -300,149 +310,10 @@
               </tr>
           </thead>
           <tbody id="tbody">
-              <tr>
-                  <td>Juan Pérez</td>
-                  <td>12345678</td>
-                  <td>3001234567</td>
-                  <td>Analista</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>María Gómez</td>
-                  <td>87654321</td>
-                  <td>3012345678</td>
-                  <td>Administrador</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Carlos Martínez</td>
-                  <td>11223344</td>
-                  <td>3023456789</td>
-                  <td>Motorizado</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Ana Torres</td>
-                  <td>22334455</td>
-                  <td>3034567890</td>
-                  <td>Veterinaria</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Lucía Fernández</td>
-                  <td>33445566</td>
-                  <td>3045678901</td>
-                  <td>Analista</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Diego Ruiz</td>
-                  <td>44556677</td>
-                  <td>3056789012</td>
-                  <td>Administrador</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                <td>Ana Torres</td>
-                <td>22334455</td>
-                <td>3034567890</td>
-                <td>Veterinaria</td>
-                <td>juli@gmail.com</td>
-                <td>
-                    <select>
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                    </select>
-                </td>
-              </tr>
-              <tr>
-                  <td>Elena Castro</td>
-                  <td>55667788</td>
-                  <td>3067890123</td>
-                  <td>Motorizado</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Fernando López</td>
-                  <td>66778899</td>
-                  <td>3078901234</td>
-                  <td>Veterinaria</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Clara Sosa</td>
-                  <td>77889900</td>
-                  <td>3089012345</td>
-                  <td>Analista</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="activo">Activo</option>
-                          <option value="inactivo">Inactivo</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                <td>Ana Torres</td>
-                <td>22334455</td>
-                <td>3034567890</td>
-                <td>Veterinaria</td>
-                <td>juli@gmail.com</td>
-                <td>
-                    <select>
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                    </select>
-                </td>
-              </tr>
+
+              <?php
+                cargarUsuarios();
+              ?>
           </tbody>
         </table>
 

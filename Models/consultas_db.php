@@ -201,6 +201,77 @@
             return $datosZona;
         }
 
+        public function consultarUsuarios(){
+            // Variable que va a almacenar el fetch
+            $usuarios=null;
+
+            //creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion =$objConexion -> get_conexion();
+
+            // Definimos la consulta SQL a ejecutar y la guardamos en una variable
+            
+            $consultarUsuarios = "SELECT CONCAT(nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, idUsuario, telefonoUsuario, correoUsuario, descripcionRol FROM usuarios INNER JOIN rol ON idRolUsuario = idRol  WHERE idEstadoUsuario IS NULL ";
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $result = $conexion -> prepare($consultarUsuarios);
+
+            $result -> execute();
+
+            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+
+            while ($resultado = $result->fetch()){
+                $usuarios[] = $resultado;
+            }
+            return $usuarios;
+        }
+
+        public function validarSesion ($idUsuario, $clave){
+
+            $objConexion = new Conexion();
+            $conexion = $objConexion -> get_conexion();
+
+            $consultar = "SELECT * FROM usuarios where idUsuario=:idUsuario";
+            $result = $conexion -> prepare($consultar); 
+
+            $result -> bindParam(":idUsuario", $idUsuario);
+
+            $result->execute(); 
+            //Se valida el correo en el sistema para luego aplicar el arreglo 
+            //Solo se hace el arreglo si el correo esta en la base de datos
+            if($buscar =$result->fetch()){
+                //Validamos la clave 
+                if($clave == $buscar['claveUsuario']){
+                    //Inicio de sesión
+                    session_start();
+                    //Creamos variables de sesión que usaremos más adelante
+                    $_SESSION['id'] = $buscar ['id'];
+                    $_SESSION['rol'] = $buscar ['idRolUsuario'];
+                    $_SESSION['estado'] = $buscar ['idEstadoUsuario'];
+
+                    //VALIDAMOS EL ROL PARA REDIRECCIONAMIENTO
+                    if($datosUsuario['rol']==1 & $buscar['estado']==1 ) {
+                        echo "<script> alert ('Bienvenido Administrador')</script>"; 
+                        echo "<script>location.href='../Views/Administrador.html'</script>";
+                    }
+                    if ($datosUsuario['rol']==2 & $buscar['estado']==1){
+                        echo "<script> alert ('Bienvenido Motorizado')</script>"; 
+                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                    }
+                    if ($datosUsuario['rol']==3 & $buscar['estado']==1){
+                        echo "<script> alert ('Bienvenido Bioanalista')</script>"; 
+                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                    }
+
+                }else{
+                    echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>"; 
+                    echo "<script>location.href='../Views/Login.html'</script>";
+                }
+            }else{
+                echo "<script> alert ('El usuario ingresado no se encuentra en la base de datos')</script>"; 
+                echo "<script>location.href='../Views/Login.html'</script>";
+            } 
+        }
+
 
 
         

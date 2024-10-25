@@ -248,7 +248,7 @@ use FTP\Connection;
             if ($stmt->fetchColumn() > 0) {
                 // Alerta si el usuario ya existe
                 echo '<script>alert("El usuario ya se encuentra registrado.");</script>';
-                 echo "<script>location.href='../Registro-usuarios.html'</script>";
+                echo "<script>location.href='../Registro-usuarios.html'</script>";
                  // Salir del método
             }
     
@@ -271,7 +271,7 @@ use FTP\Connection;
     
             // Mensaje de éxito
             echo '<script>alert("Su cuenta ha sido creada.");</script>';
-            echo "<script>location.href='../login.html';</script>";
+            echo "<script>location.href='../Views/Login.html';</script>";
         }
         
 
