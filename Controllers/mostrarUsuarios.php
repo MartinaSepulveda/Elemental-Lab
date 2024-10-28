@@ -1,36 +1,35 @@
 <?php
 
     function cargarUsuarios(){
-        //creamos el objeto a partir de la clase conexion
         $objConsultas = new Consultas();
         $usuarios = $objConsultas -> consultarUsuarios();
 
-        // Se verifica si $usuarios esta vacia con empty
         if(empty($usuarios)){
-            echo "<h2> No hay usuarios registrados <h2/>";
+            echo "<h2>No hay usuarios registrados</h2>";
         }
         else{
             foreach ($usuarios as $datosUsuarios ){
-                //pintar o maquetar la informacion de la tabla 
-                echo'
+                echo '
                 <tr>
                     <td>'.$datosUsuarios['nombreCompleto'].'</td>
                     <td>'.$datosUsuarios['idUsuario'].'</td>
                     <td>'.$datosUsuarios['telefonoUsuario'].'</td>
                     <td>'.$datosUsuarios['descripcionRol'].'</td>
                     <td>'.$datosUsuarios['correoUsuario'].'</td>
-                    <td>'.$datosUsuarios['descripcionEstado'].'</td>
                     <td>
-                        <select>
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
-                        </select>
+                        <form method="POST" action="../Controllers/asignarEstadoUsuarios.php">
+                            <input type="hidden" name="idUsuario" value="'.$datosUsuarios['idUsuario'].'">
+                            <select name="estado">
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                            </select>
+                            <button type="submit">Guardar</button>
+                        </form>
                     </td>
-                </tr>
-
-                ';
+                </tr>';
             }
         }
     }
+
 
 ?>

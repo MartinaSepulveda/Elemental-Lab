@@ -1001,10 +1001,51 @@ form .enviar:hover{
 # Home / Dashboard
 --------------------------------------------------------------*/
 
-#home input, #home select{
+ /* Estilo para el select */
+select[name="estado"] {
+  padding: 5px; 
+  border: 1px solid #ccc;
+  border-radius: 4px; 
+  font-size: 14px; 
+  cursor: pointer; 
+  height: 34px;
+  margin-right: 5px;
+}
+
+div select[name="zona"] {
+  padding: 5px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  font-size: 14px; 
+  cursor: pointer; 
+  height: 34px;
+  margin-right: 5px;
+}
+
+@media (max-width: 934px) {
+  select[name="estado"] {
+    margin-bottom: 10px;
+  }
+  div select[name="zona"]{
+    margin-bottom: 10px;
+  }
+}
+
+/* Estilo para el botón */
+button[type="submit"] {
+  padding: 6px 12px; 
+  background-color: var(--color-acentos); 
+  color: white; 
+  border: none; 
   border-radius: 4px;
-  border: 1px solid black;
-  padding: 4px;
+  font-size: 14px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+
+button[type="submit"]:hover {
+  background-color: #317cb9; /* Color de fondo más oscuro al pasar el mouse */
 }
 
 /*--------------------------------------------------------------

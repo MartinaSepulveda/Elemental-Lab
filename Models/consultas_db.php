@@ -128,6 +128,29 @@
             return $datosSolicitud;
         }
 
+        public function consultarUsuarios(){
+            // Variable que va a almacenar el fetch
+            $usuarios=null;
+
+            //creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion =$objConexion -> get_conexion();
+
+            // Definimos la consulta SQL a ejecutar y la guardamos en una variable
+            
+            $consultarUsuarios = "SELECT CONCAT(nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, idUsuario, telefonoUsuario, correoUsuario, descripcionRol FROM usuarios INNER JOIN rol ON idRolUsuario = idRol  WHERE idEstadoUsuario IS NULL ";
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $result = $conexion -> prepare($consultarUsuarios);
+
+            $result -> execute();
+
+            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+
+            while ($resultado = $result->fetch()){
+                $usuarios[] = $resultado;
+            }
+            return $usuarios;
+        }
 
         public function consultarUsuariosActivos(){
             // Variable que va a almacenar el fetch
@@ -201,28 +224,28 @@
             return $datosZona;
         }
 
-        public function consultarUsuarios(){
-            // Variable que va a almacenar el fetch
-            $usuarios=null;
+        public function consultarMotorizados(){
+                // Variable que va a almacenar el fetch
+                $motorizado=null;
 
-            //creamos el objeto a partir de la clase conexion
-            $objConexion = new Conexion();
-            $conexion =$objConexion -> get_conexion();
-
-            // Definimos la consulta SQL a ejecutar y la guardamos en una variable
-            
-            $consultarUsuarios = "SELECT CONCAT(nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, idUsuario, telefonoUsuario, correoUsuario, descripcionRol FROM usuarios INNER JOIN rol ON idRolUsuario = idRol  WHERE idEstadoUsuario IS NULL ";
-            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
-            $result = $conexion -> prepare($consultarUsuarios);
-
-            $result -> execute();
-
-            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
-
-            while ($resultado = $result->fetch()){
-                $usuarios[] = $resultado;
-            }
-            return $usuarios;
+                //creamos el objeto a partir de la clase conexion
+                $objConexion = new Conexion();
+                $conexion =$objConexion -> get_conexion();
+    
+                // Definimos la consulta SQL a ejecutar y la guardamos en una variable
+                
+                $consultarMotorizado = "SELECT idUsuario, CONCAT (nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, correoUsuario, telefonoUsuario, idRolUsuario, idZonaUsuario FROM usuarios WHERE idEstadoUsuario = 1 AND idRolUsuario = 2 AND idZonaUsuario IS NULL";
+                // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+                $result = $conexion -> prepare($consultarMotorizado);
+    
+                $result -> execute();
+    
+                //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+    
+                while ($resultado = $result->fetch()){
+                    $motorizado[] = $resultado;
+                }
+                return $motorizado;
         }
 
         public function validarSesion ($idUsuario, $clave){
@@ -251,7 +274,7 @@
                     //VALIDAMOS EL ROL PARA REDIRECCIONAMIENTO
                     if($datosUsuario['rol']==1 & $buscar['estado']==1 ) {
                         echo "<script> alert ('Bienvenido Administrador')</script>"; 
-                        echo "<script>location.href='../Views/Administrador.html'</script>";
+                        echo "<script>location.href='../Views/Administrador.php'</script>";
                     }
                     if ($datosUsuario['rol']==2 & $buscar['estado']==1){
                         echo "<script> alert ('Bienvenido Motorizado')</script>"; 

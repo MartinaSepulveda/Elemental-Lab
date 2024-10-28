@@ -2,7 +2,7 @@
 
 <?php
     require_once("../Models/conexion_db.php");
-    require_once("../Models/consultas_db .php");
+    require_once("../Models/consultas_db.php");
     require_once("../Models/actualizaciones_db.php");
     require_once("../Controllers/mostrarUsuarios.php");
 
@@ -158,7 +158,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="Administrador.html">
+        <a class="nav-link collapsed" href="Administrador.php">
           <i class="bi bi-house"></i>
           <span>Home</span>
         </a>
@@ -211,7 +211,7 @@
         </a>
         <ul id="zonas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="administrador-asignarZonas.html">
+            <a href="administrador-asignarZonas.php">
               <i class="bi bi-circle"></i><span>Asignar Zona</span>
             </a>
           </li>
@@ -221,7 +221,7 @@
             </a>
           </li>
           <li>
-            <a href="administrador-ingresarZona.html">
+            <a href="administrador-ingresarZona.php">
               <i class="bi bi-circle"></i><span>Ingresar Zonas</span>
             </a>
           </li>
@@ -271,13 +271,13 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="Administrador.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="Administrador.php">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section" >
+    <section class="section" id="home">
 
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-3">

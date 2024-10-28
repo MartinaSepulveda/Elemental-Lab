@@ -2,7 +2,7 @@
 
 <?php
     require_once("../Models/conexion_db.php");
-    require_once("../Models/consultas_db .php");
+    require_once("../Models/consultas_db.php");
     require_once("../Controllers/mostrarZonas.php");
 
 ?>
@@ -161,7 +161,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="Administrador.html">
+        <a class="nav-link collapsed" href="Administrador.php">
           <i class="bi bi-house"></i>
           <span>Home</span>
         </a>
@@ -214,7 +214,7 @@
         </a>
         <ul id="zonas-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="administrador-asignarZonas.html">
+            <a href="administrador-asignarZonas.php">
               <i class="bi bi-circle"></i><span>Asignar Zona</span>
             </a>
           </li>
@@ -224,7 +224,7 @@
             </a>
           </li>
           <li>
-            <a href="administrador-ingresarZona.html" class="active">
+            <a href="administrador-ingresarZona.php" class="active">
               <i class="bi bi-circle"></i><span>Ingresar Zonas</span>
             </a>
           </li>
@@ -290,7 +290,7 @@
             <!-- Horizontal Form -->
             <form class="row" action="../Controllers/registrarZona.php" method="post">
               <div class="col-md-12 mb-12 text-center">
-                <label for="nombre" class="col-form-label"  required >Nombre Zona</label>
+                <label for="nombre" class="col-form-label"  required >Nombre de la Zona</label>
                 <div>
                   <input type="text" class="form-control" id="nombreZona" name="nombreZona">
                 </div>

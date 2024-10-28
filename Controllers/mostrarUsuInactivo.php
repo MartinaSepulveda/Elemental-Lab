@@ -20,6 +20,15 @@
                     <td>'.$datosUsuarioInactivo['descripcionRol'].'</td>
                     <td>'.$datosUsuarioInactivo['correoUsuario'].'</td>
                     <td>'.$datosUsuarioInactivo['descripcionEstado'].'</td>
+                    <td>
+                        <form method="POST" action="../Controllers/asignarEstadoUsuarios.php">
+                            <input type="hidden" name="idUsuario" value="'.$datosUsuarioInactivo['idUsuario'].'">
+                            <select name="estado">
+                                <option value="1">Activo</option>
+                            </select>
+                            <button type="submit">Guardar</button>
+                        </form>
+                    </td>
                 </tr>
                 ';
             }

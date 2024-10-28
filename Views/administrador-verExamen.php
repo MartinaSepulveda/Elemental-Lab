@@ -3,7 +3,7 @@
 
 <?php
     require_once("../Models/conexion_db.php");
-    require_once("../Models/consultas_db .php");
+    require_once("../Models/consultas_db.php");
     require_once("../Models/actualizaciones_db.php");
     require_once("../Controllers/mostrarExamen.php");
 
@@ -165,7 +165,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="Administrador.html">
+        <a class="nav-link collapsed" href="Administrador.php">
           <i class="bi bi-house"></i>
           <span>Home</span>
         </a>
@@ -218,7 +218,7 @@
         </a>
         <ul id="zonas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="administrador-asignarZonas.html">
+            <a href="administrador-asignarZonas.php">
               <i class="bi bi-circle"></i><span>Asignar Zona</span>
             </a>
           </li>
@@ -228,7 +228,7 @@
             </a>
           </li>
           <li>
-            <a href="administrador-ingresarZona.html">
+            <a href="administrador-ingresarZona.php">
               <i class="bi bi-circle"></i><span>Ingresar Zonas</span>
             </a>
           </li>

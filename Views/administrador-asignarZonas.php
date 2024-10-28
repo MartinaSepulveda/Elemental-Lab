@@ -1,3 +1,12 @@
+<!-- Cargar las dependencias necesarias -->
+
+<?php
+    require_once("../Models/conexion_db.php");
+    require_once("../Models/consultas_db.php");
+    require_once("../Controllers/mostrarMotorizados.php");
+    require_once("../Controllers/mostrarZonasSelect.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -152,7 +161,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="Administrador.html">
+        <a class="nav-link collapsed" href="Administrador.php">
           <i class="bi bi-house"></i>
           <span>Home</span>
         </a>
@@ -205,7 +214,7 @@
         </a>
         <ul id="zonas-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="administrador-asignarZonas.html" class="active">
+            <a href="administrador-asignarZonas.php" class="active">
               <i class="bi bi-circle"></i><span>Asignar Zona</span>
             </a>
           </li>
@@ -215,7 +224,7 @@
             </a>
           </li>
           <li>
-            <a href="administrador-ingresarZona.html">
+            <a href="administrador-ingresarZona.php">
               <i class="bi bi-circle"></i><span>Ingresar Zonas</span>
             </a>
           </li>
@@ -296,146 +305,18 @@
           <table id="miTabla" class="table">
             <thead>
               <tr>
-                  <th><b>N. Documento</b></th>
                   <th>Nombres y apellidos</th>
+                  <th>N. Documento</th>
                   <th>Telefono</th>
                   <th>Correo</th>
                   <th>Asignar Zona</th>
               </tr>
           </thead>
           <tbody id="tbody">
-              <tr>
-                  <td>Juan Pérez</td>
-                  <td>12345678</td>
-                  <td>3001234567</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>María Gómez</td>
-                  <td>87654321</td>
-                  <td>3012345678</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Carlos Martínez</td>
-                  <td>11223344</td>
-                  <td>3023456789</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Ana Torres</td>
-                  <td>22334455</td>
-                  <td>3034567890</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Lucía Fernández</td>
-                  <td>33445566</td>
-                  <td>3045678901</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Diego Ruiz</td>
-                  <td>44556677</td>
-                  <td>3056789012</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                <td>Ana Torres</td>
-                <td>22334455</td>
-                <td>3034567890</td>
-                <td>juli@gmail.com</td>
-                <td>
-                    <select>
-                        <option value="Zona 1">Zona 1</option>
-                        <option value="Zona 2">Zona 2</option>
-                    </select>
-                </td>
-              </tr>
-              <tr>
-                  <td>Elena Castro</td>
-                  <td>55667788</td>
-                  <td>3067890123</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Fernando López</td>
-                  <td>66778899</td>
-                  <td>3078901234</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Clara Sosa</td>
-                  <td>77889900</td>
-                  <td>3089012345</td>
-                  <td>juli@gmail.com</td>
-                  <td>
-                      <select>
-                          <option value="Zona 1">Zona 1</option>
-                          <option value="Zona 2">Zona 2</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                <td>Ana Torres</td>
-                <td>22334455</td>
-                <td>3034567890</td>
-                <td>juli@gmail.com</td>
-                <td>
-                    <select>
-                        <option value="Zona 1">Zona 1</option>
-                        <option value="Zona 2">Zona 2</option>
-                    </select>
-                </td>
-              </tr>
+              <?php
+                cargarMotorizados();
+              ?> 
+              
           </tbody>
         </table>
 
