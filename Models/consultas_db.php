@@ -319,7 +319,27 @@
                 echo "<script>location.href='../Views/Login.html'</script>";
             } 
         }
+        // Función para mostrar los datos de las zonas en el formulario para editarlos
+        public function consultarZonaEditar($id){
+            $datosZonas = null;
 
+            //creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion =$objConexion -> get_conexion();
+
+            // Definimos la consulta SQL a ejecutar en donde se compara el id de la zona que llevamos en la url con el de la db
+            $consultarZona = "SELECT * FROM zonas WHERE idZonas=:id";
+
+            $result = $conexion -> prepare($consultarZona);
+            $result -> bindParam(':id', $id);
+
+            $result -> execute();
+
+            while ($resultado = $result->fetch()){
+                $datosZonas[] = $resultado;
+            }
+            return $datosZonas;
+        }
 
 
         
