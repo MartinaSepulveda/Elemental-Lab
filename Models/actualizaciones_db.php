@@ -119,6 +119,7 @@
             }
         }
 
+        // Funcion para asignarle  la zona del motorizado, por primera vez y si tiene el campo vacio y cuando se quiera editar
         public function actualizacionZona($zona, $idUsuario){
             //creamos el objeto a partir de la clase conexion
             $objConexion = new Conexion();
@@ -227,6 +228,9 @@
             ';
             }
         }
+
+
+    
 
     }
 

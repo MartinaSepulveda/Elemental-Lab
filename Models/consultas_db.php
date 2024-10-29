@@ -248,6 +248,31 @@
                 return $motorizado;
         }
 
+        public function consultarMotorizadosZona(){
+            // Variable que va a almacenar el fetch
+            $motorizado=null;
+
+            //creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion =$objConexion -> get_conexion();
+
+            // Definimos la consulta SQL a ejecutar y la guardamos en una variable
+            
+            $consultarMotorizado = "SELECT idUsuario, CONCAT (nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, correoUsuario, telefonoUsuario, idRolUsuario, descripcionZonas FROM usuarios INNER JOIN zonas ON idZonaUsuario=idZonas WHERE idEstadoUsuario = 1 AND idRolUsuario = 2 AND idZonaUsuario IS NOT NULL";
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $result = $conexion -> prepare($consultarMotorizado);
+
+            $result -> execute();
+
+            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+
+            while ($resultado = $result->fetch()){
+                $motorizado[] = $resultado;
+            }
+            return $motorizado;
+        }
+
+
         public function validarSesion ($idUsuario, $clave){
 
             $objConexion = new Conexion();

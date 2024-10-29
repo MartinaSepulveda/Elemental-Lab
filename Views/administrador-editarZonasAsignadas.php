@@ -3,7 +3,7 @@
 <?php
     require_once("../Models/conexion_db.php");
     require_once("../Models/consultas_db.php");
-    require_once("../Controllers/mostrarSolicitudes.php");
+    require_once("../Controllers/editarMotorizadosZonas.php");
 
 ?>
 
@@ -155,7 +155,6 @@
     </nav>
   </header><!-- End Header -->
 
-  
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
@@ -190,7 +189,7 @@
         <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="solicitudes-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="administrador-solicitudProceso.php">
               <i class="bi bi-circle"></i><span>En proceso</span>
@@ -202,7 +201,7 @@
             </a>
           </li>
           <li>
-            <a href="administrador-solicitudNoRealizada.php"class="active" >
+            <a href="administrador-solicitudNoRealizada.php">
               <i class="bi bi-circle"></i><span>No realizadas</span>
             </a>
           </li>
@@ -213,14 +212,14 @@
         <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-map"></i><span>Zonas</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="zonas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="zonas-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
             <a href="administrador-asignarZonas.php">
               <i class="bi bi-circle"></i><span>Asignar Zona</span>
             </a>
           </li>
           <li>
-            <a href="administrador-zonasAsignadas.php">
+            <a href="administrador-zonasAsignadas.php" class="active">
               <i class="bi bi-circle"></i><span>Zonas Asignadas</span>
             </a>
           </li>
@@ -258,30 +257,26 @@
       </li><!-- End Resultados Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link" href="index.html">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>
       </li><!-- End cerrar sesión Page Nav -->
-
     </ul>
-
   </aside><!-- End Sidebar-->
-
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Solicitudes</h1>
+      <h1>Zonas</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Solicitudes</li>
-          <li class="breadcrumb-item active"> No Realizadas</li>
+          <li class="breadcrumb-item">Zonas</li>
+          <li class="breadcrumb-item active">Zonas Asignadas</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
 
     <section class="section">
       <div class="row">
@@ -319,22 +314,18 @@
           <table id="miTabla" class="table">
             <thead>
                 <tr>
-                <th>Nombre</th>
-                  <th>Direccion</th>
-                  <th>Celular</th>
-                  <th>Nombre Exámen</th>
-                  <th>Urgencia</th>
-                  <th>Fase</th>
-                  <th>Estado</th>
-                  <th>Zona</th>
+                    <th>Nombre</th>
+                    <th>N. Identificación</th>
+                    <th>Celular</th>
+                    <th>Zona</th>
                 </tr>
             </thead>
             <tbody id="tbody">
-              
-              <?php
-                cargarSolicitudesNoRealizadas();
-              ?>
 
+              <?php
+                editarMotorizadosZonas();
+              ?>
+                
             </tbody>
         </table>
 
@@ -363,12 +354,6 @@
   <script src="assets/vendor/quill/quill.js"></script>
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-
-  <!-- Script Excel -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-
-  <!-- Biblioteca jsPDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
   <!-- Template Main JS File -->
@@ -453,63 +438,6 @@
 
     // Inicializa la tabla al cargar
     displayTable();
-    });
-
-
-    //JS PARA DESCARGAR EN EXCEL Y PDF
-
-
-    //Función para descargar la tabla como excel
-    document.getElementById('descargarExcel').addEventListener('click', function() {
-        // Obtener datos de la tabla
-        const table = document.querySelector('table'); // Asegúrate de tener tu tabla
-        const workbook = XLSX.utils.table_to_book(table, { sheet: 'Datos' });
-        XLSX.writeFile(workbook, 'Solicitudes en proceso.xlsx');
-    });
-
-
-    // Función para descargar la tabla como PDF
-    document.getElementById('descargarPdf').addEventListener('click', () => {
-        const { jsPDF } = window.jspdf; // Acceder a jsPDF
-
-        const doc = new jsPDF();
-
-        // Agregar título
-        doc.setFontSize(18);
-        doc.text("Solicitudes en proceso", 14, 20);
-
-        // Configurar la posición inicial para los datos de la tabla
-        let ejeY = 30;
-        doc.setFontSize(12);
-
-        // Agregar encabezados de la tabla
-        doc.text("Nombre", 14, ejeY);
-        doc.text("Dirección", 70, ejeY);
-        doc.text("Celular", 140, ejeY);
-        doc.text("Muestras", 180, ejeY);
-        doc.text("Urgencia", 210, ejeY);
-        doc.text("Fase", 250, ejeY);
-        ejeY += 10; // Espacio adicional después de los encabezados
-
-        // Obtener las filas de la tabla
-        const rows = document.querySelectorAll('#miTabla tbody tr');
-
-        // Agregar los datos de cada fila
-        rows.forEach(row => {
-            const columnas = row.querySelectorAll('td');
-            const data = Array.from(columnas).map(col => col.innerText);
-            
-            ejeY += 10; // Espacio entre filas
-            doc.text(data[0], 14, ejeY);   // Nombre
-            doc.text(data[1], 70, ejeY);   // Dirección
-            doc.text(data[2], 140, ejeY);  // Celular
-            doc.text(data[3], 180, ejeY);  // Muestras
-            doc.text(data[4], 210, ejeY);  // Urgencia
-            doc.text(data[5], 250, ejeY);  // Fase
-        });
-
-        // Guardar el archivo PDF
-        doc.save("detalles.pdf");
     });
 
   </script>

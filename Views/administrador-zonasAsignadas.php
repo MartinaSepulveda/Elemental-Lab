@@ -1,3 +1,11 @@
+<!-- Cargar las dependencias necesarias -->
+
+<?php
+    require_once("../Models/conexion_db.php");
+    require_once("../Models/consultas_db.php");
+    require_once("../Controllers/mostrarMotorizadosZonas.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -210,7 +218,7 @@
             </a>
           </li>
           <li>
-            <a href="administrador-zonasAsignadas.html" class="active">
+            <a href="administrador-zonasAsignadas.php" class="active">
               <i class="bi bi-circle"></i><span>Zonas Asignadas</span>
             </a>
           </li>
@@ -313,163 +321,10 @@
                 </tr>
             </thead>
             <tbody id="tbody">
-              <tr>
-                <td>Juan Pérez</td>
-                <td>12345678</td>
-                <td>3001234567</td>
-                <td>Zona 1</td>
-                <td>
-                  <a href="administrador-editarZona.html">
-                    <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                    </button>
-                  </a>
-                  <a href="">
-                    <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
-                </td>
-              </tr>
 
-              <tr>
-                <td>Juan Pérez</td>
-                <td>12345678</td>
-                <td>3001234567</td>
-                <td>Zona 1</td>
-                <td>
-                  <a href="administrador-editarZona.html">
-                    <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                    </button>
-                  </a>
-                  <a href="">
-                    <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Juan Pérez</td>
-                <td>12345678</td>
-                <td>3001234567</td>
-                <td>Zona 1</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Luis Pulido</td>
-                <td>213123</td>
-                <td>31236271282</td>
-                <td>Zona 1</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Juan Pérez</td>
-                <td>12345678</td>
-                <td>3001234567</td>
-                <td>Zona 1</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>JUliana Pérez</td>
-                <td>asd</td>
-                <td>3001234567</td>
-                <td>Zona 1</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Juan Pérez</td>
-                <td>12345678</td>
-                <td>3001234567</td>
-                <td>Zona 1</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>JUliana Pérez</td>
-                <td>asd</td>
-                <td>3001234567</td>
-                <td>Zona 1</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Pepe Loro</td>
-                <td>412412</td>
-                <td>313728987</td>
-                <td>Zona 2</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Pepe Loro</td>
-                <td>412412</td>
-                <td>313728987</td>
-                <td>Zona 2</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger btn-sm" title="Borrar">
-                      <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
+              <?php
+                cargarMotorizadosZonas();
+              ?>
                 
             </tbody>
         </table>
