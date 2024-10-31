@@ -301,8 +301,8 @@
           <table id="miTabla" class="table">
             <thead>
               <tr>
-                  <th>Nombres y apellidos</th>
-                  <th>N. Documento</th>
+                  <th>Nombres</th>
+                  <th>N.Documento/NIT</th>
                   <th>Contacto</th>
                   <th>Cargo</th>
                   <th>Correo</th>

@@ -3,14 +3,18 @@
     function cargarUsuarioInactivo(){
         //creamos el objeto a partir de la clase conexion
         $objConsultas = new Consultas();
-        $usuarioInactivo = $objConsultas -> consultarUsuariosInactivos();
+        $resultados = $objConsultas -> consultarUsuariosInactivos();
+
+        // Cargar usuarios
+        $usuariosIna = $resultados['usuarios'];
+        $veterinariasIna = $resultados['veterinarias'];
 
         // Se verifica si $usuarioInactivo esta vacia con empty
-        if(empty($usuarioInactivo)){
-            echo "<h2> No hay usuarios inactivos registrados <h2/>";
+        if(empty($usuariosIna)){
+            echo "<h3> No hay usuarios inactivos registrados <h3/>";
         }
         else{
-            foreach ($usuarioInactivo as $datosUsuarioInactivo ){
+            foreach ($usuariosIna as $datosUsuarioInactivo ){
                 //pintar o maquetar la informacion de la tabla 
                 echo'
                 <tr>
@@ -31,6 +35,32 @@
                     </td>
                 </tr>
                 ';
+            }
+        }
+
+        // Mostrar veterinarias
+        if (empty($veterinariasIna)) {
+            echo "<h3>No hay veterinarias activas</h2>";
+        } else {
+            foreach ($veterinariasIna as $datosVeterinaria) {
+                echo '
+                <tr>
+                    <td>' . $datosVeterinaria['nombreVeterinaria'] . '</td>
+                    <td>' . $datosVeterinaria['nitVeterinaria'] . '</td>
+                    <td>' . $datosVeterinaria['telefonoVeterinaria'] . '</td>
+                    <td> Veterinaria </td>
+                    <td>' . $datosVeterinaria['correoVeterinaria'] . '</td>
+                    <td>' . $datosVeterinaria['descripcionEstado'] . '</td>
+                    <td>
+                        <form method="POST" action="../Controllers/asignarEstadoVeterinaria.php">
+                            <input type="hidden" name="nit" value="'.$datosVeterinaria['nitVeterinaria'].'">
+                            <select name="estado">
+                                <option value="1">Activo</option>
+                            </select>
+                            <button type="submit">Guardar</button>
+                        </form>
+                    </td>
+                </tr>';
             }
         }
     }

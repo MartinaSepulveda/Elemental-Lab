@@ -131,6 +131,8 @@
         public function consultarUsuarios(){
             // Variable que va a almacenar el fetch
             $usuarios=null;
+            $veterinarias=null;
+
 
             //creamos el objeto a partir de la clase conexion
             $objConexion = new Conexion();
@@ -139,22 +141,43 @@
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
             $consultarUsuarios = "SELECT CONCAT(nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, idUsuario, telefonoUsuario, correoUsuario, descripcionRol FROM usuarios INNER JOIN rol ON idRolUsuario = idRol  WHERE idEstadoUsuario IS NULL ";
-            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
-            $result = $conexion -> prepare($consultarUsuarios);
 
-            $result -> execute();
+            $consultarVeterinarias="SELECT nombreVeterinaria, nitVeterinaria, telefonoVeterinaria , correoVeterinaria FROM veterinaria WHERE idEstadoVeterinaria IS NULL";
+
+
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $resultUsuarios = $conexion -> prepare($consultarUsuarios);
+
+            $resultUsuarios -> execute();
 
             //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
 
-            while ($resultado = $result->fetch()){
+            while ($resultado = $resultUsuarios->fetch()){
                 $usuarios[] = $resultado;
             }
-            return $usuarios;
+
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $resultVeterinarias = $conexion -> prepare($consultarVeterinarias);
+
+            $resultVeterinarias -> execute();
+
+            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+
+            while ($resultado = $resultVeterinarias->fetch()){
+                $veterinarias[] = $resultado;
+            }
+
+            // Retornamos ambos resultados
+            return [
+                'usuarios' => $usuarios,
+                'veterinarias' => $veterinarias,
+            ];
         }
 
         public function consultarUsuariosActivos(){
             // Variable que va a almacenar el fetch
             $usuarioActivo=null;
+            $veterinariaActiva=null;
 
             //creamos el objeto a partir de la clase conexion
             $objConexion = new Conexion();
@@ -163,22 +186,42 @@
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
             $consultarUsuActivo = "SELECT CONCAT (nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, idUsuario ,telefonoUsuario, descripcionRol, correoUsuario, descripcionEstado FROM usuarios INNER JOIN rol ON idRolUsuario=idRol INNER JOIN estado ON idEstadoUsuario=IdEstado WHERE idEstadoUsuario = 1 ";
-            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
-            $result = $conexion -> prepare($consultarUsuActivo);
 
-            $result -> execute();
+            $consultarVetActiva="SELECT nombreVeterinaria, nitVeterinaria, telefonoVeterinaria , correoVeterinaria, descripcionEstado FROM veterinaria INNER JOIN estado ON idEstadoVeterinaria=IdEstado WHERE idEstadoVeterinaria = 1";
+
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $resultUsu = $conexion -> prepare($consultarUsuActivo);
+
+            $resultUsu -> execute();
 
             //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
 
-            while ($resultado = $result->fetch()){
+            while ($resultado = $resultUsu->fetch()){
                 $usuarioActivo[] = $resultado;
             }
-            return $usuarioActivo;
+
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $resultVet = $conexion -> prepare($consultarVetActiva);
+
+            $resultVet -> execute();
+
+            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+
+            while ($resultado = $resultVet->fetch()){
+                $veterinariaActiva[] = $resultado;
+            }
+
+            // Retornamos ambos resultados
+            return [
+                'usuarios' => $usuarioActivo,
+                'veterinarias' => $veterinariaActiva,
+            ];
         }
 
         public function consultarUsuariosInactivos(){
             // Variable que va a almacenar el fetch
             $usuarioInactivo=null;
+            $veterinariaInactiva=null;
 
             //creamos el objeto a partir de la clase conexion
             $objConexion = new Conexion();
@@ -186,18 +229,37 @@
 
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
-            $consultarUsuInactivo = "SELECT CONCAT (nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, idUsuario ,telefonoUsuario, descripcionRol, correoUsuario, descripcionEstado FROM usuarios INNER JOIN rol ON idRolUsuario=idRol INNER JOIN estado ON idEstadoUsuario=IdEstado WHERE idEstadoUsuario = 2 ";
-            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
-            $result = $conexion -> prepare($consultarUsuInactivo);
+            $consultarUsuActivo = "SELECT CONCAT (nombresUsuario, ' ', apellidosUsuario) AS nombreCompleto, idUsuario ,telefonoUsuario, descripcionRol, correoUsuario, descripcionEstado FROM usuarios INNER JOIN rol ON idRolUsuario=idRol INNER JOIN estado ON idEstadoUsuario=IdEstado WHERE idEstadoUsuario = 2 ";
 
-            $result -> execute();
+            $consultarVetActiva="SELECT nombreVeterinaria, nitVeterinaria, telefonoVeterinaria , correoVeterinaria, descripcionEstado FROM veterinaria INNER JOIN estado ON idEstadoVeterinaria=IdEstado WHERE idEstadoVeterinaria = 2";
+
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $resultUsu = $conexion -> prepare($consultarUsuActivo);
+
+            $resultUsu -> execute();
 
             //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
 
-            while ($resultado = $result->fetch()){
+            while ($resultado = $resultUsu->fetch()){
                 $usuarioInactivo[] = $resultado;
             }
-            return $usuarioInactivo;
+
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $resultVet = $conexion -> prepare($consultarVetActiva);
+
+            $resultVet -> execute();
+
+            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+
+            while ($resultado = $resultVet->fetch()){
+                $veterinariaInactiva[] = $resultado;
+            }
+
+            // Retornamos ambos resultados
+            return [
+                'usuarios' => $usuarioInactivo,
+                'veterinarias' => $veterinariaInactiva,
+            ];
         }
 
         public function consultarZonas(){

@@ -7,7 +7,7 @@ function cargarZonasSelect(){
 
     // Se verifica si $zonas esta vacia con empty
     if(empty($zonas)){
-        echo "<h2> No hay zonas registradas <h2/>";
+        echo "<h3> No hay zonas registradas <h3/>";
     }
     else{
         foreach ($zonas as $datosZonas ){

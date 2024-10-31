@@ -7,7 +7,7 @@
 
         // Se verifica si $solicitudes esta vacia con empty
         if(empty($solicitudes)){
-            echo "<h2> No hay solicitudes registradas <h2/>";
+            echo "<h3> No hay solicitudes registradas <h3/>";
         }
         else{
             foreach ($solicitudes as $datossolicitudes ){
@@ -35,7 +35,7 @@
 
         // Se verifica si $solicitudes esta vacia con empty
         if(empty($solicitudes)){
-            echo "<h2> No hay solicitudes registradas <h2/>";
+            echo "<h3> No hay solicitudes registradas <h3/>";
         }
         else{
             foreach ($solicitudes as $datossolicitudes ){
@@ -63,7 +63,7 @@
 
         // Se verifica si $solicitudes esta vacia con empty
         if(empty($solicitudes)){
-            echo "<h2> No hay solicitudes registradas <h2/>";
+            echo "<h3> No hay solicitudes registradas <h3/>";
         }
         else{
             foreach ($solicitudes as $datossolicitudes ){

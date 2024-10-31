@@ -6,7 +6,7 @@
         $motorizado = $objConsultas -> consultarMotorizados();
 
         if(empty($motorizado)){
-            echo "<h2>No hay motorizados activos por asignar zona</h2>";
+            echo "<h3>No hay motorizados activos por asignar zona</h2>";
         }
         else{
             foreach ($motorizado as $datosMotorizado ){
