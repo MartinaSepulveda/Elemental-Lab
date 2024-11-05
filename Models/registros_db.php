@@ -234,7 +234,7 @@ use FTP\Connection;
             }
         }
 
-        public function registrarUsuario($idUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario, $ruta, $claveUsuario) {
+        public function registrarUsuario($idUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario, $idRolUsuario, $ruta, $claveUsuario) {
             $objetoConexion = new Conexion();
             $conexion = $objetoConexion->get_conexion();
     
@@ -246,14 +246,55 @@ use FTP\Connection;
     
             // Comprobar el resultado
             if ($stmt->fetchColumn() > 0) {
-                // Alerta si el usuario ya existe
-                echo '<script>alert("El usuario ya se encuentra registrado.");</script>';
-                echo "<script>location.href='../Registro-usuarios.html'</script>";
-                 // Salir del método
+                echo '
+                <div id="alert" style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #f8d7da;
+                    color: #721c24;
+                    border: 1px solid #f5c6cb;
+                    padding: 15px;
+                    margin: 20px auto; /* Centra el div en la página */
+                    border-radius: 5px;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    max-width: 600px; 
+                    position: relative; /* Necesario para posicionar el botón de cerrar */
+                ">
+                    <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
+                    <span><center>El usuario ya se encuentra registrado.</center> <br> En caso de estar inactivo comuniquese con el administrador.</span>
+                    <button onclick="closeAlert()" style="
+                        background: none;
+                        border: none;
+                        color: #721c24;
+                        font-size: 16px;
+                        position: absolute;
+                        right: 10px;
+                        cursor: pointer;
+                    ">✖</button>
+                </div>
+                
+                <script>
+                    function closeAlert() {
+                        document.getElementById("alert").style.display = "none";
+                        // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
+                        location.href = "../Views/Registro-veterinaria.php";
+                    }
+
+                    // Cierra la alerta automáticamente después de 10 segundos
+                    setTimeout(function() {
+                        closeAlert();
+                        // Redirige automáticamente después de 10 segundos
+                        location.href = "../Views/Registro-veterinaria.php";
+                    }, 10000);
+                </script>
+            ';
+                exit;
             }
     
             // Si el usuario no existe, proceder a registrar
-            $registrarUsuario = "INSERT INTO usuarios (idUsuario, nombresUsuario, apellidosUsuario, correoUsuario, telefonoUsuario, fotoUsuario, claveUsuario) VALUES (:idUsuario, :nombresUsuario, :apellidosUsuario, :correoUsuario, :telefonoUsuario, :fotoUsuario, :claveUsuario)";
+            $registrarUsuario = "INSERT INTO usuarios (idUsuario, nombresUsuario, apellidosUsuario, correoUsuario, telefonoUsuario, idRolUsuario, fotoUsuario, claveUsuario) VALUES (:idUsuario, :nombresUsuario, :apellidosUsuario, :correoUsuario, :telefonoUsuario, :idRolUsuario, :fotoUsuario, :claveUsuario)";
             
             $result = $conexion->prepare($registrarUsuario);
     
@@ -263,6 +304,7 @@ use FTP\Connection;
             $result->bindParam(":apellidosUsuario", $apellidosUsuario);
             $result->bindParam(":correoUsuario", $correoUsuario);
             $result->bindParam(":telefonoUsuario", $telefonoUsuario);
+            $result->bindParam(":idRolUsuario", $idRolUsuario);
             $result->bindParam(":fotoUsuario", $ruta);
             $result->bindParam(":claveUsuario", $claveUsuario);
     
@@ -270,10 +312,176 @@ use FTP\Connection;
             $result->execute();
     
             // Mensaje de éxito
-            echo '<script>alert("Su cuenta ha sido creada.");</script>';
-            echo "<script>location.href='../Views/Login.html';</script>";
+            echo '
+                <div id="alert" style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #d4edda;
+                    color: #155724;
+                    border: 1px solid #c3e6cb;
+                    padding: 15px;
+                    margin: 20px auto; /* Centra el div en la página */
+                    border-radius: 5px;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    max-width: 600px; 
+                    position: relative; /* Necesario para posicionar el botón de cerrar */
+                ">
+                    <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
+                    <span>Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del adminitrador.</span>
+                    <button onclick="closeAlert()" style="
+                        background: none;
+                        border: none;
+                        color: #155724;
+                        font-size: 16px;
+                        position: absolute;
+                        right: 10px;
+                        cursor: pointer;
+                    ">✖</button>
+                </div>
+                
+                <script>
+                    function closeAlert() {
+                        document.getElementById("alert").style.display = "none";
+                        // Redirige después de cerrar
+                        location.href = "../Views/login.html";
+                    }
+            
+                    // Cierra la alerta 
+                    setTimeout(function() {
+                        closeAlert();
+                        // Redirige automáticamente después de 5 segundos
+                        location.href = "../Views/login.html";
+                    }, 3000);
+                </script>
+            ';
         }
 
+        public function registrarVeterinaria($nitVeterinaria, $nombreVeterinaria, $propietarioVeterinaria, $direccionVeterinaria, $correoVeterinaria, $telefonoVeterinaria, $idZonaVeterinaria, $ruta, $claveVeterinaria) {
+            $objetoConexion = new Conexion();
+            $conexion = $objetoConexion->get_conexion();
+        
+            // Verificar si el usuario ya existe
+            $checkUser = "SELECT COUNT(*) FROM veterinaria WHERE nitVeterinaria = :nitVeterinaria";
+            $stmt = $conexion->prepare($checkUser);
+            $stmt->bindParam(":nitVeterinaria", $nitVeterinaria);
+            $stmt->execute();
+        
+            if ($stmt->fetchColumn() > 0) {
+                echo '
+                <div id="alert" style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #f8d7da;
+                    color: #721c24;
+                    border: 1px solid #f5c6cb;
+                    padding: 15px;
+                    margin: 20px auto; /* Centra el div en la página */
+                    border-radius: 5px;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    max-width: 600px; 
+                    position: relative; /* Necesario para posicionar el botón de cerrar */
+                ">
+                    <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
+                    <span><center>El usuario ya se encuentra registrado.</center> <br> En caso de estar inactivo comuniquese con el administrador.</span>
+                    <button onclick="closeAlert()" style="
+                        background: none;
+                        border: none;
+                        color: #721c24;
+                        font-size: 16px;
+                        position: absolute;
+                        right: 10px;
+                        cursor: pointer;
+                    ">✖</button>
+                </div>
+                
+                <script>
+                    function closeAlert() {
+                        document.getElementById("alert").style.display = "none";
+                        // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
+                        location.href = "../Views/Registro-veterinaria.php";
+                    }
+
+                    // Cierra la alerta automáticamente después de 10 segundos
+                    setTimeout(function() {
+                        closeAlert();
+                        // Redirige automáticamente después de 10 segundos
+                        location.href = "../Views/Registro-veterinaria.php";
+                    }, 10000);
+                </script>
+            ';
+                exit;
+            }
+            
+                
+            // Si el usuario no existe y la zona es válida, proceder a registrar
+            $registrarUsuario = "INSERT INTO veterinaria (nitVeterinaria, nombreVeterinaria, propietarioVeterinaria, direccionVeterinaria, correoVeterinaria, telefonoVeterinaria, idZonaVeterinaria, fotoVeterinaria, claveVeterinaria) VALUES (:nitVeterinaria, :nombreVeterinaria, :propietarioVeterinaria, :direccionVeterinaria, :correoVeterinaria, :telefonoVeterinaria, :idZonaVeterinaria, :fotoVeterinaria, :claveVeterinaria)";
+            
+            $result = $conexion->prepare($registrarUsuario);
+        
+            // Vincular parámetros
+            $result->bindParam(":nitVeterinaria", $nitVeterinaria);
+            $result->bindParam(":nombreVeterinaria", $nombreVeterinaria);
+            $result->bindParam(":propietarioVeterinaria", $propietarioVeterinaria);
+            $result->bindParam(":direccionVeterinaria", $direccionVeterinaria);
+            $result->bindParam(":correoVeterinaria", $correoVeterinaria);
+            $result->bindParam(":telefonoVeterinaria", $telefonoVeterinaria);
+            $result->bindParam(":idZonaVeterinaria", $idZonaVeterinaria);
+            $result->bindParam(":fotoVeterinaria", $ruta);
+            $result->bindParam(":claveVeterinaria", $claveVeterinaria);
+        
+            // Ejecutar la consulta
+            $result->execute();
+        
+            // Mensaje de éxito
+            echo '
+                <div id="alert" style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #d4edda;
+                    color: #155724;
+                    border: 1px solid #c3e6cb;
+                    padding: 15px;
+                    margin: 20px auto; /* Centra el div en la página */
+                    border-radius: 5px;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    max-width: 600px; 
+                    position: relative; /* Necesario para posicionar el botón de cerrar */
+                ">
+                    <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
+                    <span>Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del adminitrador.</span>
+                    <button onclick="closeAlert()" style="
+                        background: none;
+                        border: none;
+                        color: #155724;
+                        font-size: 16px;
+                        position: absolute;
+                        right: 10px;
+                        cursor: pointer;
+                    ">✖</button>
+                </div>
+                
+                <script>
+                    function closeAlert() {
+                        document.getElementById("alert").style.display = "none";
+                        // Redirige después de cerrar
+                        location.href = "../Views/login.html";
+                    }
+            
+                    // Cierra la alerta 
+                    setTimeout(function() {
+                        closeAlert();
+                        // Redirige automáticamente después de 5 segundos
+                        location.href = "../Views/login.html";
+                    }, 3000);
+                </script>
+            ';
+        }
 
         public function ingresarEstadoUsuario($idUsuario, $estado) {
             

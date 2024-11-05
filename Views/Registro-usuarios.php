@@ -1,3 +1,9 @@
+<?php
+  require_once("../Models/conexion_db.php");
+  require_once("../Models/consultas_db.php");
+  require_once("../Controllers/mostrarRolSelect.php")
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +38,7 @@
 
 <body>
 
-  <main>
+  <main id="login">
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -40,14 +46,15 @@
           <div class="row justify-content-center">
             <div class="col-lg-12 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-              <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">Elemental Lab</span>
-                </a>
-              </div><!-- End Logo -->
 
               <div class="card mb-3" id="Registro">
+
+                <div class="d-flex justify-content-center ">
+                  <a href="index.html" class="logo d-flex align-items-center w-auto">
+                    <img src="assets/img/NombreLogoTransparente.png" alt="logo Elemental" height="200px">
+                  </a>
+                </div>
+
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
@@ -85,11 +92,25 @@
                         <input type="text" name="telefonoUsuario" class="form-control" id="telefonoUsuario" required>
                         <div class="invalid-feedback">Por favor ingresa tu teléfono!</div>
                     </div>
-
+                    
                     <div class="col-6">
+                      <label for="idRolUsuario" class="form-label">Rol</label>
+                      <select name="idRolUsuario" class="form-control" id="idRolUsuario" required>
+                        <option value="" disabled selected > Seleccione su rol</option>
+                        <?php
+                        cargarRolSelect();
+                        ?>
+                      </select>
+                      <div class="invalid-feedback">Por favor seleccione su rol!</div>
+                    </div>
+
+
+                    <center>
+                      <div class="col-6">
                       <label for="fotoUsuario" class="form-label">Foto de perfil</label>
                       <input type="file" accept="image/*" name="fotoUsuario" class="form-control" id="fotoUsuario" >
                     </div>
+                    </center>
 
                     <div class="col-6">
                         <label for="claveUsuario" class="form-label">Contraseña</label>
@@ -109,7 +130,7 @@
                       </center>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="pages-login.html">Iniciar sesión</a></p>
+                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="../Views/Login.html">Iniciar sesión</a></p>
                     </div>
                   </form>
 

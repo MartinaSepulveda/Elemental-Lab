@@ -334,53 +334,71 @@
             return $motorizado;
         }
 
-
         public function validarSesion($idUsuario, $clave) {
             $objConexion = new Conexion();
             $conexion = $objConexion->get_conexion();
         
-            $consultar = "SELECT * FROM usuarios WHERE idUsuario = :idUsuario";
-            $result = $conexion->prepare($consultar);
+            // Consulta en la tabla de usuarios
+            $consultarUsuario = "SELECT * FROM usuarios WHERE idUsuario = :idUsuario";
+            $resultUsuario = $conexion->prepare($consultarUsuario);
+            $resultUsuario->bindParam(":idUsuario", $idUsuario);
+            $resultUsuario->execute();
         
-            $result->bindParam(":idUsuario", $idUsuario);
-            $result->execute();
+            // Verifica si el usuario existe en la tabla de usuarios
+            if ($buscarUsuario = $resultUsuario->fetch()) {
+                // Validación de la clave
+                if ($clave == $buscarUsuario['claveUsuario']) {
+                    session_start();
+                    $_SESSION['id'] = $buscarUsuario['idUsuario'];
+                    $_SESSION['rol'] = $buscarUsuario['idRolUsuario'];
+                    $_SESSION['estado'] = $buscarUsuario['idEstadoUsuario'];
         
-            // Se valida si el usuario existe en la base de datos
-            if ($buscar = $result->fetch()) {
-                // Validamos la clave
-                if ($clave == $buscar['claveUsuario']) {
-                    // Inicio de sesión
-                    session_start();  // Es importante llamar session_start() aquí también.
-        
-                    // Creamos variables de sesión
-                    $_SESSION['id'] = $buscar['idUsuario'];  // El idUsuario debería ser el valor correcto.
-                    $_SESSION['rol'] = $buscar['idRolUsuario'];  // Asegúrate de que 'idRolUsuario' es el nombre correcto.
-                    $_SESSION['estado'] = $buscar['idEstadoUsuario'];  // Similar a lo anterior.
-        
-                    // Validamos el rol para redireccionamiento
-                    if ($buscar['idRolUsuario'] == 1 && $buscar['idEstadoUsuario'] == 1) {
+                    // Validación de rol y estado
+                    if ($buscarUsuario['idRolUsuario'] == 1 && $buscarUsuario['idEstadoUsuario'] == 1) {
                         echo "<script> alert ('Bienvenido Administrador')</script>";
-                        echo "<script>location.href='../Views/Administrador.php'</script>"; // Redirige al Administrador
-                    }
-                    if ($buscar['idRolUsuario'] == 2 && $buscar['idEstadoUsuario'] == 1) {
+                        echo "<script>location.href='../Views/Administrador.php'</script>";
+                    } elseif ($buscarUsuario['idRolUsuario'] == 2 && $buscarUsuario['idEstadoUsuario'] == 1) {
                         echo "<script> alert ('Bienvenido Motorizado')</script>";
-                        echo "<script>location.href='../Views/InmoDashboard.html'</script>"; // Redirige al Motorizado
-                    }
-                    if ($buscar['idRolUsuario'] == 3 && $buscar['idEstadoUsuario'] == 1) {
+                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                    } elseif ($buscarUsuario['idRolUsuario'] == 3 && $buscarUsuario['idEstadoUsuario'] == 1) {
                         echo "<script> alert ('Bienvenido Bioanalista')</script>";
-                        echo "<script>location.href='../Views/InmoDashboard.html'</script>"; // Redirige al Bioanalista
+                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
                     }
                 } else {
-                    // Si la contraseña no coincide
                     echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>";
                     echo "<script>location.href='../Views/Login.html'</script>";
                 }
             } else {
-                // Si el usuario no existe o no está activo
-                echo "<script> alert ('El usuario ingresado no se encuentra registrado o no se encuentra activo')</script>";
-                echo "<script>location.href='../Views/Login.html'</script>";
+                // Consulta en la tabla de veterinarias
+                $consultarVeterinaria = "SELECT * FROM veterinaria WHERE nitVeterinaria = :idUsuario";
+                $resultVeterinaria = $conexion->prepare($consultarVeterinaria);
+                $resultVeterinaria->bindParam(":idUsuario", $idUsuario);
+                $resultVeterinaria->execute();
+        
+                // Verifica si el usuario existe en la tabla de veterinarias
+                if ($buscarVeterinaria = $resultVeterinaria->fetch()) {
+                    // Validación de la clave
+                    if ($clave == $buscarVeterinaria['claveVeterinaria']) {
+                        session_start();
+                        $_SESSION['id'] = $buscarVeterinaria['nitVeterinaria'];
+                        $_SESSION['estado'] = $buscarVeterinaria['idEstadoVeterinaria'];
+        
+                        // Validación de rol y estado para la veterinaria
+                        if ( $buscarVeterinaria['idEstadoVeterinaria'] == 1) {
+                            echo "<script> alert ('Bienvenido Veterinario')</script>";
+                            echo "<script>location.href='../Views/veterinaria.html'</script>";
+                        }
+                    } else {
+                        echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>";
+                        echo "<script>location.href='../Views/Login.html'</script>";
+                    }
+                } else {
+                    echo "<script> alert ('El usuario ingresado no se encuentra registrado o no se encuentra activo')</script>";
+                    echo "<script>location.href='../Views/Login.html'</script>";
+                }
             }
         }
+        
         
 
 
@@ -406,6 +424,29 @@
             return $datosZonas;
         }
 
+        public function consultarRol(){
+            // Variable que va a almacenar el fetch
+            $datoRol=null;
+
+            //creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion =$objConexion -> get_conexion();
+
+            // Definimos la consulta SQL a ejecutar y la guardamos en una variable
+            
+            $consultarRol = "SELECT * FROM rol";
+            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
+            $result = $conexion -> prepare($consultarRol);
+
+            $result -> execute();
+
+            //Utilizamos un bucle while para mostrar los registros que existan en la base de datos(DB)
+
+            while ($resultado = $result->fetch()){
+                $datoRol[] = $resultado;
+            }
+            return $datoRol;
+        }
 
         
     }

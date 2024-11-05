@@ -9,6 +9,7 @@ $nombresUsuario = $_POST['nombresUsuario'];
 $apellidosUsuario = $_POST['apellidosUsuario'];
 $correoUsuario = $_POST['correoUsuario'];
 $telefonoUsuario = $_POST['telefonoUsuario'];
+$idRolUsuario = $_POST['idRolUsuario'];
 $claveUsuario = $_POST['claveUsuario'];
 
 // Comprovar si el archivo se ha cargado
@@ -22,11 +23,12 @@ if (isset($_FILES['fotoUsuario']) && $_FILES['fotoUsuario']['error'] === UPLOAD_
 
 // Crear una instancia de la clase Registros
 $objetoRegistros = new Registros();
+$nuevoUsuario = $objetoRegistros -> registrarUsuario($idUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario, $idRolUsuario, $ruta ?? null, $claveUsuario);
 
 // Validar las entradas y registrar al usuario
-if ($objetoRegistros->registrarUsuario($idUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario, $ruta ?? null, $claveUsuario)) {
-    echo "Usuario Registrado satisfactoriamente!";
-} else {
-    echo "Error al registrar el usuario.";
-}
+// if ($objetoRegistros->registrarUsuario($idUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario, $ruta ?? null, $claveUsuario)) {
+//     echo "User registered successfully!";
+// } else {
+//     echo "Error registering user.";
+// }
 ?>
