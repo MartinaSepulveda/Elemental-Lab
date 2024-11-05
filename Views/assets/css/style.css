@@ -1086,20 +1086,56 @@ button[type="submit"]:hover {
 
 
 /*--------------------------------------------------------------
-# Usuarios Inactivos
---------------------------------------------------------------*/
-
-
-
-
-
-
-/*--------------------------------------------------------------
 # Interfaz Zonas 
 --------------------------------------------------------------*/
 
 #zonas .card.formularioZonas{
   margin-top: 25%;
+}
+
+/*--------------------------------------------------------------
+# INTERFACES VETERINARIA
+--------------------------------------------------------------*/
+#ExamDis .hematologia{
+  background-color: #056cc097;
+}
+
+#ExamDis .coagulacion{
+  background-color: #1987549c;
+}
+
+#formSolicitud        
+.form-container {
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#formSolicitud
+.form-control {
+    height: 38px;
+}
+
+.custom-select {
+  background-color: white; /* Cambiar a blanco o al color deseado */
+  border: 1px solid #ddddde; /* Color del borde */
+  border-radius: 0.25rem; /* Bordes redondeados */
+  height: 36px;
+}
+
+.custom-select:focus {
+  border-color: #80bdff; /* Color del borde al enfocar */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra de enfoque */
+}
+.multiselect-container {
+  column-count: 3; /* Número de columnas */
+  column-gap: 4px; /* Espacio entre columnas */
+}
+
+.multiselect-item {
+  display: inline-block; /* Para que las opciones se alineen en columnas */
+  width: 80%; /* Para que cada opción ocupe el ancho de la columna */
 }
 
 
