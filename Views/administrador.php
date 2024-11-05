@@ -1,4 +1,10 @@
-<!-- Cargar las dependencias necesarias -->
+<?php
+session_start();  // Esto es necesario para iniciar la sesión
+
+include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
+verificarSesion();  // Verificar que esté logueado
+verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
+?>
 
 <?php
     require_once("../Models/conexion_db.php");
@@ -234,7 +240,7 @@
         </a>
         <ul id="examenes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
-                <a href="administrador-ingresarExamen.html">
+                <a href="administrador-ingresarExamen.php">
                     <i class="bi bi-circle"></i><span>Ingresar Exámenes</span>
                 </a>
             </li>

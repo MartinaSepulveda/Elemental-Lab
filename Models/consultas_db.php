@@ -335,52 +335,55 @@
         }
 
 
-        public function validarSesion ($idUsuario, $clave){
-
+        public function validarSesion($idUsuario, $clave) {
             $objConexion = new Conexion();
-            $conexion = $objConexion -> get_conexion();
-
-            $consultar = "SELECT * FROM usuarios where idUsuario=:idUsuario";
-            $result = $conexion -> prepare($consultar); 
-
-            $result -> bindParam(":idUsuario", $idUsuario);
-
-            $result->execute(); 
-            //Se valida el correo en el sistema para luego aplicar el arreglo 
-            //Solo se hace el arreglo si el correo esta en la base de datos
-            if($buscar =$result->fetch()){
-                //Validamos la clave 
-                if($clave == $buscar['claveUsuario']){
-                    //Inicio de sesión
-                    session_start();
-                    //Creamos variables de sesión que usaremos más adelante
-                    $_SESSION['id'] = $buscar ['id'];
-                    $_SESSION['rol'] = $buscar ['idRolUsuario'];
-                    $_SESSION['estado'] = $buscar ['idEstadoUsuario'];
-
-                    //VALIDAMOS EL ROL PARA REDIRECCIONAMIENTO
-                    if($datosUsuario['rol']==1 & $buscar['estado']==1 ) {
-                        echo "<script> alert ('Bienvenido Administrador')</script>"; 
-                        echo "<script>location.href='../Views/Administrador.php'</script>";
+            $conexion = $objConexion->get_conexion();
+        
+            $consultar = "SELECT * FROM usuarios WHERE idUsuario = :idUsuario";
+            $result = $conexion->prepare($consultar);
+        
+            $result->bindParam(":idUsuario", $idUsuario);
+            $result->execute();
+        
+            // Se valida si el usuario existe en la base de datos
+            if ($buscar = $result->fetch()) {
+                // Validamos la clave
+                if ($clave == $buscar['claveUsuario']) {
+                    // Inicio de sesión
+                    session_start();  // Es importante llamar session_start() aquí también.
+        
+                    // Creamos variables de sesión
+                    $_SESSION['id'] = $buscar['idUsuario'];  // El idUsuario debería ser el valor correcto.
+                    $_SESSION['rol'] = $buscar['idRolUsuario'];  // Asegúrate de que 'idRolUsuario' es el nombre correcto.
+                    $_SESSION['estado'] = $buscar['idEstadoUsuario'];  // Similar a lo anterior.
+        
+                    // Validamos el rol para redireccionamiento
+                    if ($buscar['idRolUsuario'] == 1 && $buscar['idEstadoUsuario'] == 1) {
+                        echo "<script> alert ('Bienvenido Administrador')</script>";
+                        echo "<script>location.href='../Views/Administrador.php'</script>"; // Redirige al Administrador
                     }
-                    if ($datosUsuario['rol']==2 & $buscar['estado']==1){
-                        echo "<script> alert ('Bienvenido Motorizado')</script>"; 
-                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                    if ($buscar['idRolUsuario'] == 2 && $buscar['idEstadoUsuario'] == 1) {
+                        echo "<script> alert ('Bienvenido Motorizado')</script>";
+                        echo "<script>location.href='../Views/InmoDashboard.html'</script>"; // Redirige al Motorizado
                     }
-                    if ($datosUsuario['rol']==3 & $buscar['estado']==1){
-                        echo "<script> alert ('Bienvenido Bioanalista')</script>"; 
-                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                    if ($buscar['idRolUsuario'] == 3 && $buscar['idEstadoUsuario'] == 1) {
+                        echo "<script> alert ('Bienvenido Bioanalista')</script>";
+                        echo "<script>location.href='../Views/InmoDashboard.html'</script>"; // Redirige al Bioanalista
                     }
-
-                }else{
-                    echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>"; 
+                } else {
+                    // Si la contraseña no coincide
+                    echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>";
                     echo "<script>location.href='../Views/Login.html'</script>";
                 }
-            }else{
-                echo "<script> alert ('El usuario ingresado no se encuentra en la base de datos')</script>"; 
+            } else {
+                // Si el usuario no existe o no está activo
+                echo "<script> alert ('El usuario ingresado no se encuentra registrado o no se encuentra activo')</script>";
                 echo "<script>location.href='../Views/Login.html'</script>";
-            } 
+            }
         }
+        
+
+
         // Función para mostrar los datos de las zonas en el formulario para editarlos
         public function consultarZonaEditar($id){
             $datosZonas = null;

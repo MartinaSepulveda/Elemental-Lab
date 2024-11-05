@@ -25,8 +25,8 @@ $objetoRegistros = new Registros();
 
 // Validar las entradas y registrar al usuario
 if ($objetoRegistros->registrarUsuario($idUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario, $ruta ?? null, $claveUsuario)) {
-    echo "User registered successfully!";
+    echo "Usuario Registrado satisfactoriamente!";
 } else {
-    echo "Error registering user.";
+    echo "Error al registrar el usuario.";
 }
 ?>

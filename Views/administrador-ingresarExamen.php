@@ -1,3 +1,11 @@
+<?php
+session_start();  // Esto es necesario para iniciar la sesión
+
+include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
+verificarSesion();  // Verificar que esté logueado
+verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -228,7 +236,7 @@
         </a>
         <ul id="examenes-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
             <li>
-                <a href="administrador-ingresarExamen.html" class="active">
+                <a href="administrador-ingresarExamen.php" class="active">
                     <i class="bi bi-circle"></i><span>Ingresar Exámenes</span>
                 </a>
             </li>
