@@ -334,6 +334,7 @@
             return $motorizado;
         }
 
+        
         public function validarSesion($idUsuario, $clave) {
             $objConexion = new Conexion();
             $conexion = $objConexion->get_conexion();
@@ -374,7 +375,7 @@
                 $resultVeterinaria = $conexion->prepare($consultarVeterinaria);
                 $resultVeterinaria->bindParam(":idUsuario", $idUsuario);
                 $resultVeterinaria->execute();
-        
+
                 // Verifica si el usuario existe en la tabla de veterinarias
                 if ($buscarVeterinaria = $resultVeterinaria->fetch()) {
                     // Validación de la clave
@@ -382,11 +383,16 @@
                         session_start();
                         $_SESSION['id'] = $buscarVeterinaria['nitVeterinaria'];
                         $_SESSION['estado'] = $buscarVeterinaria['idEstadoVeterinaria'];
-        
-                        // Validación de rol y estado para la veterinaria
-                        if ( $buscarVeterinaria['idEstadoVeterinaria'] == 1) {
+                        // Guardar los datos de la veterinaria en la sesión
+                        $_SESSION['nit'] = $buscarVeterinaria['nitVeterinaria'];
+                        $_SESSION['nombre'] = $buscarVeterinaria['nombreVeterinaria'];
+                        $_SESSION['direccion'] = $buscarVeterinaria['direccionVeterinaria'];
+                        $_SESSION['telefono'] = $buscarVeterinaria['telefonoVeterinaria'];
+
+                        // Redirección para la veterinaria activa
+                        if ($buscarVeterinaria['idEstadoVeterinaria'] == 1) {
                             echo "<script> alert ('Bienvenido Veterinario')</script>";
-                            echo "<script>location.href='../Views/veterinaria.html'</script>";
+                            echo "<script>location.href='../Views/veterinaria.php'</script>";
                         }
                     } else {
                         echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>";
@@ -447,6 +453,7 @@
             }
             return $datoRol;
         }
+
 
         
     }

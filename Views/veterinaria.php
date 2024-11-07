@@ -1,13 +1,18 @@
+<?php
+session_start();  // Esto es necesario para iniciar la sesión
+
+include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
+verificarSesion();  // Verificar que esté logueado
+
+?>
 
 <!-- Cargar las dependencias necesarias -->
-
-<!-- <?php
+<?php
     require_once("../Models/conexion_db.php");
     require_once("../Models/consultas_db.php");
-    require_once("../Controllers/mostrarSolicitudes.php");
+    require_once("../Controllers/mostrarExamenVeterinaria.php");
 
-?> -->
-
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +21,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bienvenido Administrador</title>
+  <title>Bienvenido Veterinario</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -31,10 +36,6 @@
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- multiselect -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@1.1.0/dist/css/bootstrap-multiselect.css">
-
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -161,13 +162,13 @@
     </nav>
   </header><!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
+  <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="veterinaria.html">
+        <a class="nav-link collapsed" href="veterinaria.php">
           <i class="bi bi-house"></i>
           <span>Home</span>
         </a>
@@ -177,14 +178,14 @@
         <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="solicitudes-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="veterinaria-hacerSolicitud.html" class="active">
+            <a href="veterinaria-hacerSolicitud.php">
               <i class="bi bi-circle"></i><span>Hacer Solicitudes</span>
             </a>
           </li>
           <li>
-            <a href="veterinaria-cancelarReprogramar.html" >
+            <a href="veterinaria-cancelarReprogramar.html">
               <i class="bi bi-circle"></i><span>Cancelar/Reprogramar</span>
             </a>
           </li>
@@ -236,145 +237,45 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Solicitudes</h1>
+      <h1>Exámenes disponibles</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Solicitudes</li>
-          <li class="breadcrumb-item active">Hacer solicitudes</li>
+          <li class="breadcrumb-item active"><a href="index.html">Home</a></li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <br>
-
-    <section class="section" id="formSolicitud">
+    <section class="section" id="ExamDis">
       <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          <div class="container d-flex justify-content-center align-items-center">
-
-            <form class="w-100">
-              <div class="row mb-3">
-                <!-- Jornada de recolección -->
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="jornada">Jornada de recolección programada</label>
-                  <select class="form-control" id="jornada" name="jornada" required>
-                    <option value="mañana">Mañana</option>
-                    <option value="tarde">Tarde</option>
-                  </select>
-                </div>
-            
-                <!-- NIT de la veterinaria -->
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="nit">NIT de la veterinaria</label>
-                  <input type="text" class="form-control" id="nit" name="nit" value="123456789" readonly>
-                </div>
-              </div>
-            
-              <div class="row mb-3">
-                <!-- Nombre de la veterinaria -->
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="nombre">Nombre de la veterinaria</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" value="Veterinaria XYZ" readonly>
-                </div>
-            
-                <!-- Dirección de la veterinaria -->
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="direccion">Dirección de la veterinaria</label>
-                  <input type="text" class="form-control" id="direccion" name="direccion" value="Calle 123, Ciudad" readonly>
-                </div>
-              </div>
-            
-              <div class="row mb-3">
-                <!-- Teléfono de la veterinaria -->
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="telefono">Teléfono de la veterinaria</label>
-                  <input type="text" class="form-control" id="telefono" name="telefono" value="1234567890" readonly>
-                </div>
-
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <!-- Tipo de exames a recoger (selección múltiple) -->
-                  <label for="tipoMuestras">Tipo de exámes a hacer</label>
-                  <select class="form-control" id="tipoMuestras" name="tipoMuestras[]" multiple required>
-                      <option value="sangre">Sangre</option>
-                      <option value="orina">Orina</option>
-                      <option value="tejido">Tejido</option>
-                      <option value="saliva">Saliva</option>
-                      <option value="hueso">Hueso</option>
-                      <option value="piel">Piel</option>
-                      <option value="heces">Heces</option>
-                      <option value="pelo">Pelo</option>
-                      <option value="plumas">Plumas</option>
-                      <option value="escamas">Escamas</option>
-                      <option value="sangre completa">Sangre Completa</option>
-                      <option value="plasma">Plasma</option>
-                      <option value="suero">Suero</option>
-                      <option value="líquido sinovial">Líquido Sinovial</option>
-                      
-                  </select>
-                </div>
-              </div>
-            
-              <div class="row mb-3">
-                <!-- Nivel de urgencia de la solicitud -->
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="urgencia">Nivel de urgencia de la solicitud</label>
-                  <select class="form-control" id="urgencia" name="urgencia" required>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
-                  </select>
-                </div>
-            
-                <!-- Fase actual de la solicitud -->
-                <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="fase">Fase actual de la solicitud</label>
-                  <input type="text" class="form-control" id="fase" name="fase" value="En proceso" readonly>
-                </div>
-              </div>
-            
-              <!-- Botón de envío -->
-              <button type="submit" class="btn btn-primary btn-block w-100 mt-3">Enviar solicitud</button>
-            </form>
-            
-            
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <?php
+              cargarExamenesVet();
+            ?>
 
           </div>
-        </div>
       </div>
-    </section>
+  </section>
+
 
   </main><!-- End #main -->
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+
+
+  <!-- Js JQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/quill/quill.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> <!-- Add Popper.js here -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@1.1.0/dist/js/bootstrap-multiselect.min.js"></script>
-  <script>
-      $(document).ready(function() {
-          $('#tipoMuestras').multiselect({
-              nonSelectedText: 'Selecciona los tipos de muestras',
-              nSelectedText: 'seleccionados',
-              allSelectedText: 'Todos seleccionados',
-              buttonWidth: '100%',
-              enableFiltering: false,
-              includeSelectAllOption: true
-          });
-      });
-  </script>
 
 </body>
 

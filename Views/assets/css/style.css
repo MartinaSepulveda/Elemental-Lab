@@ -1096,12 +1096,60 @@ button[type="submit"]:hover {
 /*--------------------------------------------------------------
 # INTERFACES VETERINARIA
 --------------------------------------------------------------*/
-#ExamDis .hematologia{
-  background-color: #056cc097;
+/* Estilos para la tarjeta */
+#ExamDis .card.category-card {
+  margin-bottom: 20px; /* Espacio entre las tarjetas */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 1px solid #ddd; /* Color de borde suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para animaciones suaves */
 }
 
-#ExamDis .coagulacion{
-  background-color: #1987549c;
+#ExamDis .card.category-card:hover {
+  transform: translateY(-5px); /* Mueve la tarjeta hacia arriba al hacer hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+}
+
+/* Estilos para el encabezado de la tarjeta */
+#ExamDis .card-header {
+  background-color: #056cc097; /* Fondo azul */
+  font-size: 18px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
+  padding: 15px 20px; /* Relleno alrededor del texto */
+  border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+/* Estilos para el texto dentro del encabezado */
+#ExamDis .card-header h5 {
+  margin: 0; /* Elimina el margen alrededor del título */
+}
+
+/* Fondo de la tabla */
+#ExamDis .table {
+  background-color: #f9f9f9; /* Fondo de tabla */
+  border-radius: 5px; /* Bordes redondeados para la tabla */
+}
+
+/* Estilos para las filas de la tabla */
+#ExamDis .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2; /* Fondo alterno para las filas */
+}
+
+#ExamDis .table-bordered {
+  border: 1px solid #ddd; /* Borde de las celdas */
+}
+
+/* Estilos para las celdas */
+#ExamDis .table th, .table td {
+  text-align: center; /* Centrar el texto */
+  padding: 12px; /* Relleno dentro de las celdas */
+}
+
+/* Estilos para la tabla en modo responsive */
+@media (max-width: 768px) {
+  #ExamDis .table-responsive {
+      margin-bottom: 15px; /* Añadir margen abajo */
+  }
 }
 
 #formSolicitud        
@@ -1129,7 +1177,7 @@ button[type="submit"]:hover {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra de enfoque */
 }
 .multiselect-container {
-  column-count: 3; /* Número de columnas */
+  column-count: 2; /* Número de columnas */
   column-gap: 4px; /* Espacio entre columnas */
 }
 
