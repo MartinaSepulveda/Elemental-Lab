@@ -185,12 +185,12 @@ verificarSesion();  // Verificar que esté logueado
             </a>
           </li>
           <li>
-            <a href="veterinaria-cancelarReprogramar.html">
+            <a href="veterinaria-cancelarReprogramar.php">
               <i class="bi bi-circle"></i><span>Cancelar/Reprogramar</span>
             </a>
           </li>
           <li>
-            <a href="veterinaria-confirmarSolicitud.html">
+            <a href="veterinaria-confirmarSolicitud.php">
               <i class="bi bi-circle"></i><span>Confirmar Solicitud</span>
             </a>
           </li>

@@ -1,3 +1,12 @@
+<?php
+session_start();  // Esto es necesario para iniciar la sesión
+
+include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
+verificarSesion();  // Verificar que esté logueado
+
+?>
+
+
 <!-- Cargar las dependencias necesarias -->
 
 <?php
@@ -179,12 +188,12 @@
               </a>
             </li>
             <li>
-              <a href="veterinaria-cancelarReprogramar.html">
+              <a href="veterinaria-cancelarReprogramar.php">
                 <i class="bi bi-circle"></i><span>Cancelar/Reprogramar</span>
               </a>
             </li>
             <li>
-              <a href="veterinaria-confirmarSolicitud.html">
+              <a href="veterinaria-confirmarSolicitud.php">
                 <i class="bi bi-circle"></i><span>Confirmar Solicitud</span>
               </a>
             </li>
@@ -281,7 +290,7 @@
               <tr>
                 <th>Id</th>
                 <th>Fecha Solicitud</th>
-                <th>Jornada</th>
+                <th>Fecha Recoleccion</th>
                 <th>Nombre Exámen/es</th>
                 <th>Urgencia</th>
                 <th>Estado</th>
@@ -291,7 +300,7 @@
             <tbody id="tbody">
               
               <?php
-                
+                cargarSolicitudesVeterinaria();
               ?>
 
             </tbody>

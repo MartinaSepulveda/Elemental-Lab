@@ -353,20 +353,26 @@
                     $_SESSION['id'] = $buscarUsuario['idUsuario'];
                     $_SESSION['rol'] = $buscarUsuario['idRolUsuario'];
                     $_SESSION['estado'] = $buscarUsuario['idEstadoUsuario'];
-        
-                    // Validación de rol y estado
-                    if ($buscarUsuario['idRolUsuario'] == 1 && $buscarUsuario['idEstadoUsuario'] == 1) {
-                        echo "<script> alert ('Bienvenido Administrador')</script>";
-                        echo "<script>location.href='../Views/Administrador.php'</script>";
-                    } elseif ($buscarUsuario['idRolUsuario'] == 2 && $buscarUsuario['idEstadoUsuario'] == 1) {
-                        echo "<script> alert ('Bienvenido Motorizado')</script>";
-                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
-                    } elseif ($buscarUsuario['idRolUsuario'] == 3 && $buscarUsuario['idEstadoUsuario'] == 1) {
-                        echo "<script> alert ('Bienvenido Bioanalista')</script>";
-                        echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                    
+                    // Validación de rol y estado activo
+                    if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Si el usuario está activo
+                        if ($buscarUsuario['idRolUsuario'] == 1) {
+                            echo "<script> alert('Bienvenido Administrador')</script>";
+                            echo "<script>location.href='../Views/Administrador.php'</script>";
+                        } elseif ($buscarUsuario['idRolUsuario'] == 2) {
+                            echo "<script> alert('Bienvenido Motorizado')</script>";
+                            echo "<script>location.href='../Views/motorizado-solicitudes.php'</script>";
+                        } elseif ($buscarUsuario['idRolUsuario'] == 3) {
+                            echo "<script> alert('Bienvenido Bioanalista')</script>";
+                            echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                        }
+                    } elseif ($buscarUsuario['idEstadoUsuario'] == 2) {
+                        // Si el usuario está inactivo
+                        echo "<script> alert('Su cuenta está inactiva. Por favor, contacte al administrador.')</script>";
+                        echo "<script>location.href='../Views/Login.html'</script>";
                     }
                 } else {
-                    echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>";
+                    echo "<script> alert('Contraseña incorrecta, vuelva a intentarlo')</script>";
                     echo "<script>location.href='../Views/Login.html'</script>";
                 }
             } else {
@@ -454,7 +460,163 @@
             return $datoRol;
         }
 
+        public function consultarSolicitudesProcesoVeterinaria($nitVeterinaria) {
+            // Variable que va a almacenar el fetch
+            $datosSolicitud = null;
 
+            // Creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+
+            // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
+            $consultarExamen = "SELECT 
+                                    idSolicitud, 
+                                    fechaSolicitud,
+                                    fechaRecoleccion,  
+                                    nombreExamen, 
+                                    descripcionUrgencia, 
+                                    descripcionFase 
+                                FROM solicitudes 
+                                INNER JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria 
+                                INNER JOIN examen ON idExamenSolicitud = idExamen 
+                                INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia 
+                                INNER JOIN fase ON idFaseSolicitud = idFase  
+                                WHERE descripcionFase = 'En proceso' 
+                                AND nitVeterinariaSolicitud = :nitVeterinaria AND confirmadoPorVeterinario IS NULL "; // Filtramos por el NIT de la veterinaria
+
+            // Preparamos la consulta
+            $result = $conexion->prepare($consultarExamen);
+
+            // Enlazamos el parámetro :nitVeterinaria con el valor de la veterinaria de la sesión
+            $result->bindParam(":nitVeterinaria", $nitVeterinaria);
+
+            // Ejecutamos la consulta
+            $result->execute();
+
+            // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
+            while ($resultado = $result->fetch()) {
+                $datosSolicitud[] = $resultado;
+            }
+
+            // Devolvemos los resultados
+            return $datosSolicitud;
+        }
+
+        public function consultarSolicitudesProcesoMotorizado($idUsuario) {
+            // Variable que va a almacenar el fetch
+            $datosSolicitud = null;
+
+            // Creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+
+            // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
+            $consultarExamen = " poner consulta xd"; // Filtramos por el NIT de la veterinaria
+
+            // Preparamos la consulta
+            $result = $conexion->prepare($consultarExamen);
+
+            // Enlazamos el parámetro :idUsuario con el valor de la veterinaria de la sesión
+            $result->bindParam(":idUsuario", $idUsuario);
+
+            // Ejecutamos la consulta
+            $result->execute();
+
+            // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
+            while ($resultado = $result->fetch()) {
+                $datosSolicitud[] = $resultado;
+            }
+
+            // Devolvemos los resultados
+            return $datosSolicitud;
+        }
+
+        public function consultarSolicitudesVeterinaria($nitVeterinaria) {
+            // Variable que va a almacenar el fetch
+            $datosSolicitud = null;
+
+            // Creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+
+            // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
+            $consultarExamen = "SELECT 
+                                    idSolicitud, 
+                                    fechaSolicitud,
+                                    fechaRecoleccion,  
+                                    nombreExamen, 
+                                    descripcionUrgencia,
+                                    descripcionEstadoSolicitud, 
+                                    descripcionFase 
+                                FROM solicitudes 
+                                LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria 
+                                LEFT JOIN examen ON idExamenSolicitud = idExamen 
+                                LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia
+                                LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud
+                                LEFT JOIN fase ON idFaseSolicitud = idFase  
+                                WHERE nitVeterinariaSolicitud = :nitVeterinaria
+                                ";
+
+            // Preparamos la consulta
+            $result = $conexion->prepare($consultarExamen);
+
+            // Enlazamos el parámetro :nitVeterinaria con el valor de la veterinaria de la sesión
+            $result->bindParam(":nitVeterinaria", $nitVeterinaria);
+
+            // Ejecutamos la consulta
+            $result->execute();
+
+            // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
+            while ($resultado = $result->fetch()) {
+                $datosSolicitud[] = $resultado;
+            }
+
+            // Devolvemos los resultados
+            return $datosSolicitud;
+        }
+
+        public function consultarSolicitudesVeterinariaEstado($nitVeterinaria) {
+            // Variable que va a almacenar el fetch
+            $datosSolicitud = null;
+
+            // Creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+
+            // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
+            $consultarExamen = "SELECT 
+                                    idSolicitud, 
+                                    fechaSolicitud,
+                                    fechaRecoleccion,  
+                                    nombreExamen, 
+                                    descripcionUrgencia,
+                                    descripcionFase 
+                                FROM solicitudes 
+                                LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria 
+                                LEFT JOIN examen ON idExamenSolicitud = idExamen 
+                                LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia
+                                LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud
+                                LEFT JOIN fase ON idFaseSolicitud = idFase  
+                                WHERE nitVeterinariaSolicitud = :nitVeterinaria AND idEstadoSolicitudSoli IS NULL
+                                ";
+
+            // Preparamos la consulta
+            $result = $conexion->prepare($consultarExamen);
+
+            // Enlazamos el parámetro :nitVeterinaria con el valor de la veterinaria de la sesión
+            $result->bindParam(":nitVeterinaria", $nitVeterinaria);
+
+            // Ejecutamos la consulta
+            $result->execute();
+
+            // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
+            while ($resultado = $result->fetch()) {
+                $datosSolicitud[] = $resultado;
+            }
+
+            // Devolvemos los resultados
+            return $datosSolicitud;
+        }
         
     }
 

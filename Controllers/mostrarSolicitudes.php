@@ -84,5 +84,186 @@
         }
     }
 
+    function cargarSolicitudesProcesoVeterinaria() {
+        // Verificamos que la veterinaria esté autenticada y que su NIT esté en la sesión
+        if (isset($_SESSION['nit'])) {
+            $nitVeterinaria = $_SESSION['nit']; // Obtenemos el NIT de la veterinaria desde la sesión
+    
+            // Creamos el objeto a partir de la clase Consultas
+            $objConsultas = new Consultas();
+    
+            // Llamamos al método y pasamos el NIT de la veterinaria para filtrar las solicitudes
+            $solicitudes = $objConsultas->consultarSolicitudesProcesoVeterinaria($nitVeterinaria);
+    
+            // Verificamos si $solicitudes está vacía
+            if (empty($solicitudes)) {
+                echo "<h3>No hay solicitudes registradas para esta veterinaria.</h3>";
+            } else {
+                // Mostramos las solicitudes en la tabla
+                foreach ($solicitudes as $datossolicitudes) {
+                    echo '
+                    <tr>
+                        <td>' . $datossolicitudes['idSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
+                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
+                        <td>' . $datossolicitudes['descripcionFase'] . '</td>
+                        <td>
+                            <!-- Botones de acción -->
+                            <form method="POST" action="../Controllers/confirmarFaseVeterinaria.php">
+                                <input type="hidden" name="idSolicitud" value="' . $datossolicitudes['idSolicitud'] . '">
+                                <button type="submit" name="fase" value="2" class="btn btn-success">Realizada</button>
+                                <button type="submit" name="fase" value="3" class="btn btn-danger">No Realizada</button>
+                            </form>
+                        </td>
+                    </tr>
+                    ';
+                }
+            }
+        } else {
+            // Si no hay una sesión activa para la veterinaria, mostramos un mensaje de error
+            echo "<h3>Debe iniciar sesión para ver las solicitudes.</h3>";
+        }
+    }
+
+    function cargarSolicitudesProcesoMotorizado() {
+        
+        if (isset($_SESSION['id'])) {
+            $idUsuario = $_SESSION['id']; 
+    
+            // Creamos el objeto a partir de la clase Consultas
+            $objConsultas = new Consultas();
+    
+            // Llamamos al método y pasamos el NIT de la veterinaria para filtrar las solicitudes
+            $solicitudes = $objConsultas->consultarSolicitudesProcesoVeterinaria($idUsuario);
+    
+            // Verificamos si $solicitudes está vacía
+            if (empty($solicitudes)) {
+                echo "<h3>No hay solicitudes registradas para esta veterinaria.</h3>";
+            } else {
+                // Mostramos las solicitudes en la tabla
+                foreach ($solicitudes as $datossolicitudes) {
+                    echo '
+                    <tr>
+                        <td>' . $datossolicitudes['idSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
+                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
+                        <td>' . $datossolicitudes['descripcionFase'] . '</td>
+                        <td>
+                            <!-- Botones de acción -->
+                            <form method="POST" action="../Controllers/confirmarFaseVeterinaria.php">
+                                <input type="hidden" name="idSolicitud" value="' . $datossolicitudes['idSolicitud'] . '">
+                                <button type="submit" name="fase" value="2" class="btn btn-success">Realizada</button>
+                                <button type="submit" name="fase" value="3" class="btn btn-danger">No Realizada</button>
+                            </form>
+                        </td>
+                    </tr>
+                    ';
+                }
+            }
+        } else {
+            // Si no hay una sesión activa para la veterinaria, mostramos un mensaje de error
+            echo "<h3>Debe iniciar sesión para ver las solicitudes.</h3>";
+        }
+    }
+
+    function cargarSolicitudesVeterinaria() {
+        // Verificamos que la veterinaria esté autenticada y que su NIT esté en la sesión
+        if (isset($_SESSION['nit'])) {
+            $nitVeterinaria = $_SESSION['nit']; // Obtenemos el NIT de la veterinaria desde la sesión
+    
+            // Creamos el objeto a partir de la clase Consultas
+            $objConsultas = new Consultas();
+    
+            // Llamamos al método y pasamos el NIT de la veterinaria para filtrar las solicitudes
+            $solicitudes = $objConsultas->consultarSolicitudesVeterinaria($nitVeterinaria);
+    
+            // Verificamos si $solicitudes está vacía
+            if (empty($solicitudes)) {
+                echo "<h3>No hay solicitudes registradas para esta veterinaria.</h3>";
+            } else {
+                // Mostramos las solicitudes en la tabla
+                foreach ($solicitudes as $datossolicitudes) {
+                    echo '
+                    <tr>
+                        <td>' . $datossolicitudes['idSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
+                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
+                        <td>' . $datossolicitudes['descripcionEstadoSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['descripcionFase'] . '</td>
+                    </tr>
+                    ';
+                }
+            }
+        } else {
+            // Si no hay una sesión activa para la veterinaria, mostramos un mensaje de error
+            echo "<h3>Debe iniciar sesión para ver las solicitudes.</h3>";
+        }
+    }
+
+    function cargarSolicitudesVeterinariaEstado() {
+        // Verificamos que la veterinaria esté autenticada y que su NIT esté en la sesión
+        if (isset($_SESSION['nit'])) {
+            $nitVeterinaria = $_SESSION['nit']; // Obtenemos el NIT de la veterinaria desde la sesión
+    
+            // Creamos el objeto a partir de la clase Consultas
+            $objConsultas = new Consultas();
+    
+            // Llamamos al método y pasamos el NIT de la veterinaria para filtrar las solicitudes
+            $solicitudes = $objConsultas->consultarSolicitudesVeterinariaEstado($nitVeterinaria);
+    
+            // Verificamos si $solicitudes está vacía
+            if (empty($solicitudes)) {
+                echo "<h3>No hay solicitudes registradas para esta veterinaria.</h3>";
+            } else {
+                // Mostramos las solicitudes en la tabla
+                foreach ($solicitudes as $datossolicitudes) {
+                    echo '
+                    <tr>
+                        <td>' . $datossolicitudes['idSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
+                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
+                        <td>
+                            <!-- Botón Cancelar -->
+                            <button class="table-button cancelar" onclick="cancelarSolicitud('.$datossolicitudes['idSolicitud'].')">
+                                Cancelar
+                            </button>
+
+                            <!-- Botón Reprogramar -->
+                            <button class="table-button reprogramar" onclick="reprogramarSolicitud('.$datossolicitudes['idSolicitud'].')">
+                                Reprogramar solicitud
+                            </button>
+                        </td>
+
+                    </tr>
+                    ';
+                }
+            }
+        } else {
+            // Si no hay una sesión activa para la veterinaria, mostramos un mensaje de error
+            echo "<h3>Debe iniciar sesión para ver las solicitudes.</h3>";
+        }
+    }
+    
 
 ?>
+<script>
+function cancelarSolicitud(idSolicitud) {
+    if (confirm("¿Estás seguro de que deseas cancelar esta solicitud?")) {
+        // Redirige a un archivo PHP que maneje la cancelación
+        window.location.href = "cancelar_solicitud.php?idSolicitud=" + idSolicitud;
+    }
+}
+
+function reprogramarSolicitud(idSolicitud) {
+    // Aquí podrías redirigir a un formulario para reprogramar la solicitud
+    window.location.href = "reprogramar_solicitud.php?idSolicitud=" + idSolicitud;
+}
+</script>

@@ -340,7 +340,81 @@
             }
         }
 
+        public function confirmacionFaseVeterinaria($idSolicitud, $fase) {
+            //creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+        
+            // Actualizar la confirmación del veterinario sin cambiar la fase
+            $consulta = "UPDATE solicitudes SET confirmadoPorVeterinario = 1 WHERE idSolicitud = :idSolicitud";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':idSolicitud', $idSolicitud);
+            $confirmacionExitosa = $resultado->execute();
+        
+            // Si la confirmación del veterinario es exitosa, verificamos si ambos confirmaron
+            if ($confirmacionExitosa) {
+                return $this->actualizarFaseSiAmbosConfirmaron($idSolicitud, $fase);
+            }
+        
+            return false;
+        }        
 
+    
+        public function confirmarFaseMotorizado($idSolicitud) {
+            //creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+        
+            // Actualizar solo la confirmación del motorizado
+            $consulta = "UPDATE solicitudes SET confirmadoPorMotorizado = 1 WHERE idSolicitud = :idSolicitud";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':idSolicitud', $idSolicitud);
+            $confirmacionExitosa = $resultado->execute();
+        
+            // Si la confirmación del motorizado es exitosa, verificamos si ambos confirmaron
+            if ($confirmacionExitosa) {
+                // Consultamos la fase actual de la solicitud
+                $consultaFase = "SELECT idFaseSolicitud FROM solicitudes WHERE idSolicitud = :idSolicitud";
+                $resultadoFase = $conexion->prepare($consultaFase);
+                $resultadoFase->bindParam(':idSolicitud', $idSolicitud);
+                $resultadoFase->execute();
+        
+                $faseActual = $resultadoFase->fetchColumn();
+        
+                // Llamar a la función para verificar si ambos han confirmado y actualizar la fase
+                return $this->actualizarFaseSiAmbosConfirmaron($idSolicitud, $faseActual);
+            }
+        
+            return false;
+        }
+
+
+        private function actualizarFaseSiAmbosConfirmaron($idSolicitud, $fase) {
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+        
+            // Verificar si tanto el veterinario como el motorizado han confirmado
+            $consultaVerificar = "SELECT confirmadoPorVeterinario, confirmadoPorMotorizado FROM solicitudes WHERE idSolicitud = :idSolicitud";
+            $resultadoVerificar = $conexion->prepare($consultaVerificar);
+            $resultadoVerificar->bindParam(':idSolicitud', $idSolicitud);
+            $resultadoVerificar->execute();
+        
+            $confirmaciones = $resultadoVerificar->fetch();
+        
+            if ($confirmaciones['confirmadoPorVeterinario'] == 1 && $confirmaciones['confirmadoPorMotorizado'] == 1) {
+                // Si ambos han confirmado, actualizamos la fase
+                $consultaActualizarFase = "UPDATE solicitudes SET idFaseSolicitud = :fase WHERE idSolicitud = :idSolicitud";
+                $resultadoActualizarFase = $conexion->prepare($consultaActualizarFase);
+                $resultadoActualizarFase->bindParam(':fase', $fase);
+                $resultadoActualizarFase->bindParam(':idSolicitud', $idSolicitud);
+                
+                return $resultadoActualizarFase->execute();
+            }
+        
+            return false;
+        }
+        
+        
     
 
     }

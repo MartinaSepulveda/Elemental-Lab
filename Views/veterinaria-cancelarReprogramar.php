@@ -1,12 +1,18 @@
+<?php
+session_start();  // Esto es necesario para iniciar la sesión
 
+include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
+verificarSesion();  // Verificar que esté logueado
+
+?>
 <!-- Cargar las dependencias necesarias -->
 
-<!-- <?php
+<?php
     require_once("../Models/conexion_db.php");
     require_once("../Models/consultas_db.php");
     require_once("../Controllers/mostrarSolicitudes.php");
 
-?> -->
+?> 
 
 
 <!DOCTYPE html>
@@ -180,12 +186,12 @@
             </a>
           </li>
           <li>
-            <a href="veterinaria-cancelarReprogramar.html" >
+            <a href="veterinaria-cancelarReprogramar.php" class="active">
               <i class="bi bi-circle"></i><span>Cancelar/Reprogramar</span>
             </a>
           </li>
           <li>
-            <a href="veterinaria-confirmarSolicitud.html" class="active">
+            <a href="veterinaria-confirmarSolicitud.php">
               <i class="bi bi-circle"></i><span>Confirmar Solicitud</span>
             </a>
           </li>
@@ -237,7 +243,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Solicitudes</li>
-          <li class="breadcrumb-item active">Confirmar Solicitudes</li>
+          <li class="breadcrumb-item active">Cancelar-reprogramar solicitudes en proceso</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -269,17 +275,17 @@
                 <tr>
                   <th>Id</th>
                   <th>Fecha Solicitud</th>
-                  <th>Jornada</th>
+                  <th>Fecha Recoleccion</th>
                   <th>Nombre Exámen/es</th>
                   <th>Urgencia</th>
-                  <th>Acciones</th> <!-- Realizda no realizada -->
+                  <th>Acciones</th> <!--realizada no realizada -->
                 </tr>
             </thead>
             <tbody id="tbody">
               
 
               <?php
-                cargarSolicitudesProceso()
+                cargarSolicitudesVeterinariaEstado();
               ?>
 
             </tbody>
@@ -302,6 +308,26 @@
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Modal Reprogramar Solicitud -->
+  <div id="modalReprogramar" class="modal" style="display: none;"> <!-- Inicia oculto -->
+      <div class="modal-content">
+          <span class="close" onclick="cerrarModal()">&times;</span>
+          
+          <!-- Formulario de reprogramación -->
+          <form id="formReprogramar" method="post">
+              <input type="hidden" id="idSolicitud" name="idSolicitud">
+              
+              <div class="form-group">
+                  <label for="fechaRecoleccion">Nueva Fecha de Recolección:</label>
+                  <input type="date" id="fechaRecoleccion" name="fechaRecoleccion" required>
+              </div>
+              
+              <button type="submit">Reprogramar</button>
+          </form>
+      </div>
+  </div>
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -459,7 +485,37 @@
         doc.save("Solicitudes en proceso.pdf");
     });
 
+
+
+    // Js para el modal de reprogramar solicitud
+
+    function reprogramarSolicitud(idSolicitud) {
+    // Muestra el modal
+    document.getElementById("modalReprogramar").style.display = "block";
+    
+    // Coloca el idSolicitud en el campo oculto del formulario
+    document.getElementById("idSolicitud").value = idSolicitud;
+    }
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        document.getElementById("modalReprogramar").style.display = "none";
+    }
+
+    // Cerrar el modal al hacer clic fuera de él
+    window.onclick = function(event) {
+        const modal = document.getElementById("modalReprogramar");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+
+
+
   </script>
+
+
+
 
 </body>
 

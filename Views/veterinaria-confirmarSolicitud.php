@@ -1,12 +1,18 @@
+<?php
+session_start();  // Esto es necesario para iniciar la sesión
 
+include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
+verificarSesion();  // Verificar que esté logueado
+
+?>
 <!-- Cargar las dependencias necesarias -->
 
-<!-- <?php
+  <?php
     require_once("../Models/conexion_db.php");
     require_once("../Models/consultas_db.php");
     require_once("../Controllers/mostrarSolicitudes.php");
 
-?> -->
+?> 
 
 
 <!DOCTYPE html>
@@ -180,12 +186,12 @@
             </a>
           </li>
           <li>
-            <a href="veterinaria-cancelarReprogramar.html" class="active">
+            <a href="veterinaria-cancelarReprogramar.php" >
               <i class="bi bi-circle"></i><span>Cancelar/Reprogramar</span>
             </a>
           </li>
           <li>
-            <a href="veterinaria-confirmarSolicitud.html">
+            <a href="veterinaria-confirmarSolicitud.php" class="active">
               <i class="bi bi-circle"></i><span>Confirmar Solicitud</span>
             </a>
           </li>
@@ -237,7 +243,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Solicitudes</li>
-          <li class="breadcrumb-item active">Cancelar-reprogramar solicitudes en proceso</li>
+          <li class="breadcrumb-item active">Confirmar Solicitudes</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -269,18 +275,18 @@
                 <tr>
                   <th>Id</th>
                   <th>Fecha Solicitud</th>
-                  <th>Jornada</th>
+                  <th>Fecha Recoleccion</th>
                   <th>Nombre Exámen/es</th>
                   <th>Urgencia</th>
-                  <th>Estado</th>
-                  <th>Acciones</th> <!--realizada no realizada -->
+                  <th>Fase Actual</th>
+                  <th>Acciones</th> <!-- Realizda no realizada -->
                 </tr>
             </thead>
             <tbody id="tbody">
               
 
               <?php
-                cargarSolicitudesProceso()
+                cargarSolicitudesProcesoVeterinaria();
               ?>
 
             </tbody>

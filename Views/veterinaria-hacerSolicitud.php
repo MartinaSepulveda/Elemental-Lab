@@ -189,12 +189,12 @@ verificarSesion();  // Verificar que esté logueado
             </a>
           </li>
           <li>
-            <a href="veterinaria-cancelarReprogramar.html" >
+            <a href="veterinaria-cancelarReprogramar.php" >
               <i class="bi bi-circle"></i><span>Cancelar/Reprogramar</span>
             </a>
           </li>
           <li>
-            <a href="veterinaria-confirmarSolicitud.html">
+            <a href="veterinaria-confirmarSolicitud.php">
               <i class="bi bi-circle"></i><span>Confirmar Solicitud</span>
             </a>
           </li>
@@ -260,14 +260,12 @@ verificarSesion();  // Verificar que esté logueado
 
             <form class="w-100" action="../Controllers/registrarSolicitud.php" method="POST">
               <div class="row mb-3">
-                <!-- Jornada de recolección -->
+                <!-- Fecha de recolección -->
                 <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="jornada">Jornada de recolección programada</label>
-                  <select class="form-control" id="jornada" name="jornada" required>
-                    <option value="mañana">Mañana</option>
-                    <option value="tarde">Tarde</option>
-                  </select>
+                    <label for="fechaRecoleccion">Fecha de recolección programada</label>
+                    <input type="date" class="form-control" id="fechaRecoleccion" name="fechaRecoleccion" required>
                 </div>
+
             
                 <!-- NIT de la veterinaria -->
                 <div class="form-group col-lg-6 col-md-12 mb-3">
@@ -316,17 +314,24 @@ verificarSesion();  // Verificar que esté logueado
                 <div class="form-group col-lg-6 col-md-12 mb-3">
                   <label for="urgencia">Nivel de urgencia de la solicitud</label>
                   <select class="form-control" id="urgencia" name="urgencia" required>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
+                  <option value="" disabled selected>Selecciona el nivel de urgencia</option>
+                    <option value="1">Baja</option>
+                    <option value="2">Media</option>
+                    <option value="3">Alta</option>
                   </select>
                 </div>
             
                 <!-- Fase actual de la solicitud -->
                 <div class="form-group col-lg-6 col-md-12 mb-3">
-                  <label for="fase">Fase actual de la solicitud</label>
-                  <input type="text" class="form-control" id="fase" name="fase" value="En proceso" readonly>
+                    <label for="fase">Fase actual de la solicitud</label>
+                    
+                    <!-- Campo visible que muestra el texto "En proceso" -->
+                    <input type="text" class="form-control" id="fase" name="fase_text" value="En proceso" readonly>
+
+                    <!-- Campo oculto que enviará el valor 1 en lugar de "En proceso" -->
+                    <input type="hidden" id="fase" name="fase" value="1">
                 </div>
+
               </div>
             
               <!-- Botón de envío -->
