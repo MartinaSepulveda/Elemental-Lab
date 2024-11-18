@@ -219,7 +219,7 @@ verificarSesion();  // Verificar que esté logueado
           </a>
           <ul id="examenes-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
               <li>
-                  <a href="veterinaria-historialSolicitudes.html"  class="active">
+                  <a href="veterinaria-historialSolicitudes.php"  class="active">
                       <i class="bi bi-circle"></i><span>H. Solicitudes</span>
                   </a>
               </li>
