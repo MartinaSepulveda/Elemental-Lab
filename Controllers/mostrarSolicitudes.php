@@ -258,7 +258,7 @@
 function cancelarSolicitud(idSolicitud) {
     if (confirm("¿Estás seguro de que deseas cancelar esta solicitud?")) {
         // Redirige a un archivo PHP que maneje la cancelación
-        window.location.href = "cancelar_solicitud.php?idSolicitud=" + idSolicitud;
+        window.location.href = "../Controllers/cancelarSolicitud.php?idSolicitud=" + idSolicitud;
     }
 }
 

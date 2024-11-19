@@ -193,7 +193,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
   
         
         <li class="nav-item">
-          <a class="nav-link " href="index.html">
+          <a class="nav-link " href="../index.html">
             <i class="bi bi-box-arrow-right"></i>
             <span>Cerrar Sesión</span>
           </a>

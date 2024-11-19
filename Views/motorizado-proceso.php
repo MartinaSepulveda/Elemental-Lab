@@ -153,7 +153,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                       </li>
           
                       <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="../index.html">
                           <i class="bi bi-box-arrow-right"></i>
                           <span>Cerrar Sesión</span>
                         </a>
@@ -201,7 +201,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
         </li><!-- End Forms Nav -->
 
         <li class="nav-item">
-          <a class="nav-link " href="index.html">
+          <a class="nav-link " href="../index.html">
             <i class="bi bi-box-arrow-right"></i>
             <span>Cerrar Sesión</span>
           </a>

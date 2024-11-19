@@ -358,7 +358,7 @@
                     if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Si el usuario está activo
                         if ($buscarUsuario['idRolUsuario'] == 1) {
                             echo "<script> alert('Bienvenido Administrador')</script>";
-                            echo "<script>location.href='../Views/Administrador.php'</script>";
+                            echo "<script>location.href='../Views/administrador.php'</script>";
                         } elseif ($buscarUsuario['idRolUsuario'] == 2) {
                             echo "<script> alert('Bienvenido Motorizado')</script>";
                             echo "<script>location.href='../Views/motorizado-solicitudes.php'</script>";
