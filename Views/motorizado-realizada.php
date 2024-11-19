@@ -171,46 +171,52 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item"></li>
-        <a class="nav-link collapsed" href="motorizado-solicitudes.php">
-          <i class="bi bi-house"></i>
-          <span>Solicitudes Recibidas</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="solicitudes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="motorizado-solicitudes.php" >
+            <i class="bi bi-circle"></i><span>Solicitudes recibidas</span>
+          </a>
+        </li>
+        
+      </ul>
+    </li><!-- End Solicitudes Nav -->
 
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-map"></i><span>Fase solicitud</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="zonas-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="motorizado-proceso.php">
+            <i class="bi bi-circle"></i><span>En Proceso</span>
+          </a>
+        </li>
+        <li>
+          <a href="motorizado-realizada.php" class="active">
+            <i class="bi bi-circle"></i><span>Realizada</span>
+          </a>
+        </li>
+        <li>
+          <a href="motorizado-noRealizada.php">
+            <i class="bi bi-circle"></i><span>No Realizada</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Zonas Nav -->
+     
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal"></i><span>Fase de Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="solicitudes-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="motorizado-proceso.php" >
-              <i class="bi bi-circle"></i><span>En proceso</span>
-            </a>
-          </li>
-          <li>
-            <a href="motoizado-realizada.php" class="active">
-              <i class="bi bi-circle"></i><span>Realizadas</span>
-            </a>
-          </li>
-          <li>
-            <a href="motorizado-noRealizada.php" >
-              <i class="bi bi-circle"></i><span>No realizadas</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link " href="../index.html">
+        <a class="nav-link " href="index.html">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>
-      </li><!-- End cerrar sesión Page Nav -->
-
+      </li><!-- Cerrar Sesión -->
     </ul>
-
   </aside><!-- End Sidebar-->
+
 
   <main id="main" class="main">
 
@@ -247,23 +253,23 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
         <div class="col-lg-12">
           <table id="miTabla" class="table">
             <tdead>
-              <tr>
-                  <th>Num <br>Solicitud</th>
-                  <th>Veterinaria</th>
-                  <th>Fecha Solicitud</th>
-                  <th>Fecha Recolección</th>
-                  <th>Dirección</th>
-                  <th>Teléfono</th>
-                  <th>Examen</th>
-                  <th>Urgencia</th>
-                  <th>Fase</th>
-                  <th>Estado</th>
+              <tr style="text-align: center;">
+              <th>Num <br>Solicitud</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Fecha Recolección</th>
+                    <th>Veterinaria</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Examen</th>
+                    <th>Urgencia</th>
+                    <th>Estado</th>
+                    <th>Fase</th>
               </tr>
           </tdead>
           <tbody id="tbody">
               
               <?php
-                cargarSolicitudesRealizadas();
+                cargarSolicitudesRealizadasMotorizado();
               ?>
 
               

@@ -9,7 +9,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 <?php
   require_once("../Models/conexion_db.php");
   require_once("../Models/consultas_db.php");
-  require_once("../Controllers/mostrarSolicitudesMotorizado.php");
+  require_once("../Controllers/mostrarSolicitudes.php")
 ?>
 
 <!DOCTYPE html>
@@ -160,40 +160,46 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
     <aside id="sidebar" class="sidebar">
 
       <ul class="sidebar-nav" id="sidebar-nav">
-  
-        <li class="nav-item"></li>
-          <a class="nav-link collapsed" href="motorizado-solicitudes.php">
-            <i class="bi bi-house"></i>
-            <span>Solicitudes Recibidas</span>
-          </a>
-        </li><!-- Solicitudes -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="solicitudes-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="motorizado-solicitudes.php" class="active">
+              <i class="bi bi-circle"></i><span>Solicitudes recibidas</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li><!-- End Solicitudes Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-map"></i><span>Fase solicitud</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="zonas-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="motorizado-proceso.php">
+              <i class="bi bi-circle"></i><span>En Proceso</span>
+            </a>
+          </li>
+          <li>
+            <a href="motorizado-realizada.php" >
+              <i class="bi bi-circle"></i><span>Realizada</span>
+            </a>
+          </li>
+          <li>
+            <a href="motorizado-noRealizada.php">
+              <i class="bi bi-circle"></i><span>No Realizada</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Zonas Nav -->
   
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal"></i><span>Fase de Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="motorizado-proceso.php">
-                <i class="bi bi-circle"></i><span>En proceso</span>
-              </a>
-            </li>
-            <li>
-              <a href="motoizado-realizada.php">
-                <i class="bi bi-circle"></i><span>Realizadas</span>
-              </a>
-            </li>
-            <li>
-              <a href="motorizado-noRealizada.php">
-                <i class="bi bi-circle"></i><span>No realizadas</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- Fases -->
-  
-        
-        <li class="nav-item">
-          <a class="nav-link " href="../index.html">
+          <a class="nav-link " href="index.html">
             <i class="bi bi-box-arrow-right"></i>
             <span>Cerrar Sesión</span>
           </a>
@@ -203,77 +209,77 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
   
     </aside><!-- End Sidebar-->
 
-  <main id="main" class="main">
+    <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="Motorizado.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+      <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="Motorizado.html">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
 
-    <section class="section">
+      <section class="section">
 
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-3">
-          <label for="registrosxPag">Registros por página:</label> 
-            <select id="registrosxPag">
-                <option value="5" selected>5</option>
-                <option value="10" >10</option>
-            </select>
-        </div>
-        <div class="col-lg-8 col-md-6 col-sm-4">
-          <label for="buscar">Buscar:</label> 
-          <input type="text" id="buscar" >
-          <span id="limpiarOrden" style="cursor: pointer; display: none;">✖</span>
-        </div>
-        
-      </div>
-      <br>
-      <hr>
-      <div class="row card">
-        <div class="col-lg-12" class="soliMotorizado">
-          <table id="miTabla" class="table">
-            <tdead>
-              <tr>
-                  <th>Num <br>Solicitud</th>
-                  <th>Veterinaria</th>
-                  <th>Fecha Solicitud</th>
-                  <th>Fecha Recolección</th>
-                  <th>Dirección</th>
-                  <th>Teléfono</th>
-                  <th>Examen</th>
-                  <th>Urgencia</th>
-                  <th>Fase</th>
-                  <th>Estado</th>
-              </tr>
-          </tdead>
-          <tbody id="tbody">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-3">
+            <label for="registrosxPag">Registros por página:</label> 
+              <select id="registrosxPag">
+                  <option value="5" selected>5</option>
+                  <option value="10" >10</option>
+              </select>
+          </div>
+          <div class="col-lg-8 col-md-6 col-sm-4">
+            <label for="buscar">Buscar:</label> 
+            <input type="text" id="buscar" >
+            <span id="limpiarOrden" style="cursor: pointer; display: none;">✖</span>
+          </div>
           
-              <?php
-                cargarSolicitudesMoto();
-              ?>
-              
-          </tbody>
-        </table>
-
-
-        <div id="paginacion" class="d-flex align-items-center">
-          <button id="prevButton" title="Anterior" class="btn btn-outline-secondary me-2">
-              <i class="bi bi-arrow-left"></i>
-          </button>
-          <button id="nextButton" title="Siguiente" class="btn btn-outline-secondary me-2">
-              <i class="bi bi-arrow-right"></i>
-          </button>
-          <span id="pageInfo"></span>
         </div>
-      </div>
-    </section>
+        <br>
+        <hr>
+        <div class="row card">
+          <div class="col-lg-12" class="soliMotorizado">
+            <table id="miTabla" class="table">
+              <tdead>
+                <tr style="text-align: center;">
+                    <th>Num <br>Solicitud</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Fecha Recolección</th>
+                    <th>Veterinaria</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Examen</th>
+                    <th>Urgencia</th>
+                    <th>Estado</th>
+                    <th>Fase</th>
+                </tr>
+            </tdead>
+            <tbody id="tbody">
+            
+                <?php
+                  cargarSolicitudesMotorizado();
+                ?>
+                
+            </tbody>
+          </table>
 
-  </main><!-- End #main -->
+
+          <div id="paginacion" class="d-flex align-items-center">
+            <button id="prevButton" title="Anterior" class="btn btn-outline-secondary me-2">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <button id="nextButton" title="Siguiente" class="btn btn-outline-secondary me-2">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+            <span id="pageInfo"></span>
+          </div>
+        </div>
+        </section>
+
+      </main><!-- End #main -->
 
 
 
