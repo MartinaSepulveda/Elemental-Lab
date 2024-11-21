@@ -150,7 +150,7 @@ verificarSesion();  // Verificar que esté logueado
         </a>
         <ul id="zonas-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="veterinaria-resultados.html">
+            <a href="veterinaria-resultados.php">
               <i class="bi bi-circle"></i><span>Ver resultados</span>
             </a>
           </li>

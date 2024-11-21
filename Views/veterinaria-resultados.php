@@ -10,7 +10,7 @@ verificarSesion();  // Verificar que esté logueado
 <?php
     require_once("../Models/conexion_db.php");
     require_once("../Models/consultas_db.php");
-    require_once("../Controllers/mostrarSolicitudes.php");
+    require_once("../Controllers/mostrarResultados.php");
 
 ?>
 
@@ -150,7 +150,7 @@ verificarSesion();  // Verificar que esté logueado
           </a>
           <ul id="zonas-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
             <li>
-              <a href="veterinaria-resultados.html"  class="active">
+              <a href="veterinaria-resultados.php"  class="active">
                 <i class="bi bi-circle"></i><span>Ver resultados</span>
               </a>
             </li>
@@ -196,98 +196,46 @@ verificarSesion();  // Verificar que esté logueado
     </div><!-- End Page Title -->
 
 
-    <section class="section">
+    <section class="section" id="resultados">
       <div class="row">
         <div class="col-lg-12 col-md-6">
           <div class="container">
-    
-            <!-- Si no hay resultados -->
-            <div id="sin-resultados" class="alert alert-warning" style="display: none;">
-                No tienes resultados de pruebas.
-            </div>
-    
-            <!-- Resultados de ejemplo -->
-            <div class="row" id="resultados-lista">
-                <!-- Tarjeta de prueba 1 -->
-                <div class="col-md-4">
-                    <div class="card result-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Prueba de Sangre</h5>
-                            <p class="card-text">
-                                Descripción breve del resultado de la prueba de sangre. Se pueden incluir detalles adicionales.
-                            </p>
-                            <p class="text-muted">Fecha de la prueba: 2024-10-10</p>
-                            <a href="#" class="btn btn-primary">Descargar Resultado</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Tarjeta de prueba 2 -->
-                <div class="col-md-4">
-                    <div class="card result-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Radiografía de Torax</h5>
-                            <p class="card-text">
-                                Descripción breve del resultado de la radiografía. Aquí puede ir información sobre el diagnóstico.
-                            </p>
-                            <p class="text-muted">Fecha de la prueba: 2024-09-15</p>
-                            <a href="#" class="btn btn-primary">Descargar Resultado</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Tarjeta de prueba 3 -->
-                <div class="col-md-4">
-                    <div class="card result-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Análisis de Orina</h5>
-                            <p class="card-text">
-                                Resultado del análisis de orina. Resultados normales o anormales se indican aquí.
-                            </p>
-                            <p class="text-muted">Fecha de la prueba: 2024-08-20</p>
-                            <a href="#" class="btn btn-primary">Descargar Resultado</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tarjeta de prueba 2 -->
-                <div class="col-md-4">
-                  <div class="card result-card">
-                      <div class="card-body">
-                          <h5 class="card-title">Radiografía de Torax</h5>
-                          <p class="card-text">
-                              Descripción breve del resultado de la radiografía. Aquí puede ir información sobre el diagnóstico.
-                          </p>
-                          <p class="text-muted">Fecha de la prueba: 2024-09-15</p>
-                          <a href="#" class="btn btn-primary">Descargar Resultado</a>
-                      </div>
+            <div class="row">
+              <!-- Contenedor para alinear los campos de búsqueda y fecha -->
+              <div class="col-lg-12">
+                <div class="d-flex align-items-center">
+                  <!-- Campo de búsqueda por texto -->
+                  <div class="col-lg-5 col-md-5 col-sm-4 buscarResul">
+                    <label for="buscar">Buscar:</label> 
+                    <input type="text" id="buscar" class="form-control">
                   </div>
-              </div>
 
-              <!-- Tarjeta de prueba 2 -->
-              <div class="col-md-4">
-                <div class="card result-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Radiografía de Torax</h5>
-                        <p class="card-text">
-                            Descripción breve del resultado de la radiografía. Aquí puede ir información sobre el diagnóstico.
-                        </p>
-                        <p class="text-muted">Fecha de la prueba: 2024-09-15</p>
-                        <a href="#" class="btn btn-primary">Descargar Resultado</a>
-                    </div>
+                  <!-- Campo de búsqueda por fecha -->
+                  <div class="col-lg-5 col-md-5 col-sm-4 mr-4 buscarResul">
+                    <label for="fecha">Filtrar por fecha:</label> 
+                    <input type="date" id="fecha" class="form-control">
+                  </div>
+
+                  <!-- Botón de limpiar -->
+                  <span id="limpiarOrden" style="cursor: pointer; display: none;">✖</span>
                 </div>
+              </div>
             </div>
 
+            <br><br>
+
+            <!-- Resultados (tarjetas) -->
+            <div class="row" id="resultados-lista">
+              <?php
+                cargarResultadosVeterinaria();
+              ?>
             </div>
-  
+
           </div>
-    
         </div>
       </div>
-
-      
-      
     </section>
+
 
   </main><!-- End #main -->
 
@@ -302,16 +250,69 @@ verificarSesion();  // Verificar que esté logueado
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
 
-  <!-- Si no hay resultados, mostrar el mensaje -->
   <script>
-    const resultadosLista = document.getElementById('resultados-lista');
-    const sinResultados = document.getElementById('sin-resultados');
+    $(document).ready(function() {
+    let filteredCards = $('.result-card'); // Todas las tarjetas de prueba
 
-    // Si no hay resultados, muestra el mensaje de "sin resultados"
-    if (resultadosLista.children.length === 0) {
-        sinResultados.style.display = 'block';
+    // Función de búsqueda por texto
+    $('#buscar').on('keyup', function() {
+        filterCards();
+    });
+
+    // Función de búsqueda por fecha
+    $('#fecha').on('change', function() {
+        filterCards();
+    });
+
+    // Función para limpiar la búsqueda
+    $('#limpiarOrden').on('click', function() {
+        $('#buscar').val(''); // Borra el valor de búsqueda
+        $('#fecha').val(''); // Borra el valor de fecha
+        filterCards(); // Restablece las tarjetas y muestra todas
+        $(this).hide(); // Oculta el botón de limpiar
+    });
+
+    // Función que filtra las tarjetas de acuerdo con el texto y la fecha
+    function filterCards() {
+        const searchValue = $('#buscar').val().toLowerCase(); // Obtiene el valor de búsqueda
+        const selectedDate = $('#fecha').val(); // Obtiene la fecha seleccionada
+
+        // Filtra las tarjetas de acuerdo al texto
+        filteredCards = $('.result-card').filter(function() {
+            const cardText = $(this).text().toLowerCase();
+            const cardDate = $(this).find('.text-muted').data('fecha');
+
+            // Verifica si el texto y la fecha coinciden
+            const matchesText = cardText.indexOf(searchValue) !== -1;
+            const matchesDate = selectedDate ? cardDate === selectedDate : true; // Si no hay fecha seleccionada, pasa
+
+            return matchesText && matchesDate; // Ambas condiciones deben ser verdaderas
+        });
+
+        // Muestra las tarjetas filtradas
+        displayCards();
     }
+
+    // Función para mostrar solo las tarjetas filtradas
+    function displayCards() {
+        // Primero, oculta todas las tarjetas
+        $('.result-card').hide();
+        
+        // Luego, muestra solo las tarjetas filtradas
+        filteredCards.show();
+
+        // Mostrar el botón de limpiar si hay algo en los campos
+        const searchValue = $('#buscar').val();
+        $('#limpiarOrden').toggle(searchValue.length > 0 || $('#fecha').val() !== '');
+    }
+
+    // Inicializa la visualización de las tarjetas al cargar
+    displayCards();
+  });
+
   </script>
+
+
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 

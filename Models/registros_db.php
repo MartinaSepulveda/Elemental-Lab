@@ -711,122 +711,54 @@ use FTP\Connection;
             }
         }
 
-        public function registrarSolictud($fechaSolicitud, $fechaRecoleccion, $nitVet,  $tipoExamen, $urgencia, $fase){
-            // Creamos el objeto a partir de la clase conexion
+        public function registrarSolicitud($fechaSolicitud, $fechaRecoleccion, $nitVet, $tipoExamenes, $urgencia, $fase) {
+            // Crear el objeto de conexión
             $objetoConexion = new Conexion();
-            $conexion = $objetoConexion-> get_conexion();
-
-            // Definimos la consulta SQL a ejecutar y la guardamos en una variable
-
-            $ingresarSolicitud = "INSERT INTO solicitudes ( fechaSolicitud, fechaRecoleccion, nitVeterinariaSolicitud, idExamenSolicitud, idUrgenciaSolicitud, idFaseSolicitud) VALUES (:fechaSolicitud,:fechaRecoleccion, :nitVet,:tipoExamen,:urgencia, :fase)" ;
-
-            // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
-            $result = $conexion -> prepare($ingresarSolicitud);
-
-            // Convertimos los argumentos $ en parametros : con bindParam
-            $result->bindParam(":fechaSolicitud", $fechaSolicitud);
-            $result->bindParam(":fechaRecoleccion", $fechaRecoleccion);
-            $result->bindParam(":nitVet", $nitVet);
-            $result->bindParam(":tipoExamen", $tipoExamen);
-            $result->bindParam(":urgencia", $urgencia);
-            $result->bindParam(":fase", $fase);
-
-            $result->execute();
-
-            if ($result->rowCount() > 0) {
+            $conexion = $objetoConexion->get_conexion();
+        
+            try {
+                // Iniciar una transacción
+                $conexion->beginTransaction();
+        
+                // Inserción en la tabla solicitudes
+                $sqlSolicitud = "INSERT INTO solicitudes (fechaSolicitud, fechaRecoleccion, nitVeterinariaSolicitud, idUrgenciaSolicitud, idFaseSolicitud) 
+                VALUES (:fechaSolicitud, :fechaRecoleccion, :nitVet, :urgencia, :fase)";
+                $stmtSolicitud = $conexion->prepare($sqlSolicitud);
+                $stmtSolicitud->bindParam(":fechaSolicitud", $fechaSolicitud);
+                $stmtSolicitud->bindParam(":fechaRecoleccion", $fechaRecoleccion);
+                $stmtSolicitud->bindParam(":nitVet", $nitVet);
+                $stmtSolicitud->bindParam(":urgencia", $urgencia);
+                $stmtSolicitud->bindParam(":fase", $fase);
+                $stmtSolicitud->execute();
+        
+                // Obtener el ID de la solicitud recién insertada
+                $idSolicitud = $conexion->lastInsertId();
+        
+                // Inserción en la tabla intermedia solicitudes_examenes
+                $sqlExamenes = "INSERT INTO solicitudes_examenes (idSolicitud, idExamen) VALUES (:idSolicitud, :idExamen)";
+                $stmtExamenes = $conexion->prepare($sqlExamenes);
+        
+                // Insertar cada examen asociado
+                foreach ($tipoExamenes as $idExamen) {
+                    $stmtExamenes->bindParam(":idSolicitud", $idSolicitud);
+                    $stmtExamenes->bindParam(":idExamen", $idExamen);
+                    $stmtExamenes->execute();
+                }
+        
+                // Confirmar la transacción
+                $conexion->commit();
+        
                 // Mensaje de éxito
-                echo '
-                <div id="alert" style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #d4edda;
-                    color: #155724;
-                    border: 1px solid #c3e6cb;
-                    padding: 15px;
-                    margin: 20px auto; /* Centra el div en la página */
-                    border-radius: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    max-width: 600px; 
-                    position: relative; /* Necesario para posicionar el botón de cerrar */
-                ">
-                    <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
-                    <span>Solictud registrada satisfactoriamente, esperamos dar respuesta a ella lo más prontamente.</span>
-                    <button onclick="closeAlert()" style="
-                        background: none;
-                        border: none;
-                        color: #155724;
-                        font-size: 16px;
-                        position: absolute;
-                        right: 10px;
-                        cursor: pointer;
-                    ">✖</button>
-                </div>
-                
-                <script>
-                    function closeAlert() {
-                        document.getElementById("alert").style.display = "none";
-                        // Redirige después de cerrar
-                        location.href = "../Views/veterinaria.php";
-                    }
-            
-                    // Cierra la alerta 
-                    setTimeout(function() {
-                        closeAlert();
-                        // Redirige automáticamente después de 5 segundos
-                        location.href = "../Views/veterinaria.php";
-                    }, 3000);
-                </script>
-            ';
-            } else {
-                // Mensaje de error
-                echo '
-                <div id="alert" style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #f8d7da;
-                    color: #721c24;
-                    border: 1px solid #f5c6cb;
-                    padding: 15px;
-                    margin: 20px auto; /* Centra el div en la página */
-                    border-radius: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    max-width: 600px; 
-                    position: relative; /* Necesario para posicionar el botón de cerrar */
-                ">
-                    <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
-                    <span>No se pudo registrar la Solicitud.</span>
-                    <button onclick="closeAlert()" style="
-                        background: none;
-                        border: none;
-                        color: #721c24;
-                        font-size: 16px;
-                        position: absolute;
-                        right: 10px;
-                        cursor: pointer;
-                    ">✖</button>
-                </div>
-                
-                <script>
-                    function closeAlert() {
-                        document.getElementById("alert").style.display = "none";
-                        // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
-                        location.href = "../Views/veterinaria.php";
-                    }
-
-                    // Cierra la alerta automáticamente después de 10 segundos
-                    setTimeout(function() {
-                        closeAlert();
-                        // Redirige automáticamente después de 10 segundos
-                        location.href = "../Views/veterinaria.php";
-                    }, 10000);
-                </script>
-            ';
+                return true;
+            } catch (Exception $e) {
+                // Revertir la transacción en caso de error
+                $conexion->rollBack();
+                // Manejo del error (puedes registrar o mostrar el error si es necesario)
+                error_log("Error al registrar la solicitud: " . $e->getMessage());
+                return false;
             }
         }
+        
         
         
 

@@ -1171,7 +1171,7 @@ button[type="submit"]:hover {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra de enfoque */
 }
 .multiselect-container {
-  column-count: 2; /* Número de columnas */
+  column-count: 1; /* Número de columnas */
   column-gap: 4px; /* Espacio entre columnas */
 }
 
@@ -1321,9 +1321,15 @@ form button[name="fase"] {
   max-width: 300px; /* Opcional: límite máximo de ancho */
 }
 
+#resultados #limpiarOrden {
+  font-size: 20px; 
+  cursor: pointer; 
+  margin-top: 3%;
+}
 
-
-
+#resultados .buscarResul{
+  margin-right: 20px;
+}
 
 
 

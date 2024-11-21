@@ -504,48 +504,53 @@
         }
 
         public function consultarSolicitudesVeterinaria($nitVeterinaria) {
-            // Variable que va a almacenar el fetch
-            $datosSolicitud = null;
-
-            // Creamos el objeto a partir de la clase conexion
+            // Variable que va a almacenar el resultado
+            $datosSolicitud = [];
+        
+            // Creamos el objeto a partir de la clase conexión
             $objConexion = new Conexion();
             $conexion = $objConexion->get_conexion();
-
-            // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT 
-                                    idSolicitud, 
-                                    fechaSolicitud,
-                                    fechaRecoleccion,  
-                                    nombreExamen, 
-                                    descripcionUrgencia,
-                                    descripcionEstadoSolicitud, 
-                                    descripcionFase 
-                                FROM solicitudes 
-                                LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria 
-                                LEFT JOIN examen ON idExamenSolicitud = idExamen 
-                                LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia
-                                LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud
-                                LEFT JOIN fase ON idFaseSolicitud = idFase  
-                                WHERE nitVeterinariaSolicitud = :nitVeterinaria
-                                ";
-
+        
+            // Consulta SQL para traer las solicitudes junto con los exámenes asociados
+            $consultarExamen = "
+                SELECT 
+                    solicitudes.idSolicitud, 
+                    solicitudes.fechaSolicitud,
+                    solicitudes.fechaRecoleccion,
+                    GROUP_CONCAT(examen.nombreExamen SEPARATOR ' , ') AS examenes, -- Agrupa los nombres de los exámenes
+                    nivelurgencia.descripcionUrgencia,
+                    estadosolicitud.descripcionEstadoSolicitud,
+                    fase.descripcionFase
+                FROM solicitudes
+                LEFT JOIN veterinaria ON solicitudes.nitVeterinariaSolicitud = veterinaria.nitVeterinaria
+                LEFT JOIN solicitudes_examenes ON solicitudes.idSolicitud = solicitudes_examenes.idSolicitud
+                LEFT JOIN examen ON solicitudes_examenes.idExamen = examen.idExamen
+                LEFT JOIN nivelurgencia ON solicitudes.idUrgenciaSolicitud = nivelurgencia.idUrgencia
+                LEFT JOIN estadosolicitud ON solicitudes.idEstadoSolicitudSoli = estadosolicitud.idEstadoSolicitud
+                LEFT JOIN fase ON solicitudes.idFaseSolicitud = fase.idFase
+                WHERE solicitudes.nitVeterinariaSolicitud = :nitVeterinaria
+                GROUP BY solicitudes.idSolicitud, solicitudes.fechaSolicitud, solicitudes.fechaRecoleccion, 
+                nivelurgencia.descripcionUrgencia, estadosolicitud.descripcionEstadoSolicitud, fase.descripcionFase
+                ORDER BY solicitudes.fechaSolicitud DESC"; 
+        
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
-
-            // Enlazamos el parámetro :nitVeterinaria con el valor de la veterinaria de la sesión
+        
+            // Enlazamos el parámetro :nitVeterinaria con el valor proporcionado
             $result->bindParam(":nitVeterinaria", $nitVeterinaria);
-
+        
             // Ejecutamos la consulta
             $result->execute();
-
+        
             // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
-            while ($resultado = $result->fetch()) {
+            while ($resultado = $result->fetch(PDO::FETCH_ASSOC)) {
                 $datosSolicitud[] = $resultado;
             }
-
+        
             // Devolvemos los resultados
             return $datosSolicitud;
         }
+        
 
         public function consultarSolicitudesVeterinariaEstado($nitVeterinaria) {
             // Variable que va a almacenar el fetch
@@ -689,6 +694,37 @@
             // Devolvemos los resultados
             return $datosSolicitud;
         }
+
+        public function consultarResultadosVeterinaria(){
+            // Variable que va a almacenar el fetch
+            $datos = null;
+
+            // Creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+
+            // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
+            $consultarResultado = "SELECT  fechaResultado, archivo, idSolicitudResultado, idExamenSolicitud, nombreExamen FROM resultados LEFT JOIN solicitudes ON idSolicitudResultado = idSolicitud LEFT JOIN examen ON idExamenSolicitud = idExamen WHERE nitVeterinariaSolicitud = :nitVet  "; 
+
+            // Preparamos la consulta
+            $result = $conexion->prepare($consultarResultado);
+
+            // Enlazamos el parámetro :nitVet 
+            $result->bindParam(':nitVet', $_SESSION['nit']);
+            
+
+            // Ejecutamos la consulta
+            $result->execute();
+
+            // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
+            while ($resultado = $result->fetch()) {
+                $datos[] = $resultado;
+            }
+
+            // Devolvemos los resultados
+            return $datos;
+        }
+
         
     }
 
