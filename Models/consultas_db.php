@@ -353,6 +353,7 @@
                     $_SESSION['id'] = $buscarUsuario['idUsuario'];
                     $_SESSION['rol'] = $buscarUsuario['idRolUsuario'];
                     $_SESSION['estado'] = $buscarUsuario['idEstadoUsuario'];
+                    $_SESSION['nombre'] = $buscarUsuario['nombresUsuario'];
                     
                     // Validación de rol y estado activo
                     if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Si el usuario está activo
@@ -412,7 +413,6 @@
         }
         
         
-
 
         // Función para mostrar los datos de las zonas en el formulario para editarlos
         public function consultarZonaEditar($id){

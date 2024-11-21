@@ -16,4 +16,26 @@ function verificarRol($rolRequerido) {
         exit();
     }
 }
+
+function obtenerNombreUsuario() {
+    // Verificamos si la sesión está iniciada
+    if (!isset($_SESSION['id']) || $_SESSION['id'] == '') {
+        return "Invitado"; // Retorno por defecto si no hay sesión activa
+    }
+
+    if (isset($_SESSION['nombre']) && !empty($_SESSION['nombre'])) {
+        return $_SESSION['nombre'];
+    }
+    return "Usuario"; // Valor por defecto si no hay nombre
+
+    // Si es una veterinaria
+    if (isset($_SESSION['nombre'])) {
+        return $_SESSION['nombre']; // Devuelve el nombre de la veterinaria
+    }
+
+    return "Veterinaria"; // Valor por defecto
+}
+
+
+
 ?>
