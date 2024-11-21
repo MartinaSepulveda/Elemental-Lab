@@ -96,7 +96,7 @@
                     <div class="col-6">
                       <label for="idRolUsuario" class="form-label">Rol</label>
                       <select name="idRolUsuario" class="form-control" id="idRolUsuario" required>
-                        <option value="" disabled selected > Seleccione su rol</option>
+                        <option value="" disabled selected > Seleccione su rol:</option>
                         <?php
                         cargarRolSelect();
                         ?>

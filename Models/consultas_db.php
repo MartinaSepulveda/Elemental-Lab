@@ -354,6 +354,7 @@
                     $_SESSION['rol'] = $buscarUsuario['idRolUsuario'];
                     $_SESSION['estado'] = $buscarUsuario['idEstadoUsuario'];
                     $_SESSION['nombre'] = $buscarUsuario['nombresUsuario'];
+                    $_SESSION['zona'] = $zonaUsuario['nombresUsuario'];
                     
                     // Validación de rol y estado activo
                     if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Si el usuario está activo
@@ -589,34 +590,45 @@
             return $datosSolicitud;
         }
 
-        public function consultarSolicitudesMotorizado() { //Motorizado Solicitudes
+        public function consultarSolicitudesMotorizado() { 
             // Variable que va a almacenar el fetch
             $datosSolicitud = null;
-
+        
             // Creamos el objeto a partir de la clase conexion
             $objConexion = new Conexion();
             $conexion = $objConexion->get_conexion();
-
+        
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes INNER JOIN examen ON idExamenSolicitud = idExamen INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia INNER JOIN Fase ON idFaseSolicitud = idFase INNER JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud INNER JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria INNER JOIN zonas ON idZonaVeterinaria = idZonas INNER JOIN usuarios ON idZonaUsuario = idZonas WHERE idZonaVeterinaria = idZonas AND idZonaUsuario = idZonas";
-
+            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, 
+                descripcionEstadoSolicitud, descripcionFase 
+                FROM solicitudes 
+                LEFT JOIN examen ON idExamenSolicitud = idExamen 
+                LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia 
+                LEFT JOIN Fase ON idFaseSolicitud = idFase 
+                LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud 
+                LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria 
+                LEFT JOIN zonas ON idZonaVeterinaria = idZonas 
+                LEFT JOIN usuarios ON idZonaUsuario = idZonas 
+                WHERE idUsuario = :idUsuario AND idZonaUsuario = idZonaVeterinaria";
+        
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
-
-            // Enlazamos el parámetro :nitVeterinaria con el valor de la veterinaria de la sesión
-            // $result->bindParam(":idUsuario", $idUsuario);
-
+        
+            // Enlazamos el parámetro :idUsuario con el valor de la sesión del usuario
+            $result->bindParam(':idUsuario', $_SESSION['id']);
+        
             // Ejecutamos la consulta
             $result->execute();
-
+        
             // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
             while ($resultado = $result->fetch()) {
                 $datosSolicitud[] = $resultado;
             }
-
+        
             // Devolvemos los resultados
             return $datosSolicitud;
         }
+        
 
         public function consultarSolicitudesProcesoMotorizado() {
             // Variable que va a almacenar el fetch
@@ -627,12 +639,13 @@
             $conexion = $objConexion->get_conexion();
 
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes INNER JOIN examen ON idExamenSolicitud = idExamen INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia INNER JOIN Fase ON idFaseSolicitud = idFase INNER JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud INNER JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria INNER JOIN zonas ON idZonaVeterinaria = idZonas INNER JOIN usuarios ON idZonaUsuario = idZonas WHERE idFaseSolicitud = 1 AND idZonaUsuario = idZonaVeterinaria"; // Filtramos por el NIT de la veterinaria
+            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes LEFT JOIN examen ON idExamenSolicitud = idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN Fase ON idFaseSolicitud = idFase LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN usuarios ON idZonaUsuario = idZonas WHERE idUsuario = :idUsuario AND idFaseSolicitud = 1 AND idZonaUsuario = idZonaVeterinaria "; // Filtramos por el NIT de la veterinaria
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
 
             // Enlazamos el parámetro :idUsuario con el valor de la veterinaria de la sesión
+            $result->bindParam(':idUsuario', $_SESSION['id']);
             // $result->bindParam(":idUsuario", $idUsuario);
 
             // Ejecutamos la consulta
@@ -656,12 +669,13 @@
             $conexion = $objConexion->get_conexion();
 
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes INNER JOIN examen ON idExamenSolicitud = idExamen INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia INNER JOIN Fase ON idFaseSolicitud = idFase INNER JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud INNER JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria WHERE idFaseSolicitud = 2 "; // Filtramos por el NIT de la veterinaria
+            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes INNER JOIN examen ON idExamenSolicitud = idExamen INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia INNER JOIN Fase ON idFaseSolicitud = idFase INNER JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud INNER JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria  LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN usuarios ON idZonaUsuario = idZonas WHERE idUsuario = :idUsuario AND idFaseSolicitud = 1 AND idZonaUsuario = idZonaVeterinaria  "; // Filtramos por el NIT de la veterinaria
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
 
             // Enlazamos el parámetro :idUsuario con el valor de la veterinaria de la sesión
+            $result->bindParam(':idUsuario', $_SESSION['id']);
             // $result->bindParam(":idUsuario", $idUsuario);
 
             // Ejecutamos la consulta

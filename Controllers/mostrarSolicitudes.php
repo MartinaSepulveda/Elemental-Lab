@@ -212,7 +212,7 @@
     function cargarSolicitudesMotorizado() { //Motorizado Solicitudes
         // Verificamos que la veterinaria esté autenticada y que su NIT esté en la sesión
         if (isset($_SESSION['id'])) {
-            $idUsuario = $_SESSION['id'];  // Obtenemos el NIT de la veterinaria desde la sesión
+            $idUsuario = $_SESSION['id'];  // Obtenemos el id del usuario desde la sesión
     
             // Creamos el objeto a partir de la clase Consultas
             $objConsultas = new Consultas();
@@ -222,7 +222,7 @@
     
             // Verificamos si $solicitudes está vacía
             if (empty($solicitudes)) {
-                echo "<h3>No hay solicitudes registradas para esta veterinaria.</h3>";
+                echo "<h3>No hay solicitudes nuevas.</h3>";
             } else {
                 // Mostramos las solicitudes en la tabla
                 foreach ($solicitudes as $datossolicitudes) {
@@ -237,7 +237,9 @@
                         <td>' . $datossolicitudes['nombreExamen'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>' . $datossolicitudes['descripcionEstadoSolicitud'] . '</td>
-                        <td>' . $datossolicitudes['descripcionFase'] . '</td>
+                        <td>
+                        
+                        </td>
                     </tr>
                     ';
                 }
@@ -261,7 +263,7 @@
     
             // Verificamos si $solicitudes está vacía
             if (empty($solicitudes)) {
-                echo "<h3>No hay solicitudes registradas para esta veterinaria.</h3>";
+                echo "<h3>No hay solicitudes en proceso.</h3>";
             } else {
                 // Mostramos las solicitudes en la tabla
                 foreach ($solicitudes as $datossolicitudes) {
@@ -276,7 +278,9 @@
                         <td>' . $datossolicitudes['nombreExamen'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>' . $datossolicitudes['descripcionEstadoSolicitud'] . '</td>
-                        <td>' . $datossolicitudes['descripcionFase'] . '</td>
+                        
+
+                        
                         <td>
                             <!-- Botones de acción -->
                             <form method="POST" action="../Controllers/confirmarFaseMotorizado.php">
