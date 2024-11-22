@@ -312,7 +312,7 @@
     
             // Verificamos si $solicitudes está vacía
             if (empty($solicitudes)) {
-                echo "<h3>No hay solicitudes registradas por mostrar..</h3>";
+                echo "<h3>No hay solicitudes registradas por mostrar.</h3>";
             } else {
                 // Mostramos las solicitudes en la tabla
                 foreach ($solicitudes as $datossolicitudes) {
