@@ -222,10 +222,13 @@
     
             // Verificamos si $solicitudes está vacía
             if (empty($solicitudes)) {
-                echo "<h3>No hay solicitudes nuevas.</h3>";
+                echo "<h3>No hay solicitudes registradas por mostrar.</h3>";
             } else {
                 // Mostramos las solicitudes en la tabla
                 foreach ($solicitudes as $datossolicitudes) {
+
+                    $estadoSolicitud = empty($datossolicitudes['descripcionEstadoSolicitud']) ? '--' : $datossolicitudes['descripcionEstadoSolicitud'];
+
                     echo '
                     <tr>
                         <td>' . $datossolicitudes['idSolicitud'] . '</td>
@@ -236,10 +239,8 @@
                         <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['nombreExamen'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
-                        <td>' . $datossolicitudes['descripcionEstadoSolicitud'] . '</td>
-                        <td>
-                        
-                        </td>
+                        <td>' . $estadoSolicitud . '</td>
+                        <td>' . $datossolicitudes['descripcionFase'] . '</td>
                     </tr>
                     ';
                 }
@@ -263,10 +264,11 @@
     
             // Verificamos si $solicitudes está vacía
             if (empty($solicitudes)) {
-                echo "<h3>No hay solicitudes en proceso.</h3>";
+                echo "<h3>No hay solicitudes registradas por mostrar.</h3>";
             } else {
                 // Mostramos las solicitudes en la tabla
                 foreach ($solicitudes as $datossolicitudes) {
+                    $estadoSolicitud = empty($datossolicitudes['descripcionEstadoSolicitud']) ? '--' : $datossolicitudes['descripcionEstadoSolicitud'];
                     echo '
                     <tr>
                         <td>' . $datossolicitudes['idSolicitud'] . '</td>
@@ -277,9 +279,7 @@
                         <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['nombreExamen'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
-                        <td>' . $datossolicitudes['descripcionEstadoSolicitud'] . '</td>
-                        
-
+                        <td>' . $estadoSolicitud . '</td>
                         
                         <td>
                             <!-- Botones de acción -->
@@ -312,10 +312,11 @@
     
             // Verificamos si $solicitudes está vacía
             if (empty($solicitudes)) {
-                echo "<h3>No hay solicitudes registradas para esta veterinaria.</h3>";
+                echo "<h3>No hay solicitudes registradas por mostrar..</h3>";
             } else {
                 // Mostramos las solicitudes en la tabla
                 foreach ($solicitudes as $datossolicitudes) {
+                    $estadoSolicitud = empty($datossolicitudes['descripcionEstadoSolicitud']) ? '--' : $datossolicitudes['descripcionEstadoSolicitud'];
                     echo '
                     <tr>
                         <td>' . $datossolicitudes['idSolicitud'] . '</td>
@@ -326,7 +327,47 @@
                         <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['nombreExamen'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
-                        <td>' . $datossolicitudes['descripcionEstadoSolicitud'] . '</td>
+                        <td>' . $estadoSolicitud . '</td>
+                        <td>' . $datossolicitudes['descripcionFase'] . '</td>
+                    </tr>
+                    ';
+                }
+            }
+        } else {
+            // Si no hay una sesión activa para la veterinaria, mostramos un mensaje de error
+            echo "<h3>Debe iniciar sesión para ver las solicitudes.</h3>";
+        }
+    }
+
+    function cargarSolicitudesNoRealizadasMotorizado() { 
+        
+        if (isset($_SESSION['id'])) {
+            $idUsuario = $_SESSION['id']; 
+    
+            // Creamos el objeto a partir de la clase Consultas
+            $objConsultas = new Consultas();
+    
+            // Llamamos al método y pasamos el NIT de la veterinaria para filtrar las solicitudes
+            $solicitudes = $objConsultas->consultarSolicitudesNoRealizadasMotorizado($idUsuario);
+    
+            // Verificamos si $solicitudes está vacía
+            if (empty($solicitudes)) {
+                echo "<h3>No hay solicitudes registradas por mostrar.</h3>";
+            } else {
+                // Mostramos las solicitudes en la tabla
+                foreach ($solicitudes as $datossolicitudes) {
+                    $estadoSolicitud = empty($datossolicitudes['descripcionEstadoSolicitud']) ? '--' : $datossolicitudes['descripcionEstadoSolicitud'];
+                    echo '
+                    <tr>
+                        <td>' . $datossolicitudes['idSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaSolicitud'] . '</td>
+                        <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
+                        <td>' . $datossolicitudes['nombreVeterinaria'] . '</td>
+                        <td>' . $datossolicitudes['direccionVeterinaria'] . '</td>
+                        <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
+                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
+                        <td>' . $estadoSolicitud . '</td>
                         <td>' . $datossolicitudes['descripcionFase'] . '</td>
                     </tr>
                     ';
