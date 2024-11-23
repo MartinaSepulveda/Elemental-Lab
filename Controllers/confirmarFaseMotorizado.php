@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $confirmacionExitosa = $solicitudesModel->confirmarFaseMotorizado($idSolicitud);
 
     if ($confirmacionExitosa) {
-        echo "<script>alert('Motorizado ha confirmado la solicitud como Realizada'); window.location.href='pagina_solicitudes.php';</script>";
+        echo "<script>alert('Has confirmado la solicitud como Realizada'); window.location.href='../Views/motorizado-solicitudes.php';</script>";
     } else {
-        echo "<script>alert('El veterinario aún no ha marcado esta solicitud'); window.location.href='pagina_solicitudes.php';</script>";
+        echo "<script>alert('El veterinario aún no ha marcado esta solicitud'); window.location.href='../Views/motorizado-solicitudes.php';</script>";
     }
 }
 ?>

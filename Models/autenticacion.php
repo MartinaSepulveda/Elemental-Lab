@@ -17,6 +17,18 @@ function verificarRol($rolRequerido) {
     }
 }
 
+function verificarVeterinaria() {
+    // Verifica si la sesión tiene el NIT de veterinaria configurado
+    if (!isset($_SESSION['nit']) || empty($_SESSION['nit'])) {
+        echo "<script>
+            alert('Acceso denegado. Solo las veterinarias pueden acceder a esta página.');
+            window.location.href = '../Views/Login.html';
+        </script>";
+        exit();
+    }
+}
+
+
 function obtenerNombreUsuario() {
     // Verificamos si la sesión está iniciada
     if (!isset($_SESSION['id']) || $_SESSION['id'] == '') {

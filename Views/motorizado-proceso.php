@@ -61,11 +61,11 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
           <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
     
-        <nav class="header-nav ">
-          <ul class="d-flex align-items-center">
-            <h3>Bienvenido Usuario </h3>
+        <nav class="header-nav text-center col-7">
+          <ul class="d-flex justify-content-center align-items-center">
+              <h3>¡Bienvenido!, <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h3>
           </ul>
-        </nav><!-- End Icons Navigation -->
+        </nav>
     
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -153,7 +153,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                       </li>
           
                       <li>
-                        <a class="dropdown-item d-flex align-items-center" href="../index.html">
+                        <a class="dropdown-item d-flex align-items-center" href="../Models/logout.php">
                           <i class="bi bi-box-arrow-right"></i>
                           <span>Cerrar Sesión</span>
                         </a>
@@ -208,7 +208,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
       </li><!-- End Fases Nav -->
 
         <li class="nav-item">
-          <a class="nav-link " href="index.html">
+          <a class="nav-link " href="../Models/logout.php">
             <i class="bi bi-box-arrow-right"></i>
             <span>Cerrar Sesión</span>
           </a>
@@ -251,7 +251,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
         <br>
         <hr>
         <div class="row card">
-          <div class="col-lg-12">
+          <div class="col-lg-12 table-responsive">
             <table id="miTabla" class="table">
               <tdead>
                 <tr style="text-align: center;">
@@ -270,7 +270,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
             <tbody id="tbody">
                 
                 <?php
-                  cargarSolicitudesProcesoMotorizado()
+                  cargarSolicitudesProcesoMotorizado();
                 ?>
                 
             </tbody>

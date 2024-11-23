@@ -93,7 +93,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="../index.html">
+              <a class="dropdown-item d-flex align-items-center" href="../Models/logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Cerrar Sesión</span>
               </a>
@@ -206,7 +206,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
       </li><!-- End Resultados Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="../index.html">
+        <a class="nav-link " href="../Models/logout.php">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>
@@ -220,11 +220,10 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Home</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="administrador.php">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="../Views/administrador.php">Home</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

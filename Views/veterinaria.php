@@ -3,7 +3,7 @@ session_start();  // Esto es necesario para iniciar la sesión
 
 include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
 verificarSesion();  // Verificar que esté logueado
-
+verificarVeterinaria();
 ?>
 
 <!-- Cargar las dependencias necesarias -->
@@ -97,7 +97,7 @@ verificarSesion();  // Verificar que esté logueado
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="../index.html">
+              <a class="dropdown-item d-flex align-items-center" href="../Models/logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Cerrar Sesión</span>
               </a>
@@ -170,7 +170,7 @@ verificarSesion();  // Verificar que esté logueado
     </li>
 
       <li class="nav-item">
-        <a class="nav-link " href="../index.html">
+        <a class="nav-link " href="../Models/logout.php">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>

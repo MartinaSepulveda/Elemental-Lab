@@ -61,11 +61,11 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div><!-- Fin Logo -->
   
-      <nav class="header-nav ">
-        <ul class="d-flex align-items-center">
-          <h3>Bienvenido Usuario </h3>
+      <nav class="header-nav text-center col-7">
+        <ul class="d-flex justify-content-center align-items-center">
+            <h3>¡Bienvenido!, <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h3>
         </ul>
-      </nav><!-- Fin Iconos Navegación -->
+      </nav>
   
       <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
@@ -199,7 +199,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
       </li><!-- End Zonas Nav -->
   
         <li class="nav-item">
-          <a class="nav-link " href="index.html">
+          <a class="nav-link " href="../Models/logout.php">
             <i class="bi bi-box-arrow-right"></i>
             <span>Cerrar Sesión</span>
           </a>

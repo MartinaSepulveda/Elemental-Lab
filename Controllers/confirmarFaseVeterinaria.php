@@ -28,7 +28,7 @@
             if ($actualizacionExitosa) {
                 echo "<script>alert('Haz confirmado la solicitud exitosamente'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
             } else {
-                echo "<script>alert('Error al confirmar la solicitud'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
+                echo "<script>alert('Haz confirmado la solicitud, confirmación del motorizado pendiente'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
             }
         }
     }

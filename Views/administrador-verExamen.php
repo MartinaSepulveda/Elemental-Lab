@@ -100,7 +100,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="../index.html">
+              <a class="dropdown-item d-flex align-items-center" href="../Models/logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Cerrar Sesión</span>
               </a>
@@ -213,7 +213,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
       </li><!-- End Resultados Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="../index.html">
+        <a class="nav-link " href="../Models/logout.php">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>
@@ -227,7 +227,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
       <h1>Exámenes</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="../Views/administrador.php">Home</a></li>
           <li class="breadcrumb-item">Exámenes</li>
           <li class="breadcrumb-item active">Visualizar Exámenes</li>
         </ol>

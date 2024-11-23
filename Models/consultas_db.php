@@ -350,31 +350,49 @@
                 // Validación de la clave
                 if ($clave == $buscarUsuario['claveUsuario']) {
                     session_start();
+        
+                    // **Limpieza de variables de sesión previas**
+                    unset($_SESSION['nit']);
+                    unset($_SESSION['estado']);
+                    unset($_SESSION['nombre']);
+                    unset($_SESSION['direccion']);
+                    unset($_SESSION['telefono']);
+        
+                    // Asignar las variables de sesión específicas del usuario
                     $_SESSION['id'] = $buscarUsuario['idUsuario'];
                     $_SESSION['rol'] = $buscarUsuario['idRolUsuario'];
                     $_SESSION['estado'] = $buscarUsuario['idEstadoUsuario'];
                     $_SESSION['nombre'] = $buscarUsuario['nombresUsuario'];
-                    
+        
                     // Validación de rol y estado activo
-                    if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Si el usuario está activo
+                    if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Usuario activo
                         if ($buscarUsuario['idRolUsuario'] == 1) {
-                            echo "<script> alert('Bienvenido Administrador')</script>";
-                            echo "<script>location.href='../Views/administrador.php'</script>";
+                            echo "<script>
+                                alert('Bienvenido Administrador');
+                                window.location.href='../Views/administrador.php';
+                            </script>";
                         } elseif ($buscarUsuario['idRolUsuario'] == 2) {
-                            echo "<script> alert('Bienvenido Motorizado')</script>";
-                            echo "<script>location.href='../Views/motorizado-solicitudes.php'</script>";
+                            echo "<script>
+                                alert('Bienvenido Motorizado');
+                                window.location.href='../Views/motorizado-solicitudes.php';
+                            </script>";
                         } elseif ($buscarUsuario['idRolUsuario'] == 3) {
-                            echo "<script> alert('Bienvenido Bioanalista')</script>";
-                            echo "<script>location.href='../Views/InmoDashboard.html'</script>";
+                            echo "<script>
+                                alert('Bienvenido Bioanalista');
+                                window.location.href='../Views/InmoDashboard.html';
+                            </script>";
                         }
-                    } elseif ($buscarUsuario['idEstadoUsuario'] == 2) {
-                        // Si el usuario está inactivo
-                        echo "<script> alert('Su cuenta está inactiva. Por favor, contacte al administrador.')</script>";
-                        echo "<script>location.href='../Views/Login.html'</script>";
+                    } else { // Usuario inactivo
+                        echo "<script>
+                            alert('Su cuenta está inactiva. Por favor, contacte al administrador.');
+                            window.location.href='../Views/Login.html';
+                        </script>";
                     }
-                } else {
-                    echo "<script> alert('Contraseña incorrecta, vuelva a intentarlo')</script>";
-                    echo "<script>location.href='../Views/Login.html'</script>";
+                } else { // Clave incorrecta
+                    echo "<script>
+                        alert('Contraseña incorrecta, vuelva a intentarlo.');
+                        window.location.href='../Views/Login.html';
+                    </script>";
                 }
             } else {
                 // Consulta en la tabla de veterinarias
@@ -382,36 +400,52 @@
                 $resultVeterinaria = $conexion->prepare($consultarVeterinaria);
                 $resultVeterinaria->bindParam(":idUsuario", $idUsuario);
                 $resultVeterinaria->execute();
-
+        
                 // Verifica si el usuario existe en la tabla de veterinarias
                 if ($buscarVeterinaria = $resultVeterinaria->fetch()) {
                     // Validación de la clave
                     if ($clave == $buscarVeterinaria['claveVeterinaria']) {
                         session_start();
+        
+                        // **Limpieza de variables de sesión previas**
+                        unset($_SESSION['id']);
+                        unset($_SESSION['rol']);
+                        unset($_SESSION['estado']);
+                        unset($_SESSION['nombre']);
+        
+                        // Asignar las variables de sesión específicas de veterinarias
                         $_SESSION['id'] = $buscarVeterinaria['nitVeterinaria'];
                         $_SESSION['estado'] = $buscarVeterinaria['idEstadoVeterinaria'];
-                        // Guardar los datos de la veterinaria en la sesión
                         $_SESSION['nit'] = $buscarVeterinaria['nitVeterinaria'];
                         $_SESSION['nombre'] = $buscarVeterinaria['nombreVeterinaria'];
                         $_SESSION['direccion'] = $buscarVeterinaria['direccionVeterinaria'];
                         $_SESSION['telefono'] = $buscarVeterinaria['telefonoVeterinaria'];
-
-                        // Redirección para la veterinaria activa
-                        if ($buscarVeterinaria['idEstadoVeterinaria'] == 1) {
-                            echo "<script> alert ('Bienvenido Veterinario')</script>";
-                            echo "<script>location.href='../Views/veterinaria.php'</script>";
+        
+                        if ($buscarVeterinaria['idEstadoVeterinaria'] == 1) { // Veterinaria activa
+                            echo "<script>
+                                alert('Bienvenido Veterinario');
+                                window.location.href='../Views/veterinaria.php';
+                            </script>";
+                        } else { // Veterinaria inactiva
+                            echo "<script>
+                                alert('Su cuenta está inactiva. Por favor, contacte al administrador.');
+                                window.location.href='../Views/Login.html';
+                            </script>";
                         }
-                    } else {
-                        echo "<script> alert ('Contraseña incorrecta, vuelva a intentarlo')</script>";
-                        echo "<script>location.href='../Views/Login.html'</script>";
+                    } else { // Clave incorrecta
+                        echo "<script>
+                            alert('Contraseña incorrecta, vuelva a intentarlo.');
+                            window.location.href='../Views/Login.html';
+                        </script>";
                     }
                 } else {
-                    echo "<script> alert ('El usuario ingresado no se encuentra registrado o no se encuentra activo')</script>";
-                    echo "<script>location.href='../Views/Login.html'</script>";
+                    echo "<script>
+                        alert('El usuario ingresado no se encuentra registrado.');
+                        window.location.href='../Views/Login.html';
+                    </script>";
                 }
             }
-        }
-        
+        }                
         
 
         // Función para mostrar los datos de las zonas en el formulario para editarlos

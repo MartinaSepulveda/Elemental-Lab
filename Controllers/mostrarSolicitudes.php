@@ -151,7 +151,7 @@
                         <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
                         <td>' . $datossolicitudes['examenes'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
-                        <td>' . $datossolicitudes['descripcionEstadoSolicitud'] . '</td>
+                        <td>' . (!empty($datossolicitudes['descripcionEstadoSolicitud']) ? $datossolicitudes['descripcionEstadoSolicitud'] : '--') . '</td>
                         <td>' . $datossolicitudes['descripcionFase'] . '</td>
                     </tr>
                     ';
