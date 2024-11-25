@@ -210,7 +210,7 @@ verificarVeterinaria();
                 <!-- Fecha de recolección -->
                 <div class="form-group col-lg-6 col-md-12 mb-3">
                     <label for="fechaRecoleccion">Fecha de recolección programada</label>
-                    <input type="date" class="form-control" id="fechaRecoleccion" name="fechaRecoleccion" required>
+                    <input  type="date" class="form-control" id="fechaRecoleccion" name="fechaRecoleccion" required style="border: 1px solid black" >
                 </div>
 
             
@@ -243,10 +243,10 @@ verificarVeterinaria();
                     <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $_SESSION['telefono']; ?>" readonly>
                 </div>
 
-                <div class="form-group col-lg-6 col-md-12 mb-3">
+                <div class="form-group col-lg-6 col-md-12 mb-3" >
                   <!-- Tipo de exames a recoger (selección múltiple) -->
-                  <label for="tipoMuestras">Tipo de exámes a hacer</label>
-                  <select class="form-control" id="tipoMuestras" name="tipoMuestras[]" multiple required>
+                  <label for="tipoMuestras" >Tipo de exámes a hacer</label>
+                  <select class="form-control" id="tipoMuestras" name="tipoMuestras[]" multiple required style="border: 2px solid blue !important;">
                       <?php
                       
                         cargarExamenesVetSelect();
@@ -260,7 +260,7 @@ verificarVeterinaria();
                 <!-- Nivel de urgencia de la solicitud -->
                 <div class="form-group col-lg-6 col-md-12 mb-3">
                   <label for="urgencia">Nivel de urgencia de la solicitud</label>
-                  <select class="form-control" id="urgencia" name="urgencia" required>
+                  <select class="form-control" id="urgencia" name="urgencia" required style="border: 1px solid black">
                   <option value="" disabled selected>Selecciona el nivel de urgencia</option>
                     <option value="1">Baja</option>
                     <option value="2">Media</option>

@@ -130,7 +130,7 @@
                       </center>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="../Views/Login.html">Iniciar sesión</a></p>
+                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="../index.html">Iniciar sesión</a></p>
                     </div>
                   </form>
 

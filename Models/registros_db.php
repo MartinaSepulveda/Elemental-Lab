@@ -248,48 +248,55 @@ use FTP\Connection;
             if ($stmt->fetchColumn() > 0) {
                 echo '
                 <div id="alert" style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #f8d7da;
-                    color: #721c24;
-                    border: 1px solid #f5c6cb;
-                    padding: 15px;
-                    margin: 20px auto; /* Centra el div en la página */
-                    border-radius: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    max-width: 600px; 
-                    position: relative; /* Necesario para posicionar el botón de cerrar */
-                ">
-                    <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
-                    <span><center>El usuario ya se encuentra registrado.</center> <br> En caso de estar inactivo comuniquese con el administrador.</span>
-                    <button onclick="closeAlert()" style="
-                        background: none;
-                        border: none;
-                        color: #721c24;
-                        font-size: 16px;
-                        position: absolute;
-                        right: 10px;
-                        cursor: pointer;
-                    ">✖</button>
-                </div>
+                display: flex;
+                flex-direction: column; /* Apilar los elementos verticalmente */
+                justify-content: center;
+                align-items: center;
+                background-color: #f8d7da; 
+                color: #721c24; 
+                border: 1px solid #f5c6cb; 
+                padding: 20px; 
+                margin: 0 auto; /* Centra el div en la página */
+                font-family: Arial, sans-serif;
+                font-size: 16px; /* Reduce el tamaño de la fuente */
+                max-width: 400px; /* Disminuye el ancho máximo */
+                width: 80%; /* Reduce el ancho relativo al tamaño de la pantalla */
+                position: fixed; /* Posición fija en la pantalla */
+                top: 50%; /* Centra verticalmente */
+                left: 50%; /* Centra horizontalmente */
+                transform: translate(-50%, -50%); /* Ajusta el div para que esté centrado */
+                z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
+                height: 200px; /* Altura fija */
+                border-radius: 15px; /* Bordes redondeados */
+            ">
+                <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Ajustar imagen y márgenes -->
+                <span style="text-align: center;">El usuario ya se encuentra registrado. <br> En caso de estar inactivo comuníquese con el administrador.</span>
+                <button onclick="closeAlert()" style="
+                    background: none;
+                    border: none;
+                    color: #721c24; /* Color de la X igual que el texto */
+                    font-size: 24px; /* Tamaño más grande de la X */
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                    cursor: pointer;
+                ">✖</button>
+            </div>
                 
-                <script>
-                    function closeAlert() {
-                        document.getElementById("alert").style.display = "none";
-                        // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
-                        location.href = "../Views/Registro-veterinaria.php";
-                    }
+            <script>
+                function closeAlert() {
+                    document.getElementById("alert").style.display = "none";
+                    // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
+                    location.href = "../Views/Registro-usuarios.php";
+                }
 
-                    // Cierra la alerta automáticamente después de 10 segundos
-                    setTimeout(function() {
-                        closeAlert();
-                        // Redirige automáticamente después de 10 segundos
-                        location.href = "../Views/Registro-veterinaria.php";
-                    }, 10000);
-                </script>
-            ';
+                // Cierra la alerta automáticamente después de 10 segundos
+                setTimeout(function() {
+                    closeAlert();
+                    // Redirige automáticamente después de 10 segundos
+                    location.href = "../Views/Registro-usuarios.php";
+                }, 10000);
+            </script>';
                 exit;
             }
     
@@ -313,49 +320,55 @@ use FTP\Connection;
     
             // Mensaje de éxito
             echo '
-                <div id="alert" style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #d4edda;
-                    color: #155724;
-                    border: 1px solid #c3e6cb;
-                    padding: 15px;
-                    margin: 20px auto; /* Centra el div en la página */
-                    border-radius: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    max-width: 600px; 
-                    position: relative; /* Necesario para posicionar el botón de cerrar */
-                ">
-                    <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
-                    <span>Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del adminitrador.</span>
-                    <button onclick="closeAlert()" style="
-                        background: none;
-                        border: none;
-                        color: #155724;
-                        font-size: 16px;
-                        position: absolute;
-                        right: 10px;
-                        cursor: pointer;
-                    ">✖</button>
-                </div>
-                
-                <script>
-                    function closeAlert() {
-                        document.getElementById("alert").style.display = "none";
-                        // Redirige después de cerrar
-                        location.href = "../Views/login.html";
-                    }
-            
-                    // Cierra la alerta 
-                    setTimeout(function() {
-                        closeAlert();
-                        // Redirige automáticamente después de 5 segundos
-                        location.href = "../Views/login.html";
-                    }, 3000);
-                </script>
-            ';
+            <div id="alert" style="
+            display: flex;
+            flex-direction: column; /* Apila los elementos en una columna */
+            justify-content: center;
+            align-items: center;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 20px; /* Ajusta el padding para que el contenido esté bien distribuido */
+            margin: 0 auto; /* Centra el div en la página */
+            font-family: Arial, sans-serif;
+            font-size: 16px; /* Reduce el tamaño de la fuente */
+            max-width: 400px; /* Disminuye el ancho máximo */
+            width: 80%; /* Reduce el ancho relativo al tamaño de la pantalla */
+            position: fixed; /* Lo posiciona de manera fija en la pantalla */
+            top: 50%; /* Lo coloca verticalmente en el medio de la pantalla */
+            left: 50%; /* Lo coloca horizontalmente en el medio de la pantalla */
+            transform: translate(-50%, -50%); /* Ajusta el div para que esté centrado */
+            z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
+            height: 200px; /* Altura fija para hacer el cuadro cuadrado */
+            border-radius: 15px; /* Bordes redondeados */
+        ">
+            <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Se ajustan los márgenes -->
+            <span style="text-align: center;">Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del administrador.</span>
+            <button onclick="closeAlert()" style="
+                background: none;
+                border: none;
+                color: #155724;
+                font-size: 24px; /* Tamaño de la X */
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                cursor: pointer;
+            ">✖</button>
+        </div>
+
+         <script>
+            function closeAlert() {
+                document.getElementById("alert").style.display = "none";
+                // Redirige después de cerrar
+                location.href = "../index.html";
+            }
+            // Cierra la alerta 
+            setTimeout(function() {
+                closeAlert();
+                // Redirige automáticamente después de 5 segundos
+                location.href = "../index.html";
+            }, 3000);
+        </script>';
         }
 
         public function registrarVeterinaria($nitVeterinaria, $nombreVeterinaria, $propietarioVeterinaria, $direccionVeterinaria, $correoVeterinaria, $telefonoVeterinaria, $idZonaVeterinaria, $ruta, $claveVeterinaria) {
@@ -371,48 +384,55 @@ use FTP\Connection;
             if ($stmt->fetchColumn() > 0) {
                 echo '
                 <div id="alert" style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #f8d7da;
-                    color: #721c24;
-                    border: 1px solid #f5c6cb;
-                    padding: 15px;
-                    margin: 20px auto; /* Centra el div en la página */
-                    border-radius: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    max-width: 600px; 
-                    position: relative; /* Necesario para posicionar el botón de cerrar */
-                ">
-                    <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
-                    <span><center>El usuario ya se encuentra registrado.</center> <br> En caso de estar inactivo comuniquese con el administrador.</span>
-                    <button onclick="closeAlert()" style="
-                        background: none;
-                        border: none;
-                        color: #721c24;
-                        font-size: 16px;
-                        position: absolute;
-                        right: 10px;
-                        cursor: pointer;
-                    ">✖</button>
-                </div>
+                display: flex;
+                flex-direction: column; /* Apilar los elementos verticalmente */
+                justify-content: center;
+                align-items: center;
+                background-color: #f8d7da; 
+                color: #721c24; 
+                border: 1px solid #f5c6cb; 
+                padding: 20px; 
+                margin: 0 auto; /* Centra el div en la página */
+                font-family: Arial, sans-serif;
+                font-size: 16px; /* Reduce el tamaño de la fuente */
+                max-width: 400px; /* Disminuye el ancho máximo */
+                width: 80%; /* Reduce el ancho relativo al tamaño de la pantalla */
+                position: fixed; /* Posición fija en la pantalla */
+                top: 50%; /* Centra verticalmente */
+                left: 50%; /* Centra horizontalmente */
+                transform: translate(-50%, -50%); /* Ajusta el div para que esté centrado */
+                z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
+                height: 200px; /* Altura fija */
+                border-radius: 15px; /* Bordes redondeados */
+            ">
+                <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Ajustar imagen y márgenes -->
+                <span style="text-align: center;">El usuario ya se encuentra registrado. <br> En caso de estar inactivo comuníquese con el administrador.</span>
+                <button onclick="closeAlert()" style="
+                    background: none;
+                    border: none;
+                    color: #721c24; /* Color de la X igual que el texto */
+                    font-size: 24px; /* Tamaño más grande de la X */
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                    cursor: pointer;
+                ">✖</button>
+            </div>
                 
-                <script>
-                    function closeAlert() {
-                        document.getElementById("alert").style.display = "none";
-                        // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
-                        location.href = "../Views/Registro-veterinaria.php";
-                    }
+            <script>
+                function closeAlert() {
+                    document.getElementById("alert").style.display = "none";
+                    // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
+                    location.href = "../Views/Registro-veterinaria.php";
+                }
 
-                    // Cierra la alerta automáticamente después de 10 segundos
-                    setTimeout(function() {
-                        closeAlert();
-                        // Redirige automáticamente después de 10 segundos
-                        location.href = "../Views/Registro-veterinaria.php";
-                    }, 10000);
-                </script>
-            ';
+                // Cierra la alerta automáticamente después de 10 segundos
+                setTimeout(function() {
+                    closeAlert();
+                    // Redirige automáticamente después de 10 segundos
+                    location.href = "../Views/Registro-veterinaria.php";
+                }, 10000);
+            </script>';
                 exit;
             }
             
@@ -438,49 +458,55 @@ use FTP\Connection;
         
             // Mensaje de éxito
             echo '
-                <div id="alert" style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #d4edda;
-                    color: #155724;
-                    border: 1px solid #c3e6cb;
-                    padding: 15px;
-                    margin: 20px auto; /* Centra el div en la página */
-                    border-radius: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    max-width: 600px; 
-                    position: relative; /* Necesario para posicionar el botón de cerrar */
-                ">
-                    <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-right: 10px; width: 24px; height: 24px;">
-                    <span>Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del adminitrador.</span>
-                    <button onclick="closeAlert()" style="
-                        background: none;
-                        border: none;
-                        color: #155724;
-                        font-size: 16px;
-                        position: absolute;
-                        right: 10px;
-                        cursor: pointer;
-                    ">✖</button>
-                </div>
-                
-                <script>
-                    function closeAlert() {
-                        document.getElementById("alert").style.display = "none";
-                        // Redirige después de cerrar
-                        location.href = "../Views/login.html";
-                    }
-            
-                    // Cierra la alerta 
-                    setTimeout(function() {
-                        closeAlert();
-                        // Redirige automáticamente después de 5 segundos
-                        location.href = "../Views/login.html";
-                    }, 3000);
-                </script>
-            ';
+            <div id="alert" style="
+            display: flex;
+            flex-direction: column; /* Apila los elementos en una columna */
+            justify-content: center;
+            align-items: center;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 20px; /* Ajusta el padding para que el contenido esté bien distribuido */
+            margin: 0 auto; /* Centra el div en la página */
+            font-family: Arial, sans-serif;
+            font-size: 16px; /* Reduce el tamaño de la fuente */
+            max-width: 400px; /* Disminuye el ancho máximo */
+            width: 80%; /* Reduce el ancho relativo al tamaño de la pantalla */
+            position: fixed; /* Lo posiciona de manera fija en la pantalla */
+            top: 50%; /* Lo coloca verticalmente en el medio de la pantalla */
+            left: 50%; /* Lo coloca horizontalmente en el medio de la pantalla */
+            transform: translate(-50%, -50%); /* Ajusta el div para que esté centrado */
+            z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
+            height: 200px; /* Altura fija para hacer el cuadro cuadrado */
+            border-radius: 15px; /* Bordes redondeados */
+        ">
+            <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Se ajustan los márgenes -->
+            <span style="text-align: center;">Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del administrador.</span>
+            <button onclick="closeAlert()" style="
+                background: none;
+                border: none;
+                color: #155724;
+                font-size: 24px; /* Tamaño de la X */
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                cursor: pointer;
+            ">✖</button>
+        </div>
+
+         <script>
+            function closeAlert() {
+                document.getElementById("alert").style.display = "none";
+                // Redirige después de cerrar
+                location.href = "../index.html";
+            }
+            // Cierra la alerta 
+            setTimeout(function() {
+                closeAlert();
+                // Redirige automáticamente después de 5 segundos
+                location.href = "../index.html";
+            }, 3000);
+        </script>';
         }
 
         public function ingresarEstadoUsuario($idUsuario, $estado) {

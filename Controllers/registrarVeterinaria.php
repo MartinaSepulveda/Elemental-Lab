@@ -28,6 +28,7 @@ if (isset($_FILES['fotoVeterinaria']) && $_FILES['fotoVeterinaria']['error'] ===
 $objetoRegistros = new Registros();
 $nuevaVeterinaria = $objetoRegistros -> registrarVeterinaria($nitVeterinaria, $nombreVeterinaria, $propietarioVeterinaria, $direccionVeterinaria,$correoVeterinaria, $telefonoVeterinaria, $idZonaVeterinaria, $ruta ?? null, $claveVeterinaria);
 
+
 // Validar las entradas y registrar al usuario
 // if ($objetoRegistros->registrarVeterinaria($nitVeterinaria, $nombreVeterinaria, $propietarioVeterinaria, $direccionVeterinaria,$correoVeterinaria, $telefonoVeterinaria, $idZonaVeterinaria ?? null, $ruta ?? null, $claveVeterinaria)) {
 //     echo "Usuario registrado correctamente!";

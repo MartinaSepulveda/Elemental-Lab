@@ -267,7 +267,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
             <tbody id="tbody">
               
                 <?php
-                  cargarSolicitudesNoRealizadas();
+                  cargarSolicitudesNoRealizadasMotorizado();
                 ?>
                 
             </tbody>

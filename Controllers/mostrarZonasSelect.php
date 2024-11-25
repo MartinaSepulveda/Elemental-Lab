@@ -13,8 +13,9 @@ function cargarZonasSelect(){
         foreach ($zonas as $datosZonas ){
             //pintar o maquetar la informacion de la tabla 
             echo'
-                <option value="'.$datosZonas['idZonas'].'">'.$datosZonas['descripcionZonas'].'</option>
+            <option value="'.$datosZonas['idZonas'].'">'.$datosZonas['idZonas'].' - '.$datosZonas['descripcionZonas'].'</option>
             ';
+
         }
     }
 }
