@@ -246,7 +246,7 @@ verificarVeterinaria();
                 <div class="form-group col-lg-6 col-md-12 mb-3" >
                   <!-- Tipo de exames a recoger (selección múltiple) -->
                   <label for="tipoMuestras" >Tipo de exámes a hacer</label>
-                  <select class="form-control" id="tipoMuestras" name="tipoMuestras[]" multiple required style="border: 2px solid blue !important;">
+                  <select class="form-control" id="tipoMuestras" name="tipoMuestras[]" multiple required style="border: 1px solid black">
                       <?php
                       
                         cargarExamenesVetSelect();

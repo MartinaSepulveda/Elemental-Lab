@@ -127,12 +127,12 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
   
                   <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2"> Julian Pérez</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">  <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></span>
                   </a><!-- End Profile Iamge Icon -->
         
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                      <h6>Julian Pérez</h6>
+                      <h6> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h6>
                       <span>Motorizado</span>
                     </li>
                     <li>
@@ -140,7 +140,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                     </li>
         
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                      <a class="dropdown-item d-flex align-items-center" href="motorizado-perfil.php">
                         <i class="bi bi-person"></i>
                         <span>Mi Perfil</span>
                       </a>
@@ -148,6 +148,12 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                     <li>
                       <hr class="dropdown-divider">
                     </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="../Models/login.html">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Cerrar Sesión</span>
+                        </a>
+                      </li>
         
                   </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
