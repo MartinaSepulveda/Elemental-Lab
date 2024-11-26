@@ -102,7 +102,16 @@ nav .navbar-nav {
     border: none;
     cursor: pointer;
     border-radius: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+
 }
+.seguir button:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+    background-color: #218377;
+    
+}
+
 
 #hero .algo button {
     background-color: white;
@@ -111,6 +120,12 @@ nav .navbar-nav {
     border: 1px solid black; 
     cursor: pointer;
     border-radius: 10px;
+}
+#hero .algo button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    background-color: #ffffff;
+
 }
 
 #hero .btn button {
@@ -449,10 +464,67 @@ background-color: #0056b3;
 }
 
 #btn-veterinaria {
-background-color: #28a745;
+background-color: #2A9D8F;
 color: var(--blanco);
 }
 
 #btn-veterinaria:hover {
-background-color: #1e7e34;
+background-color: #218377;
 }
+
+/* logré hacer el responsive muchachas lo logreeeee  */
+@media screen and  (max-width: 767px) {  
+    .navbar-brand{
+        height: 50%;
+    }
+    #hero .row .info {  
+        padding: 20px; 
+    }  
+    .imagen_hero img {  
+        width: 70%; 
+        margin: 0 auto; 
+    }  
+    .imagen_logo img{
+        max-width: 100%;  
+
+    }
+    #fila{
+        text-align: center;
+
+    }
+    #fila1{
+        padding: 250px 50px 100px 50px;
+        text-align: center;
+    }
+    .row{
+        text-align: center;
+        margin: 0;
+    }
+    #contenido1{
+        padding: 200px 50px 100px;
+    }
+    #contenido2{
+        margin: 0;
+
+    }
+    #contenido2 h2{
+        padding-top: 10%;
+    }
+    #contenido3{
+        margin: 0;
+    }    
+}
+@media screen and  (min-width: 768px) and (max-width:991){
+    #contenido1 h2{
+        padding-top: 1000%;
+    }
+    #hero .row .elementos{
+        padding: 0;
+    }
+    #hero .row .info{
+        padding: 50px 0;
+    }
+    #contenido1{
+        padding: 0;
+    }
+}  
