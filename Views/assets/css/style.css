@@ -1332,6 +1332,19 @@ form button[name="fase"] {
 }
 
 
+/* Estilos de error para el registro (Cantidad mínima y máxima)*/
+input:invalid {
+  border-color: red;  /* Color rojo para el borde del campo */
+}
+
+/* Estilo cuando el campo es válido */
+input:valid {
+  border-color: green;  /* Color verde para el borde del campo */
+}
+
+
+
+
 
 
 

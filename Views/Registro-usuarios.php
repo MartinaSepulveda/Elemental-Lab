@@ -65,20 +65,20 @@
                   <form id="crearCuenta" action="../Controllers/registrarUsuario.php" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                     <div class="col-6">
                       <label for="idUsuario" class="form-label">Cédula</label>
-                      <input type="number" name="idUsuario" class="form-control" id="idUsuario" required>
-                      <div class="invalid-feedback">Por favor ingresa tu cédula!</div>
+                      <input type="number" name="idUsuario" class="form-control" id="idUsuario" min="1000000" max="9999999999" required>
+                      <div class="invalid-feedback">La cédula debe tener de 7 a 10 caracteres!</div>
                     </div>
 
                     <div class="col-6">
                       <label for="nombresUsuario" class="form-label">Nombres</label>
-                      <input type="text" name="nombresUsuario" class="form-control" id="nombresUsuario" required>
-                      <div class="invalid-feedback">Por favor ingresa tus nombres!</div>
+                      <input type="text" name="nombresUsuario" class="form-control" id="nombresUsuario" minlength="3" required>
+                      <div class="invalid-feedback">El nombre debe tener mínimo 3 caracteres!</div>
                     </div>
 
                     <div class="col-6">
                       <label for="apellidosUsuario" class="form-label">Apellidos</label>
-                      <input type="text" name="apellidosUsuario" class="form-control" id="apellidosUsuario" required>
-                      <div class="invalid-feedback">Por favor ingresa tus apellidos!</div>
+                      <input type="text" name="apellidosUsuario" class="form-control" id="apellidosUsuario" minlength="3" required>
+                      <div class="invalid-feedback">El nombre debe tener mínimo 3 caracteres!!</div>
                     </div>
 
                     <div class="col-6">
@@ -89,8 +89,8 @@
 
                     <div class="col-6">
                         <label for="telefonoUsuario" class="form-label">Teléfono</label>
-                        <input type="text" name="telefonoUsuario" class="form-control" id="telefonoUsuario" required>
-                        <div class="invalid-feedback">Por favor ingresa tu teléfono!</div>
+                        <input type="text" name="telefonoUsuario" class="form-control" id="telefonoUsuario" minlength="10" maxlength="10" required>
+                        <div class="invalid-feedback">El teléfono debe tener 10 caracteres!</div>
                     </div>
                     
                     <div class="col-6">
@@ -113,10 +113,16 @@
                     </center>
 
                     <div class="col-6">
-                        <label for="claveUsuario" class="form-label">Contraseña</label>
-                        <input type="password" name="claveUsuario" class="form-control" id="claveUsuario" required>
-                        <div class="invalid-feedback">Por favor elige tu contraseña!</div>
+                      <label for="claveUsuario" class="form-label">Contraseña</label>
+                      <input type="password" name="claveUsuario" class="form-control" id="claveUsuario" 
+                            required 
+                            minlength="8" 
+                            pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$">
+                      <div class="invalid-feedback">
+                          La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un signo especial.
+                      </div>
                     </div>
+
 
                     <div class="col-6">
                         <label for="yourPassword" class="form-label">Confirmar contraseña</label>
