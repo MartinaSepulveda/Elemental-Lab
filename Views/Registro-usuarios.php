@@ -71,25 +71,25 @@
 
                     <div class="col-6">
                       <label for="nombresUsuario" class="form-label">Nombres</label>
-                      <input type="text" name="nombresUsuario" class="form-control" id="nombresUsuario" minlength="3" required>
+                      <input type="text" name="nombresUsuario" class="form-control" id="nombresUsuario" minlength="3" maxlength="40" required>
                       <div class="invalid-feedback">El nombre debe tener mínimo 3 caracteres!</div>
                     </div>
 
                     <div class="col-6">
                       <label for="apellidosUsuario" class="form-label">Apellidos</label>
-                      <input type="text" name="apellidosUsuario" class="form-control" id="apellidosUsuario" minlength="3" required>
+                      <input type="text" name="apellidosUsuario" class="form-control" id="apellidosUsuario" minlength="3" maxlength="40" required>
                       <div class="invalid-feedback">El nombre debe tener mínimo 3 caracteres!!</div>
                     </div>
 
                     <div class="col-6">
                       <label for="correoUsuario" class="form-label">Correo Electrónico</label>
-                      <input type="email" name="correoUsuario" class="form-control" id="correoUsuario" required>
+                      <input type="email" name="correoUsuario" class="form-control" id="correoUsuario" minlength="8" maxlength="50" required>
                       <div class="invalid-feedback">Por favor ingresa tu correo electrónico!</div>
                     </div>
 
                     <div class="col-6">
                         <label for="telefonoUsuario" class="form-label">Teléfono</label>
-                        <input type="text" name="telefonoUsuario" class="form-control" id="telefonoUsuario" minlength="10" maxlength="10" required>
+                        <input type="text" name="telefonoUsuario" class="form-control" id="telefonoUsuario" minlength="10" maxlength="12" required>
                         <div class="invalid-feedback">El teléfono debe tener 10 caracteres!</div>
                     </div>
                     
@@ -136,15 +136,11 @@
                       </center>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="../index.html">Iniciar sesión</a></p>
+                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="login.html">Iniciar sesión</a></p>
                     </div>
                   </form>
 
                 </div>
-              </div>
-
-              <div class="credits">
-                Pie de pagina :3 <a href="https://bootstrapmade.com/">BootstrapMade</a>
               </div>
 
             </div>

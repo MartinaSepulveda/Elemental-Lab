@@ -73,37 +73,37 @@
                   <form id="crearCuenta" action="../Controllers/registrarVeterinaria.php" method="post" enctype="multipart/form-data" class="row g-3 needs-validation"  novalidate>
                     <div class="col-6">
                       <label for="nitVeterinaria" class="form-label">NIT Veterinaria</label>
-                      <input type="text" name="nitVeterinaria" class="form-control" id="nitVeterinaria" required>
+                      <input type="text" name="nitVeterinaria" class="form-control" id="nitVeterinaria" minlength="10" maxlength="15" required>
                       <div class="invalid-feedback">Por favor introduzca el NIT de su veterinaria!</div>
                     </div>
 
                     <div class="col-6">
                         <label for="nombreVeterinaria" class="form-label">Nombre Veterinaria</label>
-                        <input type="text" name="nombreVeterinaria" class="form-control" id="nombreVeterinaria" required>
+                        <input type="text" name="nombreVeterinaria" class="form-control" id="nombreVeterinaria" minlength="3" maxlength="40" required>
                         <div class="invalid-feedback">Por favor introduzca el nombre de su Veterinaria!</div>
                     </div>
 
                     <div class="col-6">
                         <label for="propietarioVeterinaria" class="form-label">Nombre del Propietario</label>                      
-                        <input type="text" name="propietarioVeterinaria" class="form-control" id="propietarioVeterinaria" required>
+                        <input type="text" name="propietarioVeterinaria" class="form-control" id="propietarioVeterinaria" minlength="6" maxlength="40" required>
                         <div class="invalid-feedback">Por favor introduzca su nombre!.</div>
                     </div>
 
                     <div class="col-6">
                       <label for="direccionVeterinaria" class="form-label">Dirección</label>                      
-                      <input type="text" name="direccionVeterinaria" class="form-control" id="direccionVeterinaria" required>
+                      <input type="text" name="direccionVeterinaria" class="form-control" id="direccionVeterinaria" minlength="9" maxlength="50" required>
                       <div class="invalid-feedback">Por favor introduzca su nombre!.</div>
                     </div>
 
                     <div class="col-6">
                         <label for="correoVeterinaria" class="form-label">Correo Electrónico</label>
-                        <input type="email" name="correoVeterinaria" class="form-control" id="correoVeterinaria" required>
+                        <input type="email" name="correoVeterinaria" class="form-control" id="correoVeterinaria" minlength="8" maxlength="50" required>
                         <div class="invalid-feedback">Por favor ingrese su correo electrónico!</div>
                     </div>
 
                     <div class="col-6">
                         <label for="telefonoVeterinaria" class="form-label">Teléfono</label>
-                        <input type="int" name="telefonoVeterinaria" class="form-control" id="telefonoVeterinaria" required>
+                        <input type="int" name="telefonoVeterinaria" class="form-control" id="telefonoVeterinaria" minlength="10" maxlength="10" required>
                         <div class="invalid-feedback">Por favor ingrese su teléfono!</div>
                     </div>
                     
@@ -123,11 +123,15 @@
                       <input type="file" accept="image/*" name="fotoVeterinaria" class="form-control" id="fotoVeterinaria" >
                     </div>
                   
-                    <div class="col-6">
+                    <div class="col-6 position-relative">
                         <label for="claveVeterinaria" class="form-label">Contraseña</label>
-                        <input type="password" name="claveVeterinaria" class="form-control" id="claveVeterinaria" required>
-                        <div class="invalid-feedback">Por favor eliga su contraseña!</div>
+                        <input type="password" name="claveVeterinaria" class="form-control" id="claveVeterinaria" required >
+                        <span id="togglePassword" class="position-absolute" style="right: 17px; top: 72%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        </span>
+                        <div class="invalid-feedback">Por favor elija su contraseña!</div>
                     </div>
+
 
                     <div class="col-6">
                         <label for="yourPassword" class="form-label">Confirmar contraseña</label>
@@ -142,7 +146,7 @@
                     </div>
 
                     <div class="col-12">
-                        <p class="small mb-0">¿Ya tienes una cuenta? <a href="../index.html">Iniciar sesión</a></p>
+                        <p class="small mb-0">¿Ya tienes una cuenta? <a href="login.html">Iniciar sesión</a></p>
                     </div>
                   </form>
                 </div>
@@ -181,6 +185,23 @@
       }
       return true;
     };
+  </script>
+
+  <!-- Scrip para ocultar/mostrar la contraseña -->
+  <script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const passwordInput = document.querySelector('#claveVeterinaria');
+  const eyeIcon = document.querySelector('#eyeIcon');
+
+  togglePassword.addEventListener('click', function () {
+    // Alterna el tipo de input entre 'password' y 'text'
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+
+    // Cambia el ícono del ojito
+    eyeIcon.classList.toggle('bi-eye');
+    eyeIcon.classList.toggle('bi-eye-slash');
+  });
   </script>
   
 
