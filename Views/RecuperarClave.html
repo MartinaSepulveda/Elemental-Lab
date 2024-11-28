@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inicio de sesión</title>
+  <title>RECUPERAR CLAVE</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -60,11 +60,11 @@
                 </div>
                 <div class="card-body">
                   <div class="pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Ingresa con tu cuenta</h5>
-                    <p class="text-center small">Ingresa tu identificacion/NIT & tu contraseña</p>
+                    <h5 class="card-title text-center pb-0 fs-4">Recuperar Clave</h5>
+                    <p class="text-center small">Ingresa tu identificacion/NIT & tu email</p>
                   </div>
                   <!-- Formulario inicio de sesión -->
-                  <form class="row g-3 needs-validation" action="../Controllers/inicioSesion.php" method="post" novalidate>
+                  <form class="row g-3 needs-validation" action="../Controllers/recuperarClave.php" method="post" novalidate>
 
                     <!-- Campo numéro de documento -->
                     <div class="col-12">
@@ -77,21 +77,18 @@
 
                     <!-- Campo contraseña -->
                     <div class="col-12 position-relative">
-                      <label for="claveUsu" class="form-label">Contraseña</label>
+                      <label for="claveUsu" class="form-label">Email</label>
                       <div class="position-relative">
-                        <input type="password" name="claveUsu" class="form-control" id="claveUsu" required style="padding-right: 40px;">
-                        <span id="togglePassword" class="position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
-                          <i class="bi bi-eye" id="eyeIcon"></i>
-                        </span>
-                        <div class="invalid-feedback">Ingresa tu contraseña</div>
+                        <input type="email" name="email" class="form-control" id="claveUsu" required style="padding-right: 40px;">
+                          <div class="invalid-feedback">Ingresa tu contraseña</div>
                       </div>
                     </div>
 
-                    <a href="RecuperarClave.html">¿Olvidó su contraseña?</a>
+                    <a href="Login.html">¡Quiero iniciar sesión!</a>
 
 
                     <div class="col-12">
-                      <button class="btn  w-100" type="submit">Ingresar</button>
+                      <button class="btn  w-100" type="submit">Recuperar</button>
                     </div>
                   </form><!-- Fin Formulario inicio de sesión -->
 
@@ -131,22 +128,7 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!-- Scrip para ocultar/mostrar la contraseña -->
-  <script>
-  const togglePassword = document.querySelector('#togglePassword');
-  const passwordInput = document.querySelector('#claveUsu');
-  const eyeIcon = document.querySelector('#eyeIcon');
-
-  togglePassword.addEventListener('click', function () {
-    // Alterna el tipo de input entre 'password' y 'text'
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-
-    // Cambia el ícono del ojito
-    eyeIcon.classList.toggle('bi-eye');
-    eyeIcon.classList.toggle('bi-eye-slash');
-  });
-  </script>
+  
 
 </body>
 

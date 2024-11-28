@@ -120,7 +120,7 @@
 
                     <div class="col-6">
                       <label for="fotoVeterinaria" class="form-label">Foto de perfil</label>
-                      <input type="file" accept="image/*" name="fotoVeterinaria" class="form-control" id="fotoVeterinaria" >
+                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoVeterinaria" class="form-control" id="fotoVeterinaria" >
                     </div>
                   
                     <div class="col-6">

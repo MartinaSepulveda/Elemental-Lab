@@ -10,16 +10,12 @@ $apellidosUsuario = $_POST['apellidosUsuario'];
 $correoUsuario = $_POST['correoUsuario'];
 $telefonoUsuario = $_POST['telefonoUsuario'];
 $idRolUsuario = $_POST['idRolUsuario'];
-$claveUsuario = $_POST['claveUsuario'];
+$claveUsuario = md5($_POST['claveUsuario']);
 
-// Comprovar si el archivo se ha cargado
-if (isset($_FILES['fotoUsuario']) && $_FILES['fotoUsuario']['error'] === UPLOAD_ERR_OK) {
-    // Definir el directorio de carga
-    $uploadDir = "../assets/img/";
-    // Crear la ruta completa para el archivo cargado
-    $ruta = $uploadDir . basename($_FILES['fotoUsuario']['name']);
-    
-}
+    // CREAMOS UNA VARIABLE PARA DEFINIR LA RUTA DONDE QUEDARA ALOJADA LA IMAGEN
+    $ruta = "../Uploads/Usuarios/".$_FILES['fotoUsuario']['name'];
+    // MOVEMOS EL ARCHIVO A LA CARPETA UPLOADS Y LA CARPETA USUARIOS
+    $mover = move_uploaded_file($_FILES['fotoUsuario']['tmp_name'], $ruta);
 
 // Crear una instancia de la clase Registros
 $objetoRegistros = new Registros();

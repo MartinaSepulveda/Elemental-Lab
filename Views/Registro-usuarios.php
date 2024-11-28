@@ -108,7 +108,7 @@
                     <center>
                       <div class="col-6">
                       <label for="fotoUsuario" class="form-label">Foto de perfil</label>
-                      <input type="file" accept="image/*" name="fotoUsuario" class="form-control" id="fotoUsuario" >
+                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoUsuario" class="form-control" id="fotoUsuario" >
                     </div>
                     </center>
 
@@ -116,10 +116,10 @@
                       <label for="claveUsuario" class="form-label">Contraseña</label>
                       <input type="password" name="claveUsuario" class="form-control" id="claveUsuario" 
                             required 
-                            minlength="8" 
-                            pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$">
+                            minlength="8"                          
+                            pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
                       <div class="invalid-feedback">
-                          La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un signo especial.
+                          La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
                     </div>
 
@@ -127,7 +127,7 @@
                     <div class="col-6">
                         <label for="yourPassword" class="form-label">Confirmar contraseña</label>
                         <input type="password" name="password" class="form-control" id="yourPassword" required>
-                        <div class="invalid-feedback">Por favor confirma tu contraseña!</div>
+                        <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
 
                     <div class="col-12 ">
@@ -136,17 +136,11 @@
                       </center>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="../index.html">Iniciar sesión</a></p>
+                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="Login.html">Iniciar sesión</a></p>
                     </div>
                   </form>
-
                 </div>
               </div>
-
-              <div class="credits">
-                Pie de pagina :3 <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
-
             </div>
           </div>
         </div>
