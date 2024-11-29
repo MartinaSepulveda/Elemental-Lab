@@ -363,6 +363,7 @@
                     $_SESSION['rol'] = $buscarUsuario['idRolUsuario'];
                     $_SESSION['estado'] = $buscarUsuario['idEstadoUsuario'];
                     $_SESSION['nombre'] = $buscarUsuario['nombresUsuario'];
+                    $_SESSION['apellido'] = $buscarUsuario['apellidosUsuario'];
         
                     // Validación de rol y estado activo
                     if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Usuario activo
