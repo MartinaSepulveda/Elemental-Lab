@@ -11,7 +11,7 @@ $direccionVeterinaria = $_POST['direccionVeterinaria'];
 $correoVeterinaria = $_POST['correoVeterinaria'];
 $telefonoVeterinaria = $_POST['telefonoVeterinaria'];
 $idZonaVeterinaria = $_POST['idZonaVeterinaria'];
-$claveVeterinaria = $_POST['claveVeterinaria'];
+$claveVeterinaria = md5($_POST['claveVeterinaria']);
 
 
 

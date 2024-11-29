@@ -439,13 +439,14 @@
                         </script>";
                     }
                 } else {
+                    // Si el usuario no está registrado ni en la tabla de usuarios ni en la tabla de veterinarias
                     echo "<script>
                         alert('El usuario ingresado no se encuentra registrado.');
                         window.location.href='../Views/Login.html';
                     </script>";
                 }
             }
-        }                
+        }                       
         
 
         // Función para mostrar los datos de las zonas en el formulario para editarlos
@@ -508,7 +509,7 @@
                                     fechaSolicitud,
                                     fechaRecoleccion,  
                                     nombreExamen, 
-                                    descripcionUrgencia, 
+                                    descripcionUrgencia,
                                     descripcionFase 
                                 FROM solicitudes 
                                 INNER JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria 
@@ -516,7 +517,7 @@
                                 INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia 
                                 INNER JOIN fase ON idFaseSolicitud = idFase  
                                 WHERE descripcionFase = 'En proceso' 
-                                AND nitVeterinariaSolicitud = :nitVeterinaria AND confirmadoPorVeterinario IS NULL "; // Filtramos por el NIT de la veterinaria
+                                AND nitVeterinariaSolicitud = :nitVeterinaria  "; // Filtramos por el NIT de la veterinaria
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);

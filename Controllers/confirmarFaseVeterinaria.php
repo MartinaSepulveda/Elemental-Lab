@@ -9,28 +9,26 @@
     require_once("../Models/actualizaciones_db.php");
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Obtener los datos enviados
         $idSolicitud = $_POST['idSolicitud'];
-        $fase = $_POST['fase']; 
-
-
-        // Verificar que el valor de la fase sea válido
-        if ($fase == 2 || $fase == 3) {
-            // Incluir el modelo
-            require_once("../Models/actualizaciones_db.php");
-
-            // Crear una instancia del modelo
-            $solicitudesModel = new Actualizaciones ();
-
-            // Llamar al método para marcar la solicitud como realizada o no realizada
-            $actualizacionExitosa = $solicitudesModel->confirmacionFaseVeterinaria($idSolicitud, $fase);
-
-            if ($actualizacionExitosa) {
-                echo "<script>alert('Haz confirmado la solicitud exitosamente'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
-            } else {
-                echo "<script>alert('Haz confirmado la solicitud, confirmación del motorizado pendiente'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
-            }
+        $fase = $_POST['fase'];
+    
+        $solicitudesModel = new Actualizaciones();
+        $resultado = $solicitudesModel->confirmacionFaseVeterinaria($idSolicitud, $fase);
+    
+        switch ($resultado) {
+            case "actualizado":
+                echo "<script>alert('Haz confirmado la solicitud exitosamente.'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
+                break;
+            case "inconsistencia":
+                echo "<script>alert('Las respuestas no coinciden. Comuníquese con el motorizado para resolver la inconsistencia.'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
+                break;
+            case "pendiente":
+                echo "<script>alert('Haz confirmado la solicitud. Esperando confirmación del motorizado.'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
+                break;
+            default:
+                echo "<script>alert('Hubo un error. Inténtelo nuevamente.'); window.location.href='../Views/veterinaria-confirmarSolicitud.php';</script>";
         }
     }
+    
 
 ?>

@@ -136,19 +136,11 @@
                       </center>
                     </div>
                     <div class="col-12">
-<<<<<<< HEAD
                       <p class="small mb-0">¿Ya tienes una cuenta? <a href="Login.html">Iniciar sesión</a></p>
-=======
-                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="login.html">Iniciar sesión</a></p>
->>>>>>> 7f19bd0d1d1809cdc4088fd304d5d4752293c95c
                     </div>
                   </form>
                 </div>
               </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f19bd0d1d1809cdc4088fd304d5d4752293c95c
             </div>
           </div>
         </div>
