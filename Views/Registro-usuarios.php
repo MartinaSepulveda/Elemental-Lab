@@ -66,31 +66,31 @@
                     <div class="col-6">
                       <label for="idUsuario" class="form-label">Cédula</label>
                       <input type="number" name="idUsuario" class="form-control" id="idUsuario" min="1000000" max="9999999999" required>
-                      <div class="invalid-feedback">La cédula debe tener de 7 a 10 caracteres!</div>
+                      <div class="invalid-feedback">Ingrese un valor entre 7 y 10 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                       <label for="nombresUsuario" class="form-label">Nombres</label>
                       <input type="text" name="nombresUsuario" class="form-control" id="nombresUsuario" minlength="3" maxlength="40" required>
-                      <div class="invalid-feedback">El nombre debe tener mínimo 3 caracteres!</div>
+                      <div class="invalid-feedback">Ingrese un valor entre 3 y 40 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                       <label for="apellidosUsuario" class="form-label">Apellidos</label>
                       <input type="text" name="apellidosUsuario" class="form-control" id="apellidosUsuario" minlength="3" maxlength="40" required>
-                      <div class="invalid-feedback">El nombre debe tener mínimo 3 caracteres!!</div>
+                      <div class="invalid-feedback">Ingrese un valor entre 3 y 40 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                       <label for="correoUsuario" class="form-label">Correo Electrónico</label>
                       <input type="email" name="correoUsuario" class="form-control" id="correoUsuario" minlength="8" maxlength="50" required>
-                      <div class="invalid-feedback">Por favor ingresa tu correo electrónico!</div>
+                      <div class="invalid-feedback">Ingrese un valor entre 8 y 50 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                         <label for="telefonoUsuario" class="form-label">Teléfono</label>
                         <input type="text" name="telefonoUsuario" class="form-control" id="telefonoUsuario" minlength="10" maxlength="12" required>
-                        <div class="invalid-feedback">El teléfono debe tener 10 caracteres!</div>
+                        <div class="invalid-feedback">Ingrese un valor entre 10 y 12 caracteres.</div>
                     </div>
                     
                     <div class="col-6">
@@ -114,10 +114,9 @@
 
                     <div class="col-6">
                       <label for="claveUsuario" class="form-label">Contraseña</label>
-                      <input type="password" name="claveUsuario" class="form-control" id="claveUsuario" 
-                            required 
-                            minlength="8"                          
-                            pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
+                      <input type="password" name="claveUsuario" class="form-control" id="claveUsuario" required minlength="8" 
+                      pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
+                     
                       <div class="invalid-feedback">
                           La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
@@ -127,6 +126,10 @@
                     <div class="col-6">
                         <label for="yourPassword" class="form-label">Confirmar contraseña</label>
                         <input type="password" name="password" class="form-control" id="yourPassword" required>
+                        <span id="togglePassword" required  
+                          class="position-absolute" style="right: 62px; top: 79.7%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        </span>
                         <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
 
@@ -177,6 +180,23 @@
       }
       return true;
     };
+  </script>
+
+  <!-- Scrip para ocultar/mostrar la contraseña -->
+  <script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const passwordInput = document.querySelector('#claveUsuario');
+  const eyeIcon = document.querySelector('#eyeIcon');
+
+  togglePassword.addEventListener('click', function () {
+    // Alterna el tipo de input entre 'password' y 'text'
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+
+    // Cambia el ícono del ojito
+    eyeIcon.classList.toggle('bi-eye');
+    eyeIcon.classList.toggle('bi-eye-slash');
+  });
   </script>
 
 </body>

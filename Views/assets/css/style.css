@@ -998,6 +998,26 @@ form .enviar:hover{
 }
 
 /*--------------------------------------------------------------
+# Recuperar Clave
+--------------------------------------------------------------*/
+#recuperarClave {
+  width: 100%;
+  background: url(../img/fondoRecuperar.jpg);
+  background-size: cover;
+}
+
+#recuperarClave .card {
+  padding: 20px 30px;
+  background: #ffffff;
+}
+
+#recuperarClave button{
+  margin-top: 20px;
+  background-color: var(--color-acentos);
+  color: #fff;
+}
+
+/*--------------------------------------------------------------
 # Home / Dashboard
 --------------------------------------------------------------*/
 

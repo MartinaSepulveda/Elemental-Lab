@@ -74,37 +74,37 @@
                     <div class="col-6">
                       <label for="nitVeterinaria" class="form-label">NIT Veterinaria</label>
                       <input type="text" name="nitVeterinaria" class="form-control" id="nitVeterinaria" minlength="10" maxlength="15" required>
-                      <div class="invalid-feedback">Por favor introduzca el NIT de su veterinaria!</div>
+                      <div class="invalid-feedback">Ingrese un valor entre 10 y 15 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                         <label for="nombreVeterinaria" class="form-label">Nombre Veterinaria</label>
                         <input type="text" name="nombreVeterinaria" class="form-control" id="nombreVeterinaria" minlength="3" maxlength="40" required>
-                        <div class="invalid-feedback">Por favor introduzca el nombre de su Veterinaria!</div>
+                        <div class="invalid-feedback">Ingrese un valor entre 3 y 40 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                         <label for="propietarioVeterinaria" class="form-label">Nombre del Propietario</label>                      
                         <input type="text" name="propietarioVeterinaria" class="form-control" id="propietarioVeterinaria" minlength="6" maxlength="40" required>
-                        <div class="invalid-feedback">Por favor introduzca su nombre!.</div>
+                        <div class="invalid-feedback">Ingrese un valor entre 6 y 40 caracteres..</div>
                     </div>
 
                     <div class="col-6">
                       <label for="direccionVeterinaria" class="form-label">Dirección</label>                      
                       <input type="text" name="direccionVeterinaria" class="form-control" id="direccionVeterinaria" minlength="9" maxlength="50" required>
-                      <div class="invalid-feedback">Por favor introduzca su nombre!.</div>
+                      <div class="invalid-feedback">Ingrese un valor entre 9 y 50 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                         <label for="correoVeterinaria" class="form-label">Correo Electrónico</label>
                         <input type="email" name="correoVeterinaria" class="form-control" id="correoVeterinaria" minlength="8" maxlength="50" required>
-                        <div class="invalid-feedback">Por favor ingrese su correo electrónico!</div>
+                        <div class="invalid-feedback">Ingrese un valor entre 8 y 50 caracteres.</div>
                     </div>
 
                     <div class="col-6">
                         <label for="telefonoVeterinaria" class="form-label">Teléfono</label>
                         <input type="int" name="telefonoVeterinaria" class="form-control" id="telefonoVeterinaria" minlength="10" maxlength="10" required>
-                        <div class="invalid-feedback">Por favor ingrese su teléfono!</div>
+                        <div class="invalid-feedback">Ingrese un valor entre 10 y 12 caracteres.</div>
                     </div>
                     
                     <div class="col-6">
@@ -125,17 +125,22 @@
                   
                     <div class="col-6 position-relative">
                         <label for="claveVeterinaria" class="form-label">Contraseña</label>
-                        <input type="password" name="claveVeterinaria" class="form-control" id="claveVeterinaria" required >
-                        <span id="togglePassword" class="position-absolute" style="right: 17px; top: 72%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                        <input type="password" name="claveVeterinaria" class="form-control" id="claveVeterinaria" minlength="8" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required >
+                        <span id="togglePassword" required  
+                          class="position-absolute" style="right: 17px; top: 74%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
                             <i class="bi bi-eye" id="eyeIcon"></i>
                         </span>
-                        <div class="invalid-feedback">Por favor elija su contraseña!</div>
+                        <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.</div>
                     </div>
 
 
                     <div class="col-6">
                         <label for="yourPassword" class="form-label">Confirmar contraseña</label>
                         <input type="password" name="password" class="form-control" id="yourPassword" required>
+                        <span id="togglePassword" required  
+                          class="position-absolute" style="right: 62px; top: 79.7%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        </span>
                         <div class="invalid-feedback">Por favor confirme su contraseña!</div>
                     </div>
   

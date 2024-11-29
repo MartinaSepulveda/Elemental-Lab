@@ -13,16 +13,10 @@ $telefonoVeterinaria = $_POST['telefonoVeterinaria'];
 $idZonaVeterinaria = $_POST['idZonaVeterinaria'];
 $claveVeterinaria = md5($_POST['claveVeterinaria']);
 
-
-
-// Comprovar si el archivo se ha cargado
-if (isset($_FILES['fotoVeterinaria']) && $_FILES['fotoVeterinaria']['error'] === UPLOAD_ERR_OK) {
-    // Definir el directorio de carga
-    $uploadDir = "../assets/img/";
-    // Crear la ruta completa para el archivo cargado
-    $ruta = $uploadDir . basename($_FILES['fotoVeterinaria']['name']);
-    
-}
+ // CREAMOS UNA VARIABLE PARA DEFINIR LA RUTA DONDE QUEDARA ALOJADA LA IMAGEN
+ $ruta = "../Uploads/Veterinaria/".$_FILES['fotoVeterinaria']['name'];
+ // MOVEMOS EL ARCHIVO A LA CARPETA UPLOADS Y LA CARPETA USUARIOS
+ $mover = move_uploaded_file($_FILES['fotoVeterinaria']['tmp_name'], $ruta);
 
 // Crear una instancia de la clase Registros
 $objetoRegistros = new Registros();
