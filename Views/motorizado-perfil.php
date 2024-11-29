@@ -232,16 +232,9 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <img src="<?php echo $_SESSION['foto']; ?>" alt="Profile" class="rounded-circle">
               <h2> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h2>
-              <h3>Web Designer</h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+              <h3><?php echo $_SESSION['rol']; ?></h3>
             </div>
           </div>
 
@@ -286,22 +279,22 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Apellidos</div>
-                    <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars(obtenerApellidoUsuario()); ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['apellido']; ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Correo</div>
-                    <div class="col-lg-9 col-md-8">--</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['correo']; ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Telefono</div>
-                    <div class="col-lg-9 col-md-8">--</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['telefono']; ?></div>
                   </div>
 
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Rol</div>
+                    <div class="col-lg-3 col-md-4 label">Rollll</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['rol']; ?></div>
                   </div>
 
@@ -317,10 +310,10 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="assets/img/profile-img.jpg" alt="Profile">
+                        <img src="<?php echo $_SESSION['foto']; ?>" alt="Profile">
                         <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                          <a href="#" class="btn btn-primary btn-sm" title="Cargar nueva imagen"><i class="bi bi-upload"></i></a>
+                          <a href="#" class="btn btn-danger btn-sm" title="Eliminar imagen"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
                     </div>
@@ -328,7 +321,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Cédula</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="id" name="id" value="<?php echo $_SESSION['id']; ?>" >
+                        <input type="text" class="form-control" id="id" name="id" value="<?php echo $_SESSION['id']; ?>" disabled>
                       </div>
                     </div>
 
@@ -363,7 +356,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Rol</label>
                       <div class="col-md-8 col-lg-9">
-                      <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $_SESSION['rol']; ?>" >
+                      <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $_SESSION['rol']; ?>" disabled>
                       </div>
                     </div>
                     <!-- End Editar perfil -->
@@ -413,34 +406,28 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form>
+                  <!-- Cambiar Contraseña -->
+                  <form method="POST" action="cambiarClave.php">
+
 
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña actual</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contrasela</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                        <input name="claveUsuario" type="password" class="form-control" id="newPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <input name="claveUsuarios" type="password" class="form-control" id="renewPassword">
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                      <button type="submit" class="btn btn-primary" >Cambiar contraseña</button>
                     </div>
-                  </form><!-- End Change Password Form -->
+                  </form><!-- End Cambiar contraseña -->
 
                 </div>
 

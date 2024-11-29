@@ -48,18 +48,7 @@ function obtenerNombreUsuario() {
     return "Veterinaria"; // Valor por defecto
 }
 
-function obtenerApellidoUsuario() {
-    // Verificamos si la sesión está iniciada
-    if (!isset($_SESSION['id']) || $_SESSION['id'] == '') {
-        return "Invitado"; // Retorno por defecto si no hay sesión activa
-    }
 
-    if (isset($_SESSION['apellido']) && !empty($_SESSION['apellido'])) {
-        return $_SESSION['apellido'];
-    }
-    return "Usuario"; // Valor por defecto si no hay nombre
-
-}
 
 
 

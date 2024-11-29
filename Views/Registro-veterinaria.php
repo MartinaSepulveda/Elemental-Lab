@@ -125,7 +125,8 @@
                   
                     <div class="col-6 position-relative">
                         <label for="claveVeterinaria" class="form-label">Contraseña</label>
-                        <input type="password" name="claveVeterinaria" class="form-control" id="claveVeterinaria" minlength="8" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required >
+                        <input type="password" name="claveVeterinaria" class="form-control" id="claveVeterinaria" minlength="8" 
+                        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required >
                         <span id="togglePassword" required  
                           class="position-absolute" style="right: 17px; top: 74%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
                             <i class="bi bi-eye" id="eyeIcon"></i>

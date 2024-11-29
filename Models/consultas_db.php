@@ -357,6 +357,8 @@
                     unset($_SESSION['nombre']);
                     unset($_SESSION['direccion']);
                     unset($_SESSION['telefono']);
+
+                    
         
                     // Asignar las variables de sesión específicas del usuario
                     $_SESSION['id'] = $buscarUsuario['idUsuario'];
@@ -364,7 +366,13 @@
                     $_SESSION['estado'] = $buscarUsuario['idEstadoUsuario'];
                     $_SESSION['nombre'] = $buscarUsuario['nombresUsuario'];
                     $_SESSION['apellido'] = $buscarUsuario['apellidosUsuario'];
-        
+                    $_SESSION['correo'] = $buscarUsuario['correoUsuario'];
+                    $_SESSION['telefono'] = $buscarUsuario['telefonoUsuario'];
+                    $_SESSION['foto'] = $buscarUsuario['fotoUsuario'];
+
+
+                    
+                            
                     // Validación de rol y estado activo
                     if ($buscarUsuario['idEstadoUsuario'] == 1) {  // Usuario activo
                         if ($buscarUsuario['idRolUsuario'] == 1) {
