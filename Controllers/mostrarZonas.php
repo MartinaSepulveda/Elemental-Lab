@@ -16,7 +16,7 @@ function cargarZonas(){
                 <tr>
                     <td>'.$datosZonas['idZonas'].'</td>
                     <td>'.$datosZonas['descripcionZonas'].'</td>
-                    <td>           
+                    <td class="action-buttons" >           
                         <a href="../Views/administrador-editarZonaAdmi.php?id='.$datosZonas['idZonas'].'">
                             <button class="btn btn-primary btn-sm" title="Editar">
                                 <i class="bi bi-pencil"></i>

@@ -202,7 +202,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
     </li>    
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="AdmiResultados.html">
+        <a class="nav-link collapsed" href="administrador-resultados.php">
           <i class="bi bi-check-circle"></i>
           <span>Resultados enviados</span>
         </a>
@@ -237,15 +237,12 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
             <button id="descargarExcel" class="btn ">
                 <i class="bi bi-file-earmark-spreadsheet"></i> Descargar Excel
             </button>
-            <button id="descargarPdf" class="btn ">
-                <i class="bi bi-file-earmark-pdf"></i> Descargar PDF
-            </button>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-3">
+        <div class="col-lg-4 col-md-6 col-sm-3 mb-4">
           <label for="registrosxPag">Registros por página:</label> 
             <select id="registrosxPag">
                 <option value="5" selected>5</option>
@@ -263,25 +260,28 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
       <hr>
       <div class="row card">
         <div class="col-lg-12">
-          <table id="miTabla" class="table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>N. Identificación</th>
-                    <th>Celular</th>
-                    <th>Zona</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="tbody">
+          <div class="table-responsive">
+            <table id="miTabla" class="table">
+              <thead>
+                  <tr>
+                      <th>Nombre</th>
+                      <th>N. Identificación</th>
+                      <th>Celular</th>
+                      <th>Zona</th>
+                      <th>Acciones</th>
+                  </tr>
+              </thead>
+              <tbody id="tbody">
 
-              <?php
-                cargarMotorizadosZonas();
-              ?>
-                
-            </tbody>
-        </table>
+                <?php
+                  cargarMotorizadosZonas();
+                ?>
+                  
+              </tbody>
+            </table>
 
+          </div>
+        </div>    
 
         <div id="paginacion" class="d-flex align-items-center">
           <button id="prevButton" title="Anterior" class="btn btn-outline-secondary me-2">
@@ -308,6 +308,8 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
 
+    <!-- Liberia XLSX.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
@@ -392,6 +394,90 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
     // Inicializa la tabla al cargar
     displayTable();
     });
+
+
+    document.getElementById('descargarExcel').addEventListener('click', function () {
+    // Obtener la tabla por su ID
+    const table = document.getElementById('miTabla');
+    
+    if (!table) {
+        alert("No se encontró la tabla para exportar.");
+        return;
+    }
+
+    // Configuración personalizada
+    const opciones = {
+        nombreArchivo: 'Zonas_Asignadas.xlsx', // Nombre del archivo
+        hojaNombre: 'Zonas Asignadas',                   // Nombre de la hoja
+        excluirColumnas: []                         // Inicialmente no se excluyen columnas
+    };
+
+    // Obtener el número total de columnas (asumimos que todas las filas tienen el mismo número de columnas)
+    const numColumnas = table.querySelector('thead tr').cells.length;
+    
+    // Excluir la última columna
+    opciones.excluirColumnas.push(numColumnas - 1); // Índice de la última columna (0-based)
+
+    // Obtener todas las filas de la tabla (incluyendo las que están en otras páginas)
+    const rows = $('#tbody tr'); // Filas de la tabla
+
+    // Crear una nueva tabla clonada que contenga todas las filas
+    const tablaClonada = document.createElement('table');
+    const encabezado = table.querySelector('thead').cloneNode(true); // Clonamos el encabezado
+    tablaClonada.appendChild(encabezado); // Añadimos el encabezado a la tabla clonada
+
+    // Añadir todas las filas a la nueva tabla clonada
+    rows.each(function () {
+        const fila = $(this); // Cada fila
+        const nuevaFila = document.createElement('tr');
+        
+        fila.find('td').each(function () {
+            const celda = document.createElement('td');
+            celda.textContent = $(this).text();
+            nuevaFila.appendChild(celda);
+        });
+
+        tablaClonada.appendChild(nuevaFila); // Añadir la fila a la tabla clonada
+    });
+
+    // Si es necesario excluir columnas, las eliminamos
+    if (opciones.excluirColumnas && opciones.excluirColumnas.length > 0) {
+        const filas = tablaClonada.rows;
+        for (let fila of filas) {
+            for (let i = opciones.excluirColumnas.length - 1; i >= 0; i--) {
+                const indice = opciones.excluirColumnas[i];
+                if (fila.cells[indice]) fila.deleteCell(indice);
+            }
+        }
+    }
+
+    // Aplicar estilo a la tabla clonada
+    const worksheet = XLSX.utils.table_to_sheet(tablaClonada, { raw: true });
+
+    // Ajuste automático de las columnas
+    const colWidths = [];
+    for (let col in worksheet) {
+      if (col[0] !== '!') {
+        const cellValue = worksheet[col].v;
+        const columnIndex = col.match(/[A-Z]+/)[0];
+        const columnIndexNum = XLSX.utils.decode_col(columnIndex);
+        const cellLength = cellValue ? String(cellValue).length : 0;
+        
+        colWidths[columnIndexNum] = Math.max(colWidths[columnIndexNum] || 10, cellLength);
+      }
+    }
+
+    // Aplicar el ajuste de las columnas
+    worksheet['!cols'] = colWidths.map(width => ({ wch: width }));
+
+    // Convertir la tabla clonada a un libro Excel
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, opciones.hojaNombre);
+
+    // Descargar el archivo Excel
+    XLSX.writeFile(workbook, opciones.nombreArchivo);
+    });
+
 
   </script>
 

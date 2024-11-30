@@ -203,7 +203,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
     </li>    
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="AdmiResultados.html">
+        <a class="nav-link collapsed" href="administrador-resultados.php">
           <i class="bi bi-check-circle"></i>
           <span>Resultados enviados</span>
         </a>

@@ -5,6 +5,14 @@ include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
 verificarSesion();  // Verificar que esté logueado
 verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
 ?>
+<!-- Cargar las dependencias necesarias -->
+
+<?php
+    require_once("../Models/conexion_db.php");
+    require_once("../Models/consultas_db.php");
+    require_once("../Controllers/mostrarResultados.php");
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -151,13 +159,13 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
             </a>
           </li>
         </ul>
-      </li><!-- End Solcitudes Nav -->
+      </li><!-- End Solicitudes Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-map"></i><span>Zonas</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="zonas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="zonas-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="administrador-asignarZonas.php">
               <i class="bi bi-circle"></i><span>Asignar Zona</span>
@@ -180,9 +188,9 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
         <a class="nav-link collapsed" data-bs-target="#examenes-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-file-earmark-text"></i><span>Exámenes</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="examenes-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <ul id="examenes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
-                <a href="administrador-ingresarExamen.php" class="active">
+                <a href="administrador-ingresarExamen.php">
                     <i class="bi bi-circle"></i><span>Ingresar Exámenes</span>
                 </a>
             </li>
@@ -196,7 +204,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="administrador-resultados.php">
-          <i class="bi bi-check-circle"></i>
+          <i class="bi bi-check-circle" class="active"></i>
           <span>Resultados enviados</span>
         </a>
       </li><!-- End Resultados Nav -->
@@ -215,72 +223,136 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Exámenes</h1>
+      <h1>Resultados</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../Views/administrador.php">Home</a></li>
-          <li class="breadcrumb-item">Exámenes</li>
-          <li class="breadcrumb-item active">Ingresar Exámen</li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Resultados</li>
+          <li class="breadcrumb-item active">Ver Resultados</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
 
+    <section class="section" id="resultados">
       <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          <!-- Horizontal Form -->
-          <form class="row" action="../Controllers/registrarExamen.php" method="post">
-            <div class="col-md-6 mb-3">
-              <label for="codigoExam" class="col-form-label"  required >Codigo Exámen</label>
-              <div>
-                <input type="text" class="form-control" id="codigoExam" name="codigoExam">
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="nombreExam" class="col-form-label"  required >Nombre Exámen</label>
-              <div>
-                <textarea type="text" class="form-control" id="nombreExam" name="nombreExam"></textarea>
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="muestraTubo" class="col-form-label"  required >Muestra / Tubo</label>
-              <div>
-                <input type="text" class="form-control" id="muestraTubo" name="muestraTubo">
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="tipoExam" class="col-form-label"  required >Tipo de Exámen</label>
-              <div>
-                <input type="text" class="form-control" id="tipoExam" name="tipoExam">
-              </div>
-            </div>
-            
-            
-            <div class="text-center">
-              <button type="submit" class="btn enviar">Enviar</button>
-            </div>
-          </form><!-- End Horizontal Form -->
+        <div class="col-lg-12 col-md-6">
+          <div class="container">
+            <div class="row">
+              <!-- Contenedor para alinear los campos de búsqueda y fecha -->
+              <div class="col-lg-12">
+                <div class="d-flex align-items-center">
+                  <!-- Campo de búsqueda por texto -->
+                  <div class="col-lg-5 col-md-5 col-sm-4 buscarResul">
+                    <label for="buscar">Buscar:</label> 
+                    <input type="text" id="buscar" class="form-control">
+                  </div>
 
+                  <!-- Campo de búsqueda por fecha -->
+                  <div class="col-lg-5 col-md-5 col-sm-4 mr-4 buscarResul">
+                    <label for="fecha">Filtrar por fecha:</label> 
+                    <input type="date" id="fecha" class="form-control">
+                  </div>
+
+                  <!-- Botón de limpiar -->
+                  <span id="limpiarOrden" style="cursor: pointer; display: none;">✖</span>
+                </div>
+              </div>
+            </div>
+
+            <br><br>
+
+            <!-- Resultados (tarjetas) -->
+            <div class="row" id="resultados-lista">
+              <?php
+                cargarResultadosAdministrador();
+              ?>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
+
 
   </main><!-- End #main -->
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Js JQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+    let filteredCards = $('.result-card'); // Todas las tarjetas de prueba
+
+    // Función de búsqueda por texto
+    $('#buscar').on('keyup', function() {
+        filterCards();
+    });
+
+    // Función de búsqueda por fecha
+    $('#fecha').on('change', function() {
+        filterCards();
+    });
+
+    // Función para limpiar la búsqueda
+    $('#limpiarOrden').on('click', function() {
+        $('#buscar').val(''); // Borra el valor de búsqueda
+        $('#fecha').val(''); // Borra el valor de fecha
+        filterCards(); // Restablece las tarjetas y muestra todas
+        $(this).hide(); // Oculta el botón de limpiar
+    });
+
+    // Función que filtra las tarjetas de acuerdo con el texto y la fecha
+    function filterCards() {
+        const searchValue = $('#buscar').val().toLowerCase(); // Obtiene el valor de búsqueda
+        const selectedDate = $('#fecha').val(); // Obtiene la fecha seleccionada
+
+        // Filtra las tarjetas de acuerdo al texto
+        filteredCards = $('.result-card').filter(function() {
+            const cardText = $(this).text().toLowerCase();
+            const cardDate = $(this).find('.text-muted').data('fecha');
+
+            // Verifica si el texto y la fecha coinciden
+            const matchesText = cardText.indexOf(searchValue) !== -1;
+            const matchesDate = selectedDate ? cardDate === selectedDate : true; // Si no hay fecha seleccionada, pasa
+
+            return matchesText && matchesDate; // Ambas condiciones deben ser verdaderas
+        });
+
+        // Muestra las tarjetas filtradas
+        displayCards();
+    }
+
+    // Función para mostrar solo las tarjetas filtradas
+    function displayCards() {
+        // Primero, oculta todas las tarjetas
+        $('.result-card').hide();
+        
+        // Luego, muestra solo las tarjetas filtradas
+        filteredCards.show();
+
+        // Mostrar el botón de limpiar si hay algo en los campos
+        const searchValue = $('#buscar').val();
+        $('#limpiarOrden').toggle(searchValue.length > 0 || $('#fecha').val() !== '');
+    }
+
+    // Inicializa la visualización de las tarjetas al cargar
+    displayCards();
+  });
+
+  </script>
 
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
 
 </body>
 
