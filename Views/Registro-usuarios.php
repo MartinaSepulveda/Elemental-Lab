@@ -84,7 +84,7 @@
                     <div class="col-6">
                       <label for="correoUsuario" class="form-label">Correo Electrónico</label>
                       <input type="email" name="correoUsuario" class="form-control" id="correoUsuario" minlength="8" maxlength="50" required>
-                      <div class="invalid-feedback">Ingrese un valor entre 8 y 50 caracteres.</div>
+                      <div class="invalid-feedback">Ingrese un correo válido.</div>
                     </div>
 
                     <div class="col-6">

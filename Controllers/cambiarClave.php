@@ -1,13 +1,15 @@
 <?php
 
-require_once("../Models/conexion_db.php");
-require_once("../Models/registros_db.php");  
-require_once("../Models/actualizaciones_db.php"); 
+session_start(); 
 
-    $claveUsuario= $_POST ['claveUsuario'];
-    $claveUsuarios = md5($_POST ['claveUsuarios']);
+require_once("../Models/conexion_db.php");
+require_once("../Models/actualizaciones_db.php");
+require_once("../Models/autenticacion.php");
+
+    $claveUsuario = md5($_POST['claveUsuario']);
+    $idUsuario = $_SESSION['id'];
 
     $objetoRegistros = new Actualizaciones();
-    $nuevoExamen = $objetoRegistros -> actualizarClave($claveUsuario, $claveUsuarios);
+    $objetoRegistros->actualizarClave($claveUsuario, $idUsuario);
 
 ?>
