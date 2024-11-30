@@ -18,7 +18,7 @@
   --color-tex: #056cc0; /* Color texto titulos y subtitulos */
   --color-acentos: #548cba;  /* Color acentos hover y bases */
   --bg-color: #f2f4fe; /* Color de fondo  */
-  --bg-botones: #2a9d90cb; /*Color botones*/
+  --bg-botones: #2A9D8F; /*Color botones*/
 
 
 }
@@ -45,7 +45,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Nunito", sans-serif;
+  font-family: "Monserrat", sans-serif;
 
 }
 
@@ -88,7 +88,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: var(--color-acentos);
+  background: var(--bg-botones);
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -102,7 +102,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #85adfd;
+  background: #218377;
   color: #fff;
 }
 
@@ -1030,6 +1030,7 @@ select[name="estado"] {
   cursor: pointer; 
   height: 34px;
   margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 div select[name="zona"] {
@@ -1040,6 +1041,7 @@ div select[name="zona"] {
   cursor: pointer; 
   height: 34px;
   margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 934px) {
@@ -1054,18 +1056,19 @@ div select[name="zona"] {
 /* Estilo para el botón */
 button[type="submit"] {
   padding: 6px 12px; 
-  background-color: var(--color-acentos); 
+  background-color: var(--bg-botones); 
   color: white; 
   border: none; 
   border-radius: 4px;
   font-size: 14px; 
   cursor: pointer; 
   transition: background-color 0.3s; 
+  margin-bottom: 10px;
 }
 
 
 button[type="submit"]:hover {
-  background-color: #317cb9; /* Color de fondo más oscuro al pasar el mouse */
+  background-color: #218377; /* Color de fondo más oscuro al pasar el mouse */
 }
 
 /*--------------------------------------------------------------
@@ -1088,7 +1091,7 @@ button[type="submit"]:hover {
 
 }
 #paginacion button:hover{
-  background-color: var(--color-acentos);
+  background-color: var(--bg-botones);
   color: #fff;
   
 }
@@ -1105,6 +1108,10 @@ button[type="submit"]:hover {
 
 #zonas .card.formularioZonas{
   margin-top: 25%;
+}
+
+.action-buttons .btn{
+  margin-bottom: 10px;
 }
 
 /*--------------------------------------------------------------
@@ -1156,7 +1163,6 @@ button[type="submit"]:hover {
 /* Estilos para las celdas */
 #ExamDis .table th, .table td {
   text-align: center; /* Centrar el texto */
-  padding: 12px; /* Relleno dentro de las celdas */
 }
 
 /* Estilos para la tabla en modo responsive */

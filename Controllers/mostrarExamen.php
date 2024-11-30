@@ -18,7 +18,7 @@
                     <td>'.$datosExamenes['nombreExamen'].'</td>
                     <td>'.$datosExamenes['muestraTubo'].'</td>
                     <td>'.$datosExamenes['tipoExamen'].'</td>
-                    <td>           
+                    <td class="action-buttons">           
                         <a href="administrador-editarExamen.php?id='.$datosExamenes['idExamen'].'">
                             <button class="btn btn-primary btn-sm" title="Editar">
                                 <i class="bi bi-pencil"></i>

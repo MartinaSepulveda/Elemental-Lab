@@ -40,7 +40,7 @@
 
         // Mostrar veterinarias
         if (empty($veterinariasIna)) {
-            echo "<h3>No hay veterinarias activas</h2>";
+            echo "<h3>No hay veterinarias Inactivas</h2>";
         } else {
             foreach ($veterinariasIna as $datosVeterinaria) {
                 echo '

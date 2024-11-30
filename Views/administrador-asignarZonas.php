@@ -204,7 +204,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
     </li>    
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="AdmiResultados.html">
+        <a class="nav-link collapsed" href="administrador-resultados.php">
           <i class="bi bi-check-circle"></i>
           <span>Resultados enviados</span>
         </a>
@@ -238,7 +238,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
     <section class="section">
 
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-3">
+        <div class="col-lg-4 col-md-6 col-sm-3 mb-4">
           <label for="registrosxPag">Registros por página:</label> 
             <select id="registrosxPag">
                 <option value="5" selected>5</option>
@@ -256,24 +256,27 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
       <hr>
       <div class="row card">
         <div class="col-lg-12">
-          <table id="miTabla" class="table">
-            <thead>
-              <tr>
-                  <th>Nombres y apellidos</th>
-                  <th>N. Documento</th>
-                  <th>Telefono</th>
-                  <th>Correo</th>
-                  <th>Asignar Zona</th>
-              </tr>
-          </thead>
-          <tbody id="tbody">
-              <?php
-                cargarMotorizados();
-              ?> 
-              
-          </tbody>
-        </table>
+          <div class="table-responsive">
+            <table id="miTabla" class="table">
+              <thead>
+                <tr>
+                    <th>Nombres y apellidos</th>
+                    <th>N. Documento</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Asignar Zona</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                  <?php
+                    cargarMotorizados();
+                  ?> 
+                  
+              </tbody>
+            </table>
 
+          </div>
+        </div>  
 
         <div id="paginacion" class="d-flex align-items-center">
           <button id="prevButton" title="Anterior" class="btn btn-outline-secondary me-2">

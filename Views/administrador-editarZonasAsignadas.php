@@ -203,7 +203,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
     </li>    
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="AdmiResultados.html">
+        <a class="nav-link collapsed" href="administrador-resultados.php">
           <i class="bi bi-check-circle"></i>
           <span>Resultados enviados</span>
         </a>
@@ -246,7 +246,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
       </div>
 
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-3">
+        <div class="col-lg-4 col-md-6 col-sm-3 mb-4">
           <label for="registrosxPag">Registros por página:</label> 
             <select id="registrosxPag">
                 <option value="5" selected>5</option>

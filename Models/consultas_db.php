@@ -64,7 +64,7 @@
 
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
-            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud FROM solicitudes INNER JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria INNER JOIN examen ON idExamenSolicitud=idExamen INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia INNER JOIN fase ON idFaseSolicitud =idFase INNER JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE descripcionFase = 'En proceso' ";
+            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud, descripcionZonas FROM solicitudes LEFT JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN examen ON idExamenSolicitud=idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN fase ON idFaseSolicitud =idFase LEFT JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE idFaseSolicitud = 1 ";
             // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
             $result = $conexion -> prepare($consultarExamen);
 
@@ -89,7 +89,7 @@
 
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
-            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud FROM solicitudes INNER JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria INNER JOIN examen ON idExamenSolicitud=idExamen INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia INNER JOIN fase ON idFaseSolicitud =idFase INNER JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE descripcionFase = 'Realizada' ";
+            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud, descripcionZonas FROM solicitudes LEFT JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN examen ON idExamenSolicitud=idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN fase ON idFaseSolicitud =idFase LEFT JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE idFaseSolicitud = 2 ";
             // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
             $result = $conexion -> prepare($consultarExamen);
 
@@ -114,7 +114,7 @@
 
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
-            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud FROM solicitudes INNER JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria INNER JOIN examen ON idExamenSolicitud=idExamen INNER JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia INNER JOIN fase ON idFaseSolicitud =idFase INNER JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE descripcionFase = 'No realizada' ";
+            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud, descripcionZonas FROM solicitudes LEFT JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN examen ON idExamenSolicitud=idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN fase ON idFaseSolicitud =idFase LEFT JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE idFaseSolicitud = 3 ";
             // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
             $result = $conexion -> prepare($consultarExamen);
 
@@ -785,6 +785,32 @@
             // Enlazamos el parámetro :nitVet 
             $result->bindParam(':nitVet', $_SESSION['nit']);
             
+
+            // Ejecutamos la consulta
+            $result->execute();
+
+            // Utilizamos un bucle while para almacenar los registros que coinciden con la consulta
+            while ($resultado = $result->fetch()) {
+                $datos[] = $resultado;
+            }
+
+            // Devolvemos los resultados
+            return $datos;
+        }
+
+        public function consultarResultadosAdministrador(){
+            // Variable que va a almacenar el fetch
+            $datos = null;
+
+            // Creamos el objeto a partir de la clase conexion
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_conexion();
+
+            // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
+            $consultarResultado = "SELECT  fechaResultado, archivo, idSolicitudResultado, idExamenSolicitud, nombreExamen, nitVeterinaria, nombreVeterinaria FROM resultados LEFT JOIN solicitudes ON idSolicitudResultado = idSolicitud LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria LEFT JOIN examen ON idExamenSolicitud = idExamen "; 
+
+            // Preparamos la consulta
+            $result = $conexion->prepare($consultarResultado);
 
             // Ejecutamos la consulta
             $result->execute();

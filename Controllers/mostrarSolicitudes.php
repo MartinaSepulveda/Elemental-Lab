@@ -21,7 +21,8 @@
                     <td>'.$datossolicitudes['nombreExamen'].'</td>
                     <td>'.$datossolicitudes['descripcionUrgencia'].'</td>
                     <td>'.$datossolicitudes['descripcionFase'].'</td>
-                    <td>'.$datossolicitudes['descripcionEstadoSolicitud'].'</td>
+                    <td>' . (!empty($datossolicitudes['descripcionEstadoSolicitud']) ? $datossolicitudes['descripcionEstadoSolicitud'] : '--') . '</td>
+                    <td>'.$datossolicitudes['descripcionZonas'].'</td>
                 </tr>
                 ';
             }
@@ -49,7 +50,8 @@
                     <td>'.$datossolicitudes['nombreExamen'].'</td>
                     <td>'.$datossolicitudes['descripcionUrgencia'].'</td>
                     <td>'.$datossolicitudes['descripcionFase'].'</td>
-                    <td>'.$datossolicitudes['descripcionEstadoSolicitud'].'</td>
+                    <td>' . (!empty($datossolicitudes['descripcionEstadoSolicitud']) ? $datossolicitudes['descripcionEstadoSolicitud'] : '--') . '</td>
+                    <td>'.$datossolicitudes['descripcionZonas'].'</td>
                 </tr>
                 ';
             }
@@ -77,7 +79,8 @@
                     <td>'.$datossolicitudes['nombreExamen'].'</td>
                     <td>'.$datossolicitudes['descripcionUrgencia'].'</td>
                     <td>'.$datossolicitudes['descripcionFase'].'</td>
-                    <td>'.$datossolicitudes['descripcionEstadoSolicitud'].'</td>
+                    <td>' . (!empty($datossolicitudes['descripcionEstadoSolicitud']) ? $datossolicitudes['descripcionEstadoSolicitud'] : '--') . '</td>
+                    <td>'.$datossolicitudes['descripcionZonas'].'</td>
                 </tr>
                 ';
             }

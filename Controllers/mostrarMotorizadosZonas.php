@@ -15,7 +15,7 @@
                     <td>'.$datosMotorizado['idUsuario'].'</td>
                     <td>'.$datosMotorizado['telefonoUsuario'].'</td>
                     <td>'.$datosMotorizado['descripcionZonas'].'</td>
-                    <td>
+                    <td class="action-buttons">
                     <a href="administrador-editarZonasAsignadas.php">
                         <button class="btn btn-primary btn-sm" title="Editar">
                         <i class="bi bi-pencil"></i>
