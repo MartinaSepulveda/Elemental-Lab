@@ -375,65 +375,6 @@ verificarVeterinaria();
     displayTable();
     });
 
-
-    //JS PARA DESCARGAR EN EXCEL Y PDF
-
-
-    //Función para descargar la tabla como excel
-    document.getElementById('descargarExcel').addEventListener('click', function() {
-        // Obtener datos de la tabla
-        const table = document.querySelector('table'); // Asegúrate de tener tu tabla
-        const workbook = XLSX.utils.table_to_book(table, { sheet: 'Datos' });
-        XLSX.writeFile(workbook, 'Solicitudes en proceso.xlsx');
-    });
-
-
-    // Función para descargar la tabla como PDF
-    document.getElementById('descargarPdf').addEventListener('click', () => {
-        const { jsPDF } = window.jspdf; // Acceder a jsPDF
-
-        const doc = new jsPDF();
-
-        // Agregar título
-        doc.setFontSize(18);
-        doc.text("Solicitudes en proceso", 14, 20);
-
-        // Configurar la posición inicial para los datos de la tabla
-        let ejeY = 30;
-        doc.setFontSize(12);
-
-        // Agregar encabezados de la tabla
-        doc.text("Nombre", 14, ejeY);
-        doc.text("Dirección", 70, ejeY);
-        doc.text("Celular", 140, ejeY);
-        doc.text("Muestras", 180, ejeY);
-        doc.text("Urgencia", 210, ejeY);
-        doc.text("Fase", 250, ejeY);
-        ejeY += 10; // Espacio adicional después de los encabezados
-
-        // Obtener las filas de la tabla
-        const rows = document.querySelectorAll('#miTabla tbody tr');
-
-        // Agregar los datos de cada fila
-        rows.forEach(row => {
-            const columnas = row.querySelectorAll('td');
-            const data = Array.from(columnas).map(col => col.innerText);
-            
-            ejeY += 10; // Espacio entre filas
-            doc.text(data[0], 14, ejeY);   // Nombre
-            doc.text(data[1], 70, ejeY);   // Dirección
-            doc.text(data[2], 140, ejeY);  // Celular
-            doc.text(data[3], 180, ejeY);  // Muestras
-            doc.text(data[4], 210, ejeY);  // Urgencia
-            doc.text(data[5], 250, ejeY);  // Fase
-        });
-
-        // Guardar el archivo PDF
-        doc.save("Solicitudes en proceso.pdf");
-    });
-
-
-
     // Js para el modal de reprogramar solicitud
 
     function reprogramarSolicitud(idSolicitud) {

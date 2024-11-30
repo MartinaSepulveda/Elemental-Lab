@@ -24,11 +24,13 @@
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </a>
-                        <a href="../Controllers/eliminarExamen.php?id='.$datosExamenes['idExamen'].'">
-                            <button class="btn btn-danger btn-sm" title="Borrar">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </a>
+
+                        <!-- Botón Eliminar -->
+                        <button class="btn btn-danger btn-sm table-button eliminar" 
+                                title="Borrar" 
+                                onclick="eliminarExamen('. $datosExamenes['idExamen'].')">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </td>
                 </tr>
                 ';
@@ -84,3 +86,14 @@
 
 
 ?>
+
+<script>
+    function eliminarExamen(idExamen) {
+        // Mostrar confirmación antes de eliminar
+        if (confirm("¿Estás seguro de que deseas eliminar este exámen?")) {
+            // Hacer la llamada al backend para realizar la eliminación
+            window.location.href = '../Controllers/eliminarExamen.php?id=' + idExamen;
+        }
+    }
+
+</script>
