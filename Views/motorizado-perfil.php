@@ -76,57 +76,17 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
           </a>
         </li><!-- icono de foto-->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">1</span>
-          </a><!-- fin Notificaciones -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              1 Nueva notificacio
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todo</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Elemental_lab</h4>
-                <p>Ha cargado resultados</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Todos las notificaciones</a>
-            </li>
-
-          </ul><!-- Fin notificaciones -->
-
-        </li><!-- End Notification Nav -->
-
-
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="<?php echo $_SESSION['foto']; ?>" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2"> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h6>
-              <span>Veterinaria</span>
+              <span><?php echo $_SESSION['rol']; ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -407,20 +367,25 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Cambiar Contraseña -->
-                  <form method="POST" action="cambiarClave.php">
+                  <form  id="cambiarClave" action="../Controllers/cambiarClave.php" method="POST">
 
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="claveUsuario" type="password" class="form-control" id="newPassword">
+                        <input name="claveUsuario" type="password" class="form-control" id="newPassword" required minlength="8" 
+                        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
+                        <div class="invalid-feedback">
+                          La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
+                      </div>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
+                      <label for="yourPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="claveUsuarios" type="password" class="form-control" id="renewPassword">
+                        <input name="password" type="password" class="form-control" id="yourPassword" required >
+                        <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                       </div>
                     </div>
 
@@ -471,6 +436,20 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    // Simple password confirmation validation
+    document.getElementById('cambiarClave').onsubmit = function() {
+      const password = document.getElementById('claveUsuario').value;
+      const confirmPassword = document.getElementById('yourPassword').value;
+
+      if (password !== confirmPassword) {
+        alert("Las contraseñas no coinciden. Por favor intenta de nuevo.");
+        return false;
+      }
+      return true;
+    };
+  </script>
 
 </body>
 
