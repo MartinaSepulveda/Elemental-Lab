@@ -574,7 +574,7 @@
                 WHERE solicitudes.nitVeterinariaSolicitud = :nitVeterinaria
                 GROUP BY solicitudes.idSolicitud, solicitudes.fechaSolicitud, solicitudes.fechaRecoleccion, 
                 nivelurgencia.descripcionUrgencia, estadosolicitud.descripcionEstadoSolicitud, fase.descripcionFase
-                ORDER BY solicitudes.fechaSolicitud DESC"; 
+                ORDER BY solicitudes.idSolicitud DESC"; 
         
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
