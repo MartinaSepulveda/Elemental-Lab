@@ -401,8 +401,8 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
     displayTable();
     });
 
-        // Función para descargar la tabla como Excel
-        document.getElementById('descargarExcel').addEventListener('click', function () {
+    // Función para descargar la tabla como Excel
+    document.getElementById('descargarExcel').addEventListener('click', function () {
     // Obtener la tabla por su ID
     const table = document.getElementById('miTabla');
     
