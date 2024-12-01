@@ -3,7 +3,7 @@ session_start();  // Esto es necesario para iniciar la sesión
 
 include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
 verificarSesion();  // Verificar que esté logueado
-verificarRol(2);    // Verificar que tenga el rol adecuado
+verificarRol(1);    // Verificar que tenga el rol adecuado
 ?>
 <!-- Cargar las dependencias necesarias -->
 
@@ -20,7 +20,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Motorizado Perfil</title>
+  <title>Administrador Perfil</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -119,58 +119,118 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
   </header><!-- End Header -->
 
- <!-- ======= Sidebar ======= -->
- <aside id="sidebar" class="sidebar">
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
 
-  <ul class="sidebar-nav" id="sidebar-nav">
+        <ul class="sidebar-nav" id="sidebar-nav">
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="motorizado-solicitudes.php" >
-          <i class="bi bi-circle"></i><span>Solicitudes recibidas</span>
-        </a>
-      </li>
-      
-    </ul>
-  </li><!-- End Solicitudes Nav -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="administrador.php">
+            <i class="bi bi-house"></i>
+            <span>Home</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-map"></i><span>Fase solicitud</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="zonas-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="motorizado-proceso.php">
-          <i class="bi bi-circle"></i><span>En Proceso</span>
-        </a>
-      </li>
-      <li>
-        <a href="motorizado-realizada.php" >
-          <i class="bi bi-circle"></i><span>Realizada</span>
-        </a>
-      </li>
-      <li>
-        <a href="motorizado-noRealizada.php">
-          <i class="bi bi-circle"></i><span>No Realizada</span>
-        </a>
-      </li>
-    </ul>
-  </li><!-- End Zonas Nav -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-person"></i><span>Usuarios</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="usuarios-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="administrador-usuariosActivos.php">
+                <i class="bi bi-circle"></i><span>Activos</span>
+              </a>
+            </li>
+            <li>
+              <a href="administrador-usuariosInactivos.php">
+                <i class="bi bi-circle"></i><span>Inactivos</span>
+              </a>
+            </li>
+          </ul>
+        </li><!-- End Usuarios Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link " href="../Models/logout.php">
-        <i class="bi bi-box-arrow-right"></i>
-        <span>Cerrar Sesión</span>
-      </a>
-    </li><!-- Cerrar Sesión -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="administrador-solicitudProceso.php">
+                <i class="bi bi-circle"></i><span>En proceso</span>
+              </a>
+            </li>
+            <li>
+              <a href="administrador-solicitudRealizada.php">
+                <i class="bi bi-circle"></i><span>Realizadas</span>
+              </a>
+            </li>
+            <li>
+              <a href="administrador-solicitudNoRealizada.php">
+                <i class="bi bi-circle"></i><span>No realizadas</span>
+              </a>
+            </li>
+          </ul>
+        </li><!-- End Solicitudes Nav -->
 
-  </ul>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-map"></i><span>Zonas</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="zonas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="administrador-asignarZonas.php">
+                <i class="bi bi-circle"></i><span>Asignar Zona</span>
+              </a>
+            </li>
+            <li>
+              <a href="administrador-zonasAsignadas.php">
+                <i class="bi bi-circle"></i><span>Zonas Asignadas</span>
+              </a>
+            </li>
+            <li>
+              <a href="administrador-ingresarZona.php">
+                <i class="bi bi-circle"></i><span>Ingresar Zonas</span>
+              </a>
+            </li>
+          </ul>
+        </li><!-- End Zonas Nav -->
 
-</aside><!-- End Sidebar-->
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#examenes-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-file-earmark-text"></i><span>Exámenes</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="examenes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+                  <a href="administrador-ingresarExamen.php">
+                      <i class="bi bi-circle"></i><span>Ingresar Exámenes</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="administrador-verExamen.php">
+                      <i class="bi bi-circle"></i><span>Ver Exámenes</span>
+                  </a>
+              </li>
+          </ul>
+      </li>    
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="administrador-resultados.php">
+            <i class="bi bi-check-circle"></i>
+            <span>Resultados enviados</span>
+          </a>
+        </li><!-- End Resultados Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link " href="../Models/logout.php">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </li><!-- End cerrar sesión Page Nav -->
+
+      </ul>
+
+  </aside><!-- End Sidebar-->
+
 
   <main id="main" class="main">
 

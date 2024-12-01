@@ -83,7 +83,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="administrador-perfil.php">
                 <i class="bi bi-person"></i>
                 <span>Mi Perfil</span>
               </a>
