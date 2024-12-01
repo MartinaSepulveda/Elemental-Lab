@@ -51,7 +51,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado (1 = Administrador)
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="administrador.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Elemental Lab</span>
       </a>

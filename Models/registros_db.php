@@ -284,8 +284,8 @@ use FTP\Connection;
                 transform: translate(-50%, -50%); /* Ajusta el div para que esté centrado */
                 z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
                 height: 200px; /* Altura fija */
-                border-radius: 15px; /* Bordes redondeados */
-            ">
+                border-radius: 15px; /* Bordes redondeados */ 
+                    ">
                 <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Ajustar imagen y márgenes -->
                 <span style="text-align: center;">El usuario ya se encuentra registrado. <br> En caso de estar inactivo comuníquese con el administrador.</span>
                 <button onclick="closeAlert()" style="
@@ -298,22 +298,22 @@ use FTP\Connection;
                     top: 10px;
                     cursor: pointer;
                 ">✖</button>
-            </div>
-                
-            <script>
-                function closeAlert() {
-                    document.getElementById("alert").style.display = "none";
-                    // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
-                    location.href = "../Views/Registro-usuarios.php";
-                }
+                </div>
+                    
+                    <script>
+                        function closeAlert() {
+                            document.getElementById("alert").style.display = "none";
+                            // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
+                            location.href = "../Views/Registro-usuarios.php";
+                        }
 
-                // Cierra la alerta automáticamente después de 10 segundos
-                setTimeout(function() {
-                    closeAlert();
-                    // Redirige automáticamente después de 10 segundos
-                    location.href = "../Views/Registro-usuarios.php";
-                }, 10000);
-            </script>';
+                        // Cierra la alerta automáticamente después de 10 segundos
+                        setTimeout(function() {
+                            closeAlert();
+                            // Redirige automáticamente después de 10 segundos
+                            location.href = "../Views/Registro-usuarios.php";
+                        }, 10000);
+                    </script>';
                 exit;
             }
     
@@ -358,7 +358,7 @@ use FTP\Connection;
             z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
             height: 200px; /* Altura fija para hacer el cuadro cuadrado */
             border-radius: 15px; /* Bordes redondeados */
-        ">
+         ">
             <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Se ajustan los márgenes -->
             <span style="text-align: center;">Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del administrador.</span>
             <button onclick="closeAlert()" style="
@@ -371,21 +371,21 @@ use FTP\Connection;
                 top: 10px;
                 cursor: pointer;
             ">✖</button>
-        </div>
+            </div>
 
-        <script>
-            function closeAlert() {
-                document.getElementById("alert").style.display = "none";
-                // Redirige después de cerrar
-                location.href = "../index.html";
-            }
-            // Cierra la alerta 
-            setTimeout(function() {
-                closeAlert();
-                // Redirige automáticamente después de 5 segundos
-                location.href = "../index.html";
-            }, 3000);
-        </script>';
+            <script>
+                function closeAlert() {
+                    document.getElementById("alert").style.display = "none";
+                    // Redirige después de cerrar
+                    location.href = "../index.html";
+                }
+                // Cierra la alerta 
+                setTimeout(function() {
+                    closeAlert();
+                    // Redirige automáticamente después de 5 segundos
+                    location.href = "../index.html";
+                }, 3000);
+            </script>';
         }
 
         public function registrarVeterinaria($nitVeterinaria, $nombreVeterinaria, $propietarioVeterinaria, $direccionVeterinaria, $correoVeterinaria, $telefonoVeterinaria, $idZonaVeterinaria, $ruta, $claveVeterinaria) {
@@ -421,7 +421,7 @@ use FTP\Connection;
                 z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
                 height: 200px; /* Altura fija */
                 border-radius: 15px; /* Bordes redondeados */
-            ">
+                ">
                 <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Ajustar imagen y márgenes -->
                 <span style="text-align: center;">El usuario ya se encuentra registrado. <br> En caso de estar inactivo comuníquese con el administrador.</span>
                 <button onclick="closeAlert()" style="
@@ -434,22 +434,22 @@ use FTP\Connection;
                     top: 10px;
                     cursor: pointer;
                 ">✖</button>
-            </div>
+                </div>
                 
-            <script>
-                function closeAlert() {
-                    document.getElementById("alert").style.display = "none";
-                    // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
-                    location.href = "../Views/Registro-veterinaria.php";
-                }
+                    <script>
+                        function closeAlert() {
+                            document.getElementById("alert").style.display = "none";
+                            // Redirige después de cerrar o puedes comentar esta línea si no deseas redirigir
+                            location.href = "../Views/Registro-veterinaria.php";
+                        }
 
-                // Cierra la alerta automáticamente después de 10 segundos
-                setTimeout(function() {
-                    closeAlert();
-                    // Redirige automáticamente después de 10 segundos
-                    location.href = "../Views/Registro-veterinaria.php";
-                }, 10000);
-            </script>';
+                        // Cierra la alerta automáticamente después de 10 segundos
+                        setTimeout(function() {
+                            closeAlert();
+                            // Redirige automáticamente después de 10 segundos
+                            location.href = "../Views/Registro-veterinaria.php";
+                        }, 10000);
+                    </script>';
                 exit;
             }
             
@@ -496,7 +496,7 @@ use FTP\Connection;
             z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
             height: 200px; /* Altura fija para hacer el cuadro cuadrado */
             border-radius: 15px; /* Bordes redondeados */
-        ">
+            ">
             <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Se ajustan los márgenes -->
             <span style="text-align: center;">Su cuenta ha sido registrada exitosamente. <br> Espere la autorización del administrador.</span>
             <button onclick="closeAlert()" style="
@@ -509,21 +509,21 @@ use FTP\Connection;
                 top: 10px;
                 cursor: pointer;
             ">✖</button>
-        </div>
+            </div>
 
-        <script>
-            function closeAlert() {
-                document.getElementById("alert").style.display = "none";
-                // Redirige después de cerrar
-                location.href = "../index.html";
-            }
-            // Cierra la alerta 
-            setTimeout(function() {
-                closeAlert();
-                // Redirige automáticamente después de 5 segundos
-                location.href = "../index.html";
-            }, 3000);
-        </script>';
+            <script>
+                function closeAlert() {
+                    document.getElementById("alert").style.display = "none";
+                    // Redirige después de cerrar
+                    location.href = "../index.html";
+                }
+                // Cierra la alerta 
+                setTimeout(function() {
+                    closeAlert();
+                    // Redirige automáticamente después de 5 segundos
+                    location.href = "../index.html";
+                }, 3000);
+            </script>';
         }
 
         public function ingresarEstadoUsuario($idUsuario, $estado) {

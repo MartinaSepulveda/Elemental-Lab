@@ -814,7 +814,6 @@
         }
          
         public function actualizarPerfilUsuario($idUsuario, $fotoUsuario, $nombresUsuario, $apellidosUsuario, $correoUsuario, $telefonoUsuario){
-            
             //creamos el objeto a partir de la clase conexion
             $objConexion = new Conexion();
             $conexion =$objConexion -> get_conexion();
@@ -871,18 +870,18 @@
                 ">✖</button>
             </div>
 
-           <script>
-            function closeAlert() {
-                document.getElementById("alert").style.display = "none";
-                // Redirige después de cerrar a la página anterior
-                history.back();
-            }
-            // Cierra la alerta y redirige automáticamente después de 3 segundos
-            setTimeout(function() {
-                closeAlert();
-            }, 3000);
-        </script>
-            ';
+                <script>
+                    function closeAlert() {
+                        document.getElementById("alert").style.display = "none";
+                        // Redirige después de cerrar a la página anterior
+                        history.back();
+                    }
+                    // Cierra la alerta y redirige automáticamente después de 3 segundos
+                    setTimeout(function() {
+                        closeAlert();
+                    }, 3000);
+                </script>
+                    ';
 
             } else {
                 echo '
@@ -909,7 +908,7 @@
                 border-radius: 15px; /* Bordes redondeados */
             ">
                 <img src="../Views/assets/img/cancelar.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Ajustar imagen y márgenes -->
-                <span style="text-align: center;">No se pudo actualizar los datos <br> Intente nuevamente. <br> En caso de estar inactivo comuníquese con el administrador.</span>
+                <span style="text-align: center;">No se pudo actualizar los datos <br> Intente nuevamente.</span>
                 <button onclick="closeAlert()" style="
                     background: none;
                     border: none;
@@ -937,6 +936,7 @@
             </script>';
             }
 
+            
         }
 
 }
