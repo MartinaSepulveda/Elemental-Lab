@@ -112,23 +112,28 @@
                     </div>
                     </center>
 
-                    <div class="col-6">
+                    <div class="col-12 col-md-6 position-relative">
                       <label for="claveUsuario" class="form-label">Contraseña</label>
                       <input type="password" name="claveUsuario" class="form-control" id="claveUsuario" required minlength="8" 
                       pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
-                     
+                      <span id="togglePassword1" required  
+                        class="position-absolute" 
+                        style="right: 20px; top: 76%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                        <i class="bi bi-eye" id="eyeIcon1"></i>
+                      </span>
                       <div class="invalid-feedback">
                           La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
                     </div>
 
 
-                    <div class="col-6">
+                    <div class="col-12 col-md-6 position-relative">
                         <label for="yourPassword" class="form-label">Confirmar contraseña</label>
                         <input type="password" name="password" class="form-control" id="yourPassword" required>
-                        <span id="togglePassword" required  
-                          class="position-absolute" style="right: 62px; top: 79.7%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
-                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        <span id="togglePassword2" required  
+                          class="position-absolute" 
+                          style="right: 20px; top: 76%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                          <i class="bi bi-eye" id="eyeIcon2"></i>
                         </span>
                         <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
@@ -184,20 +189,31 @@
 
   <!-- Scrip para ocultar/mostrar la contraseña -->
   <script>
-  const togglePassword = document.querySelector('#togglePassword');
-  const passwordInput = document.querySelector('#claveUsuario');
-  const eyeIcon = document.querySelector('#eyeIcon');
+const togglePassword1 = document.querySelector('#togglePassword1');
+const passwordInput1 = document.querySelector('#claveUsuario');
+const eyeIcon1 = document.querySelector('#eyeIcon1');
 
-  togglePassword.addEventListener('click', function () {
-    // Alterna el tipo de input entre 'password' y 'text'
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
+const togglePassword2 = document.querySelector('#togglePassword2');
+const passwordInput2 = document.querySelector('#yourPassword');
+const eyeIcon2 = document.querySelector('#eyeIcon2');
 
-    // Cambia el ícono del ojito
-    eyeIcon.classList.toggle('bi-eye');
-    eyeIcon.classList.toggle('bi-eye-slash');
-  });
-  </script>
+// Alternar visibilidad de la contraseña (claveVeterinaria)
+togglePassword1.addEventListener('click', function () {
+  const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput1.setAttribute('type', type);
+  eyeIcon1.classList.toggle('bi-eye');
+  eyeIcon1.classList.toggle('bi-eye-slash');
+});
+
+// Alternar visibilidad de la contraseña (yourPassword)
+togglePassword2.addEventListener('click', function () {
+  const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput2.setAttribute('type', type);
+  eyeIcon2.classList.toggle('bi-eye');
+  eyeIcon2.classList.toggle('bi-eye-slash');
+});
+
+</script>
 
 </body>
 

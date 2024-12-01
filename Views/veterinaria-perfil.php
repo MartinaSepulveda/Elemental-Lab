@@ -246,7 +246,7 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
                   <h5 class="card-title">Detalles del perfil</h5>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">NIT Veterinaria</div>
+                    <div class="col-lg-3 col-md-4 label ">NIT</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['nit']; ?></div>
                   </div>
 
@@ -286,18 +286,18 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
                   <form  action="../Controllers/editarPerfil.php" method="POST" enctype="multipart/form-data">
 
                     <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto</label>
+                      <label for="fotoVeterinaria" class="col-md-4 col-lg-3 col-form-label">Foto</label>
                       <div class="col-md-8 col-lg-9">
-                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoUsuario" class="form-control" id="fotoUsuario" > 
+                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoVeterinaria" class="form-control" id="fotoVeterinaria" > 
                       </div>
                     </div>
 
             
       
                     <div class="row mb-3">
-                      <label for="id" class="col-md-4 col-lg-3 col-form-label">NIT</label>
+                      <label for="nitVeterinaria" class="col-md-4 col-lg-3 col-form-label">NIT</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="id" name="idUsuario" value="<?php echo $_SESSION['nit']; ?>" disabled>
+                        <input type="text" class="form-control" id="nitVeterinaria" name="nitVeterinaria" value="<?php echo $_SESSION['nit']; ?>" disabled>
                         <div class="invalid-feedback">Ingrese un valor entre 10 y 15 caracteres.</div>
                       </div>
                     </div>
@@ -305,23 +305,23 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Veterinaria</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="nombre" name="nombresUsuario" value="<?php echo $_SESSION['nombre']; ?>" minlength="3" maxlength="40" >
+                        <input type="text" class="form-control" id="nombre" name="nombreVeterinaria" value="<?php echo $_SESSION['nombre']; ?>" minlength="3" maxlength="40" >
                         <div class="invalid-feedback">Ingrese un valor entre 3 y 40 caracteres.</div>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="apellido" class="col-md-4 col-lg-3 col-form-label">Propietario</label>
+                      <label for="propietario" class="col-md-4 col-lg-3 col-form-label">Propietario</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="apellido" name="apellidosUsuario" value="<?php echo $_SESSION['propietario']; ?>" minlength="3" maxlength="40">
+                        <input type="text" class="form-control" id="propietario" name="propietarioVeterinaria" value="<?php echo $_SESSION['propietario']; ?>" minlength="3" maxlength="40">
                         <div class="invalid-feedback">Ingrese un valor entre 6 y 40 caracteres.</div>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="correo" class="col-md-4 col-lg-3 col-form-label">Dirección</label>
+                      <label for="direccion" class="col-md-4 col-lg-3 col-form-label">Dirección</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="correo" name="correoUsuario" value="<?php echo $_SESSION['direccion']; ?>" minlength="8" maxlength="50">
+                        <input type="text" class="form-control" id="direccion" name="direccionVeterinaria" value="<?php echo $_SESSION['direccion']; ?>" minlength="8" maxlength="50">
                         <div class="invalid-feedback">Ingrese una dirección válida.</div>
                       </div>
                     </div>
@@ -329,7 +329,7 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="correo" class="col-md-4 col-lg-3 col-form-label">Correo</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="correo" name="correoUsuario" value="<?php echo $_SESSION['correo']; ?>" minlength="8" maxlength="50">
+                        <input type="text" class="form-control" id="correo" name="correoVeterinaria" value="<?php echo $_SESSION['correo']; ?>" minlength="8" maxlength="50">
                         <div class="invalid-feedback">Ingrese un correo válido.</div>
                       </div>
                     </div>
@@ -337,7 +337,7 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="telefono" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="telefono" name="telefonoUsuario" value="<?php echo $_SESSION['telefono']; ?>" minlength="10" maxlength="12">
+                        <input type="text" class="form-control" id="telefono" name="telefonoVeterinaria" value="<?php echo $_SESSION['telefono']; ?>" minlength="10" maxlength="12">
                         <div class="invalid-feedback">Ingrese un valor entre 10 y 12 caracteres.</div>
                       </div>
                     </div>
