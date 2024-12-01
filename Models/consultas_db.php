@@ -369,8 +369,6 @@
                     $_SESSION['correo'] = $buscarUsuario['correoUsuario'];
                     $_SESSION['telefono'] = $buscarUsuario['telefonoUsuario'];
                     $_SESSION['foto'] = $buscarUsuario['fotoUsuario'];
-
-
                     
                             
                     // Validación de rol y estado activo
@@ -388,7 +386,7 @@
                         } elseif ($buscarUsuario['idRolUsuario'] == 3) {
                             echo "<script>
                                 alert('Bienvenido Bioanalista');
-                                window.location.href='../Views/InmoDashboard.html';
+                                window.location.href='../Views/bioanalista.php';
                             </script>";
                         }
                     } else { // Usuario inactivo
@@ -418,7 +416,6 @@
         
                         // **Limpieza de variables de sesión previas**
                         unset($_SESSION['id']);
-                        unset($_SESSION['rol']);
                         unset($_SESSION['estado']);
                         unset($_SESSION['nombre']);
         

@@ -10,9 +10,10 @@ function verificarSesion() {
 
 // Verificar si el usuario tiene el rol adecuado
 function verificarRol($rolRequerido) {
-    if ($_SESSION['rol'] != $rolRequerido) {
-        echo "<script> alert ('Acceso denegado. Solo los roles especificos pueden acceder.'); </script>";
-        echo "<script>location.href='../Views/Login.html';</script>";
+    // Verificamos si la variable de sesión 'rol' está definida y tiene el valor correcto
+    if (!isset($_SESSION['rol']) || $_SESSION['rol'] != $rolRequerido) {
+        echo "<script> alert('Acceso denegado. Solo los roles específicos pueden acceder.'); </script>";
+        echo "<script>location.href='../Views/Login.html';</script>"; // Descomenta si quieres redirigir al login
         exit();
     }
 }

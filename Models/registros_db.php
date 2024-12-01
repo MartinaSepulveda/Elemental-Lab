@@ -2,6 +2,7 @@
 
 // instrucción de PHP para importar una clase de un namespace
 use FTP\Connection;
+    session_start();
 
     class Registros{
 
@@ -818,8 +819,90 @@ use FTP\Connection;
             }
         }
         
+        public function subirResultado($idSolicitud, $fecha, $doc) {
+            $objetoConexion = new Conexion();
+            $conexion = $objetoConexion->get_conexion();
         
+            // Validar y guardar el archivo
+            $rutaArchivo = "../uploads/Resultados/" . basename($doc['name']);
+            if (!move_uploaded_file($doc['tmp_name'], $rutaArchivo)) {
+                echo 'Error al subir el archivo.';
+                return false;
+            }
         
+            // Insertar resultado
+            $ingresarEstado = "INSERT INTO resultados (fechaResultado, archivo, idSolicitudResultado, idUsuarioResultado) 
+                                VALUES (:fecha, :archivo, :idSolicitud, :idUsuario)";
+            $stmtResultado = $conexion->prepare($ingresarEstado);
+            $stmtResultado->bindParam(':fecha', $fecha);
+            $stmtResultado->bindParam(':archivo', $rutaArchivo);
+            $stmtResultado->bindParam(':idSolicitud', $idSolicitud, PDO::PARAM_INT);
+            $stmtResultado->bindParam(':idUsuario', $_SESSION['id'], PDO::PARAM_INT);
+        
+            // Ejecución y manejo de errores
+            try {
+                if ($stmtResultado->execute()) {
+                    echo '
+                
+                    <div id="alert" style="
+                    display: flex;
+                    flex-direction: column; /* Apila los elementos en una columna */
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #d4edda;
+                    color: #155724;
+                    border: 1px solid #c3e6cb;
+                    padding: 20px; /* Ajusta el padding para que el contenido esté bien distribuido */
+                    margin: 0 auto; /* Centra el div en la página */
+                    font-family: Arial, sans-serif;
+                    font-size: 16px; /* Reduce el tamaño de la fuente */
+                    max-width: 400px; /* Disminuye el ancho máximo */
+                    width: 80%; /* Reduce el ancho relativo al tamaño de la pantalla */
+                    position: fixed; /* Lo posiciona de manera fija en la pantalla */
+                    top: 50%; /* Lo coloca verticalmente en el medio de la pantalla */
+                    left: 50%; /* Lo coloca horizontalmente en el medio de la pantalla */
+                    transform: translate(-50%, -50%); /* Ajusta el div para que esté centrado */
+                    z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
+                    height: 200px; /* Altura fija para hacer el cuadro cuadrado */
+                    border-radius: 15px; /* Bordes redondeados */
+                ">
+                    <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Se ajustan los márgenes -->
+                    <span style="text-align: center;">El resultado se subio correctamente.</span>
+                    <button onclick="closeAlert()" style="
+                        background: none;
+                        border: none;
+                        color: #155724;
+                        font-size: 24px; /* Tamaño de la X */
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                        cursor: pointer;
+                    ">✖</button>
+                </div>
+
+                <script>
+                    function closeAlert() {
+                        document.getElementById("alert").style.display = "none";
+                        // Redirige después de cerrar
+                        location.href = "../Views/bioanalista.php";
+                    }
+                    // Cierra la alerta 
+                    setTimeout(function() {
+                        closeAlert();
+                        // Redirige automáticamente después de 5 segundos
+                        location.href = "../Views/bioanalista.php";
+                    }, 3000);
+                </script>
+                ';
+                } else {
+                    echo 'Error al intentar subir el resultado.';
+                }
+            } catch (PDOException $e) {
+                echo 'Error en la consulta: ' . $e->getMessage();
+            }
+        }
+    
+            
 
     }
 
