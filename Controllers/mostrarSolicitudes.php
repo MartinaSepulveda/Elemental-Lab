@@ -109,7 +109,7 @@
                         <td>' . $datossolicitudes['idSolicitud'] . '</td>
                         <td>' . $datossolicitudes['fechaSolicitud'] . '</td>
                         <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
-                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['examenes'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>' . $datossolicitudes['descripcionFase'] . '</td>
                         <td>
@@ -188,7 +188,7 @@
                         <td>' . $datossolicitudes['idSolicitud'] . '</td>
                         <td>' . $datossolicitudes['fechaSolicitud'] . '</td>
                         <td>' . $datossolicitudes['fechaRecoleccion'] . '</td>
-                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['examenes'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>
                             <!-- Botón Cancelar -->
