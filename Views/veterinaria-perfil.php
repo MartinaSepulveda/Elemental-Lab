@@ -3,7 +3,7 @@ session_start();  // Esto es necesario para iniciar la sesión
 
 include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
 verificarSesion();  // Verificar que esté logueado
-verificarRol(1);    // Verificar que tenga el rol adecuado
+verificarVeterinaria();   // Verificar que tenga el rol adecuado
 ?>
 <!-- Cargar las dependencias necesarias -->
 
@@ -20,7 +20,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Administrador Perfil</title>
+  <title>Veterinaria Perfil</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -59,7 +59,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="administrador.php" class="logo d-flex align-items-center">
+      <a href="veterinaria.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Elemental lab</span>
       </a>
@@ -85,14 +85,14 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h6>
-              <span><?php echo $_SESSION['rol']; ?></span>
+              <span>Veterinaria</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="Perfil.html">
+              <a class="dropdown-item d-flex align-items-center" href="veterinaria-perfil.php">
                 <i class="bi bi-person"></i>
                 <span>Mi perfil</span>
               </a>
@@ -119,118 +119,77 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+ <!-- ======= Sidebar ======= -->
+ <aside id="sidebar" class="sidebar">
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+  <ul class="sidebar-nav" id="sidebar-nav">
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="administrador.php">
-            <i class="bi bi-house"></i>
-            <span>Home</span>
-          </a>
-        </li><!-- End Dashboard Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="veterinaria.php">
+      <i class="bi bi-house"></i>
+      <span>Home</span>
+    </a>
+  </li><!-- End Home Nav -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-person"></i><span>Usuarios</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="usuarios-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="administrador-usuariosActivos.php">
-                <i class="bi bi-circle"></i><span>Activos</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-usuariosInactivos.php">
-                <i class="bi bi-circle"></i><span>Inactivos</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Usuarios Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="veterinaria-hacerSolicitud.php">
+          <i class="bi bi-circle"></i><span>Hacer Solicitudes</span>
+        </a>
+      </li>
+      <li>
+        <a href="veterinaria-cancelarReprogramar.php">
+          <i class="bi bi-circle"></i><span>Cancelar/Reprogramar</span>
+        </a>
+      </li>
+      <li>
+        <a href="veterinaria-confirmarSolicitud.php">
+          <i class="bi bi-circle"></i><span>Confirmar Solicitud</span>
+        </a>
+      </li>
+    </ul>
+  </li><!-- End Solicitudes Nav -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="administrador-solicitudProceso.php">
-                <i class="bi bi-circle"></i><span>En proceso</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-solicitudRealizada.php">
-                <i class="bi bi-circle"></i><span>Realizadas</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-solicitudNoRealizada.php">
-                <i class="bi bi-circle"></i><span>No realizadas</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Solicitudes Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-map"></i><span>Resultados</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="zonas-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="veterinaria-resultados.php">
+          <i class="bi bi-circle"></i><span>Ver resultados</span>
+        </a>
+      </li>
+    </ul>
+  </li><!-- End Zonas Nav -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-map"></i><span>Zonas</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="zonas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="administrador-asignarZonas.php">
-                <i class="bi bi-circle"></i><span>Asignar Zona</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-zonasAsignadas.php">
-                <i class="bi bi-circle"></i><span>Zonas Asignadas</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-ingresarZona.php">
-                <i class="bi bi-circle"></i><span>Ingresar Zonas</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Zonas Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#examenes-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-file-earmark-text"></i><span>Historial</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="examenes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="veterinaria-historialSolicitudes.php">
+                <i class="bi bi-circle"></i><span>H. Solicitudes</span>
+            </a>
+        </li>
+    </ul>
+  </li>
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#examenes-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-file-earmark-text"></i><span>Exámenes</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="examenes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-              <li>
-                  <a href="administrador-ingresarExamen.php">
-                      <i class="bi bi-circle"></i><span>Ingresar Exámenes</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="administrador-verExamen.php">
-                      <i class="bi bi-circle"></i><span>Ver Exámenes</span>
-                  </a>
-              </li>
-          </ul>
-      </li>    
+  <li class="nav-item">
+    <a class="nav-link " href="../Models/logout.php">
+      <i class="bi bi-box-arrow-right"></i>
+      <span>Cerrar Sesión</span>
+    </a>
+  </li><!-- End cerrar sesión Page Nav -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="administrador-resultados.php">
-            <i class="bi bi-check-circle"></i>
-            <span>Resultados enviados</span>
-          </a>
-        </li><!-- End Resultados Nav -->
+  </ul>
 
-        <li class="nav-item">
-          <a class="nav-link " href="../Models/logout.php">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Cerrar Sesión</span>
-          </a>
-        </li><!-- End cerrar sesión Page Nav -->
-
-      </ul>
-
-  </aside><!-- End Sidebar-->
-
+</aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
@@ -253,7 +212,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <img src="<?php echo $_SESSION['foto']; ?>" alt="" class="rounded-circle">
               <h2> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h2>
-              <h3><?php echo $_SESSION['rol']; ?></h3>
+              <h3>Veterinaria</h3>
             </div>
           </div>
 
@@ -287,18 +246,23 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                   <h5 class="card-title">Detalles del perfil</h5>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Cedula</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['id']; ?></div>
+                    <div class="col-lg-3 col-md-4 label ">NIT Veterinaria</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['nit']; ?></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Nombres</div>
+                    <div class="col-lg-3 col-md-4 label ">Veterinaria</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['nombre']; ?></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Apellidos</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['apellido']; ?></div>
+                    <div class="col-lg-3 col-md-4 label">Propietario</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['propietario']; ?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Dirección</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['direccion']; ?></div>
                   </div>
 
                   <div class="row">
@@ -309,12 +273,6 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Telefono</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['telefono']; ?></div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Rollll</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['rol']; ?></div>
                   </div>
 
                   
@@ -330,21 +288,22 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto</label>
                       <div class="col-md-8 col-lg-9">
-                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoUsuario" class="form-control" id="fotoUsuario" >
+                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoUsuario" class="form-control" id="fotoUsuario" > 
                       </div>
                     </div>
 
             
       
                     <div class="row mb-3">
-                      <label for="id" class="col-md-4 col-lg-3 col-form-label">Cédula</label>
+                      <label for="id" class="col-md-4 col-lg-3 col-form-label">NIT</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="id" name="idUsuario" value="<?php echo $_SESSION['id']; ?>" disabled>
+                        <input type="text" class="form-control" id="id" name="idUsuario" value="<?php echo $_SESSION['nit']; ?>" disabled>
+                        <div class="invalid-feedback">Ingrese un valor entre 10 y 15 caracteres.</div>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Nombres</label>
+                      <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Veterinaria</label>
                       <div class="col-md-8 col-lg-9">
                         <input type="text" class="form-control" id="nombre" name="nombresUsuario" value="<?php echo $_SESSION['nombre']; ?>" minlength="3" maxlength="40" >
                         <div class="invalid-feedback">Ingrese un valor entre 3 y 40 caracteres.</div>
@@ -352,10 +311,18 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                     </div>
 
                     <div class="row mb-3">
-                      <label for="apellido" class="col-md-4 col-lg-3 col-form-label">Apellidos</label>
+                      <label for="apellido" class="col-md-4 col-lg-3 col-form-label">Propietario</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" class="form-control" id="apellido" name="apellidosUsuario" value="<?php echo $_SESSION['apellido']; ?>" minlength="3" maxlength="40">
-                        <div class="invalid-feedback">Ingrese un valor entre 3 y 40 caracteres.</div>
+                        <input type="text" class="form-control" id="apellido" name="apellidosUsuario" value="<?php echo $_SESSION['propietario']; ?>" minlength="3" maxlength="40">
+                        <div class="invalid-feedback">Ingrese un valor entre 6 y 40 caracteres.</div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="correo" class="col-md-4 col-lg-3 col-form-label">Dirección</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input type="text" class="form-control" id="correo" name="correoUsuario" value="<?php echo $_SESSION['direccion']; ?>" minlength="8" maxlength="50">
+                        <div class="invalid-feedback">Ingrese una dirección válida.</div>
                       </div>
                     </div>
 
@@ -372,13 +339,6 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                       <div class="col-md-8 col-lg-9">
                         <input type="text" class="form-control" id="telefono" name="telefonoUsuario" value="<?php echo $_SESSION['telefono']; ?>" minlength="10" maxlength="12">
                         <div class="invalid-feedback">Ingrese un valor entre 10 y 12 caracteres.</div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="rol" class="col-md-4 col-lg-3 col-form-label">Rol</label>
-                      <div class="col-md-8 col-lg-9">
-                      <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $_SESSION['rol']; ?>" disabled>
                       </div>
                     </div>
 
@@ -437,28 +397,35 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                   <form  id="cambiarClave" action="../Controllers/editarClave.php" method="POST">
 
 
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="claveUsuario" type="password" class="form-control" id="newPassword" required minlength="8" 
-                        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
-                        <div class="invalid-feedback">
-                          La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
-                      </div>
+                  <div class="row mb-3">
+                    <label for="claveVeterinaria" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
+                    <div class="col-md-8 col-lg-9 position-relative"> <!-- Añadimos "position-relative" -->
+                      <input name="claveVeterinaria" type="password" class="form-control" id="claveVeterinaria" required minlength="8" 
+                      pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
+                      <span id="togglePassword1" class="position-absolute" style="right: 20px; top: 32%; transform: translateY(-50%); cursor: pointer;">
+                        <i class="bi bi-eye" id="eyeIcon1"></i>
+                      </span>
+                      <div class="invalid-feedback">
+                        La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="yourPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="yourPassword" required >
-                        <div class="invalid-feedback">Las contraseñas no coinciden!</div>
-                      </div>
+                  <div class="row mb-3">
+                    <label for="yourPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
+                    <div class="col-md-8 col-lg-9 position-relative"> <!-- Añadimos "position-relative" -->
+                      <input name="password" type="password" class="form-control" id="password" required>
+                      <span id="togglePassword2" class="position-absolute" style="right: 20px; top: 32%; transform: translateY(-50%); cursor: pointer;">
+                        <i class="bi bi-eye" id="eyeIcon2"></i>
+                      </span>
+                      <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
+                  </div>
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary" >Cambiar contraseña</button>
-                    </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                  </div>
+                  
                   </form><!-- End Cambiar contraseña -->
 
                 </div>
@@ -504,45 +471,52 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Script para confirmar contraseña antes de enviar -->
   <script>
-    // Simple password confirmation validation
-    document.getElementById('cambiarClave').onsubmit = function() {
-      const password = document.getElementById('claveUsuario').value;
-      const confirmPassword = document.getElementById('yourPassword').value;
+  // Simple password confirmation validation
+  document.getElementById('cambiarClave').onsubmit = function(event) {
+    const password = document.getElementById('claveVeterinaria').value;  // Corregir el id a 'newPassword'
+    const confirmPassword = document.getElementById('password').value; // Corregir el id a 'yourPassword'
 
-      if (password !== confirmPassword) {
-        alert("Las contraseñas no coinciden. Por favor intenta de nuevo.");
-        return false;
-      }
-      return true;
-    };
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden. Por favor intenta de nuevo.");
+      event.preventDefault(); // Detiene el envío del formulario
+    }
+  };
   </script>
 
-<script>
-  // Función para previsualizar la imagen cargada
-  function previewImage() {
-    const fileInput = document.getElementById('fileInput');
-    const preview = document.getElementById('previewImage');
-    const file = fileInput.files[0]; // Obtiene el archivo seleccionado
 
-    if (file) {
-      const reader = new FileReader(); // Crea un lector de archivos
-      reader.onload = function (e) {
-        preview.src = e.target.result; // Asigna la imagen cargada al atributo src
-      };
-      reader.readAsDataURL(file); // Lee el archivo como una URL de datos
-    } else {
-      alert("No se seleccionó un archivo válido.");
-    }
-  }
 
-  // Función para eliminar la imagen
-  function removeImage() {
-    const preview = document.getElementById('previewImage');
-    preview.src = "default-image-path.jpg"; // Cambia a una imagen predeterminada
-    document.getElementById('fileInput').value = ""; // Limpia el campo de archivo
-  }
-</script>
+  <!-- Script para el funcionamiento del ícono del ojo -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Selector para los campos de contraseña
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const passwordInput1 = document.querySelector('#claveVeterinaria');
+    const eyeIcon1 = document.querySelector('#eyeIcon1');
+
+    const togglePassword2 = document.querySelector('#togglePassword2');
+    const passwordInput2 = document.querySelector('#password');
+    const eyeIcon2 = document.querySelector('#eyeIcon2');
+
+    // Evento para el primer campo de contraseña (Nueva contraseña)
+    togglePassword1.addEventListener('click', function () {
+      const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput1.setAttribute('type', type);
+      eyeIcon1.classList.toggle('bi-eye');
+      eyeIcon1.classList.toggle('bi-eye-slash');
+    });
+
+    // Evento para el segundo campo de contraseña (Confirmar contraseña)
+    togglePassword2.addEventListener('click', function () {
+      const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput2.setAttribute('type', type);
+      eyeIcon2.classList.toggle('bi-eye');
+      eyeIcon2.classList.toggle('bi-eye-slash');
+    });
+  });
+  </script>
+
 
 </body>
 

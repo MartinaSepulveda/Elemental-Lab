@@ -59,9 +59,9 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="motorizado-solicitudes.html" class="logo d-flex align-items-center">
+      <a href="motorizado-solicitudes.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">Elemental_lab</span>
+        <span class="d-none d-lg-block">Elemental lab</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -377,28 +377,35 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                   <form  id="cambiarClave" action="../Controllers/editarClave.php" method="POST">
 
 
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="claveUsuario" type="password" class="form-control" id="newPassword" required minlength="8" 
-                        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
-                        <div class="invalid-feedback">
-                          La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
-                      </div>
+                  <div class="row mb-3">
+                    <label for="claveUsuario" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
+                    <div class="col-md-8 col-lg-9 position-relative">
+                      <input name="claveUsuario" type="password" class="form-control" id="claveUsuario" required minlength="8" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
+                      <span id="togglePassword1" class="position-absolute" style="right: 20px; top: 34%; transform: translateY(-50%); cursor: pointer;">
+                        <i class="bi bi-eye" id="eyeIcon1"></i> <!-- Cambié el id a togglePassword1 y eyeIcon1 -->
+                      </span>
+                      <div class="invalid-feedback">
+                        La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="yourPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="yourPassword" required >
-                        <div class="invalid-feedback">Las contraseñas no coinciden!</div>
-                      </div>
+                  <div class="row mb-3">
+                    <label for="password" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
+                    <div class="col-md-8 col-lg-9 position-relative">
+                      <input name="password" type="password" class="form-control" id="password" required>
+                      <span id="togglePassword2" class="position-absolute" style="right: 20px; top: 32%; transform: translateY(-50%); cursor: pointer;">
+                        <i class="bi bi-eye" id="eyeIcon2"></i> <!-- Cambié el id a togglePassword2 y eyeIcon2 -->
+                      </span>
+                      <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
+                  </div>
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary" >Cambiar contraseña</button>
-                    </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                  </div>
+
+
                   </form><!-- End Cambiar contraseña -->
 
                 </div>
@@ -444,45 +451,53 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Script para validar contraseñas antes de enviar -->
   <script>
-    // Simple password confirmation validation
-    document.getElementById('cambiarClave').onsubmit = function() {
+  document.addEventListener("DOMContentLoaded", function () {
+    // Validación de contraseñas al enviar el formulario
+    document.getElementById('cambiarClave').onsubmit = function (event) {
       const password = document.getElementById('claveUsuario').value;
-      const confirmPassword = document.getElementById('yourPassword').value;
+      const confirmPassword = document.getElementById('password').value;
 
       if (password !== confirmPassword) {
         alert("Las contraseñas no coinciden. Por favor intenta de nuevo.");
-        return false;
+        event.preventDefault(); // Detener el envío del formulario
       }
-      return true;
     };
+  });
   </script>
 
-<script>
-  // Función para previsualizar la imagen cargada
-  function previewImage() {
-    const fileInput = document.getElementById('fileInput');
-    const preview = document.getElementById('previewImage');
-    const file = fileInput.files[0]; // Obtiene el archivo seleccionado
+  <!-- Script para el funcionamiento del ícono del ojito -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Selector para los campos de contraseña
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const passwordInput1 = document.querySelector('#claveUsuario');
+    const eyeIcon1 = document.querySelector('#eyeIcon1');
 
-    if (file) {
-      const reader = new FileReader(); // Crea un lector de archivos
-      reader.onload = function (e) {
-        preview.src = e.target.result; // Asigna la imagen cargada al atributo src
-      };
-      reader.readAsDataURL(file); // Lee el archivo como una URL de datos
-    } else {
-      alert("No se seleccionó un archivo válido.");
-    }
-  }
+    const togglePassword2 = document.querySelector('#togglePassword2');
+    const passwordInput2 = document.querySelector('#password');
+    const eyeIcon2 = document.querySelector('#eyeIcon2');
 
-  // Función para eliminar la imagen
-  function removeImage() {
-    const preview = document.getElementById('previewImage');
-    preview.src = "default-image-path.jpg"; // Cambia a una imagen predeterminada
-    document.getElementById('fileInput').value = ""; // Limpia el campo de archivo
-  }
-</script>
+    // Evento para el primer campo de contraseña (Nueva contraseña)
+    togglePassword1.addEventListener('click', function () {
+      const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput1.setAttribute('type', type);
+      eyeIcon1.classList.toggle('bi-eye');
+      eyeIcon1.classList.toggle('bi-eye-slash');
+    });
+
+    // Evento para el segundo campo de contraseña (Confirmar contraseña)
+    togglePassword2.addEventListener('click', function () {
+      const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput2.setAttribute('type', type);
+      eyeIcon2.classList.toggle('bi-eye');
+      eyeIcon2.classList.toggle('bi-eye-slash');
+    });
+  });
+
+  </script>
+
 
 </body>
 

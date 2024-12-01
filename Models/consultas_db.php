@@ -427,8 +427,12 @@
                         $_SESSION['estado'] = $buscarVeterinaria['idEstadoVeterinaria'];
                         $_SESSION['nit'] = $buscarVeterinaria['nitVeterinaria'];
                         $_SESSION['nombre'] = $buscarVeterinaria['nombreVeterinaria'];
+                        $_SESSION['propietario'] = $buscarVeterinaria['propietarioVeterinaria'];
                         $_SESSION['direccion'] = $buscarVeterinaria['direccionVeterinaria'];
                         $_SESSION['telefono'] = $buscarVeterinaria['telefonoVeterinaria'];
+                        $_SESSION['correo'] = $buscarVeterinaria['correoVeterinaria'];
+                        $_SESSION['foto'] = $buscarVeterinaria['fotoVeterinaria'];
+                                                
         
                         if ($buscarVeterinaria['idEstadoVeterinaria'] == 1) { // Veterinaria activa
                             echo "<script>
