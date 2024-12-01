@@ -325,14 +325,12 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                   <!-- End Detalles del perfil -->
                    
                   <!-- Editar perfil -->
-                  <form  action="../Controllers/editarPerfil.php" method="POST">
+                  <form  action="../Controllers/editarPerfil.php" method="POST" enctype="multipart/form-data">
 
-                  <div class="row mb-3">
+                    <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto</label>
                       <div class="col-md-8 col-lg-9">
                       <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoUsuario" class="form-control" id="fotoUsuario" >
-                        
-                          
                       </div>
                     </div>
 
