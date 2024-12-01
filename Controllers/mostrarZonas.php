@@ -22,11 +22,13 @@ function cargarZonas(){
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </a>
-                        <a href="../Controllers/eliminarZona.php?id='.$datosZonas['idZonas'].'">
-                            <button class="btn btn-danger btn-sm" title="Borrar">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </a>
+
+                        <!-- Botón Eliminar -->
+                        <button class="btn btn-danger btn-sm table-button eliminar" 
+                                title="Borrar" 
+                                onclick="eliminarZona('. $datosZonas['idZonas'].')">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </td>
                 <tr>
             ';
@@ -64,3 +66,13 @@ function cargarZonas(){
 
 
 ?>
+<script>
+    function eliminarZona(idZonas) {
+        // Mostrar confirmación antes de eliminar
+        if (confirm("¿Estás seguro de que deseas eliminar esta zona?")) {
+            // Hacer la llamada al backend para realizar la eliminación
+            window.location.href = '../Controllers/eliminarZona.php?id=' + idZonas;
+        }
+    }
+
+</script>

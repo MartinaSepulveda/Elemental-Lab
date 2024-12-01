@@ -198,7 +198,7 @@ verificarVeterinaria();
     <section class="section" >
 
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-3">
+        <div class="col-lg-4 col-md-6 col-sm-3 mb-4">
           <label for="registrosxPag">Registros por página:</label> 
             <select id="registrosxPag">
                 <option value="5" selected>5</option>
@@ -216,28 +216,30 @@ verificarVeterinaria();
       <hr>
       <div class="row card">
         <div class="col-lg-12">
-          <table id="miTabla" class="table">
-            <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Fecha Solicitud</th>
-                  <th>Fecha Recoleccion</th>
-                  <th>Nombre Exámen/es</th>
-                  <th>Urgencia</th>
-                  <th>Fase Actual</th>
-                  <th>Acciones</th> <!-- Realizda no realizada -->
-                </tr>
-            </thead>
-            <tbody id="tbody">
-              
+          <div class="table-responsive">
+            <table id="miTabla" class="table">
+              <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Fecha Recoleccion</th>
+                    <th>Nombre Exámen/es</th>
+                    <th>Urgencia</th>
+                    <th>Fase Actual</th>
+                    <th>Acciones</th> <!-- Realizda no realizada -->
+                  </tr>
+              </thead>
+              <tbody id="tbody">
+                
 
-              <?php
-                cargarSolicitudesProcesoVeterinaria();
-              ?>
+                <?php
+                  cargarSolicitudesProcesoVeterinaria();
+                ?>
 
-            </tbody>
-        </table>
-
+              </tbody>
+            </table>
+          </div>
+        </div>    
 
         <div id="paginacion" class="d-flex align-items-center">
           <button id="prevButton" title="Anterior" class="btn btn-outline-secondary me-2">

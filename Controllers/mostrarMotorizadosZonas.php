@@ -21,11 +21,13 @@
                         <i class="bi bi-pencil"></i>
                         </button>
                     </a>
-                    <a href="../Controllers/eliminarZonaAsignada.php?id='.$datosMotorizado['idUsuario'].'">
-                        <button class="btn btn-danger btn-sm" title="Borrar">
+                    <!-- Botón Eliminar -->
+                    <button class="btn btn-danger btn-sm table-button eliminar" 
+                            title="Borrar" 
+                            onclick="eliminarZonaAsignada('. $datosMotorizado['idUsuario'].')">
                         <i class="bi bi-trash"></i>
-                        </button>
-                    </a>
+                    </button>
+                    
                     </td>
                 </tr>
                 ';
@@ -33,4 +35,15 @@
         }
     }
 
+    
 ?>
+<script>
+    function eliminarZonaAsignada(idUsuario) {
+        // Mostrar confirmación antes de eliminar
+        if (confirm("¿Estás seguro de que deseas eliminar esta zona asignada?")) {
+            // Hacer la llamada al backend para realizar la eliminación
+            window.location.href = '../Controllers/eliminarZonaAsignada.php?id=' + idUsuario;
+        }
+    }
+
+</script>
