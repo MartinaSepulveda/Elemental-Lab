@@ -85,14 +85,14 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h6>
-              <span><?php echo $_SESSION['rol']; ?></span>
+              <span>Motorizado</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="Perfil.html">
+              <a class="dropdown-item d-flex align-items-center" href="motorizado-perfil.php">
                 <i class="bi bi-person"></i>
                 <span>Mi perfil</span>
               </a>
@@ -125,22 +125,15 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
   <ul class="sidebar-nav" id="sidebar-nav">
 
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="motorizado-solicitudes.php" >
-          <i class="bi bi-circle"></i><span>Solicitudes recibidas</span>
+        <a class="nav-link collapsed" href="motorizado-solicitudes.php">
+          <i class="bi bi-house"></i>
+          <span>Home</span>
         </a>
-      </li>
-      
-    </ul>
   </li><!-- End Solicitudes Nav -->
 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-map"></i><span>Fase solicitud</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-journal"></i><span>Fase solicitud</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="zonas-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
       <li>
@@ -178,9 +171,8 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
       <h1>perfil</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">perfil</li>
-          <li class="breadcrumb-item active">Perfil</li>
+          <li class="breadcrumb-item"><a href="motorizado-solicitudes.php">Home</a></li>
+          <li class="breadcrumb-item active">Mi Perfil</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -193,7 +185,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <img src="<?php echo $_SESSION['foto']; ?>" alt="" class="rounded-circle">
               <h2> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h2>
-              <h3><?php echo $_SESSION['rol']; ?></h3>
+              <h3>Motorizado</h3>
             </div>
           </div>
 
@@ -253,8 +245,8 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Rollll</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['rol']; ?></div>
+                    <div class="col-lg-3 col-md-4 label">Rol</div>
+                    <div class="col-lg-9 col-md-8">Motorizado</div>
                   </div>
 
                   
@@ -318,7 +310,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="rol" class="col-md-4 col-lg-3 col-form-label">Rol</label>
                       <div class="col-md-8 col-lg-9">
-                      <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $_SESSION['rol']; ?>" disabled>
+                      <input type="text" class="form-control" id="rol" name="rol" value="Motorizado" disabled>
                       </div>
                     </div>
 
@@ -377,26 +369,30 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                   <form  id="cambiarClave" action="../Controllers/editarClave.php" method="POST">
 
 
-                  <div class="row mb-3">
+                  <div class="row mb-3 position-relative">
                     <label for="claveUsuario" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
                     <div class="col-md-8 col-lg-9 position-relative">
                       <input name="claveUsuario" type="password" class="form-control" id="claveUsuario" required minlength="8" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
-                      <span id="togglePassword1" class="position-absolute" style="right: 20px; top: 34%; transform: translateY(-50%); cursor: pointer;">
-                        <i class="bi bi-eye" id="eyeIcon1"></i> <!-- Cambié el id a togglePassword1 y eyeIcon1 -->
-                      </span>
+                      <span id="togglePassword1" required  
+                          class="position-absolute" 
+                          style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                          <i class="bi bi-eye" id="eyeIcon1"></i>
+                        </span>
                       <div class="invalid-feedback">
                         La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
                     </div>
                   </div>
 
-                  <div class="row mb-3">
+                  <div class="row mb-3 position-relative">
                     <label for="password" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
                     <div class="col-md-8 col-lg-9 position-relative">
-                      <input name="password" type="password" class="form-control" id="password" required>
-                      <span id="togglePassword2" class="position-absolute" style="right: 20px; top: 32%; transform: translateY(-50%); cursor: pointer;">
-                        <i class="bi bi-eye" id="eyeIcon2"></i> <!-- Cambié el id a togglePassword2 y eyeIcon2 -->
-                      </span>
+                      <input name="password" type="password" class="form-control" id="yourPassword" required>
+                      <span id="togglePassword2" required  
+                          class="position-absolute" 
+                          style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                          <i class="bi bi-eye" id="eyeIcon2"></i>
+                        </span>
                       <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
                   </div>
@@ -469,31 +465,28 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
 
   <!-- Script para el funcionamiento del ícono del ojito -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    // Selector para los campos de contraseña
-    const togglePassword1 = document.querySelector('#togglePassword1');
-    const passwordInput1 = document.querySelector('#claveUsuario');
-    const eyeIcon1 = document.querySelector('#eyeIcon1');
+  const togglePassword1 = document.querySelector('#togglePassword1');
+  const passwordInput1 = document.querySelector('#claveUsuario');
+  const eyeIcon1 = document.querySelector('#eyeIcon1');
 
-    const togglePassword2 = document.querySelector('#togglePassword2');
-    const passwordInput2 = document.querySelector('#password');
-    const eyeIcon2 = document.querySelector('#eyeIcon2');
+  const togglePassword2 = document.querySelector('#togglePassword2');
+  const passwordInput2 = document.querySelector('#yourPassword');
+  const eyeIcon2 = document.querySelector('#eyeIcon2');
 
-    // Evento para el primer campo de contraseña (Nueva contraseña)
-    togglePassword1.addEventListener('click', function () {
-      const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput1.setAttribute('type', type);
-      eyeIcon1.classList.toggle('bi-eye');
-      eyeIcon1.classList.toggle('bi-eye-slash');
-    });
+  // Alternar visibilidad de la contraseña (claveVeterinaria)
+  togglePassword1.addEventListener('click', function () {
+    const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput1.setAttribute('type', type);
+    eyeIcon1.classList.toggle('bi-eye');
+    eyeIcon1.classList.toggle('bi-eye-slash');
+  });
 
-    // Evento para el segundo campo de contraseña (Confirmar contraseña)
-    togglePassword2.addEventListener('click', function () {
-      const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput2.setAttribute('type', type);
-      eyeIcon2.classList.toggle('bi-eye');
-      eyeIcon2.classList.toggle('bi-eye-slash');
-    });
+  // Alternar visibilidad de la contraseña (yourPassword)
+  togglePassword2.addEventListener('click', function () {
+    const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput2.setAttribute('type', type);
+    eyeIcon2.classList.toggle('bi-eye');
+    eyeIcon2.classList.toggle('bi-eye-slash');
   });
 
   </script>

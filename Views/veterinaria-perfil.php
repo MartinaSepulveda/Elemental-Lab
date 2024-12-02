@@ -397,14 +397,16 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
                   <form  id="cambiarClave" action="../Controllers/editarClave.php" method="POST">
 
 
-                  <div class="row mb-3">
+                  <div class="row mb-3 position-relative">
                     <label for="claveVeterinaria" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
                     <div class="col-md-8 col-lg-9 position-relative"> <!-- Añadimos "position-relative" -->
                       <input name="claveVeterinaria" type="password" class="form-control" id="claveVeterinaria" required minlength="8" 
                       pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
-                      <span id="togglePassword1" class="position-absolute" style="right: 20px; top: 32%; transform: translateY(-50%); cursor: pointer;">
-                        <i class="bi bi-eye" id="eyeIcon1"></i>
-                      </span>
+                      <span id="togglePassword1" required  
+                          class="position-absolute" 
+                          style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                          <i class="bi bi-eye" id="eyeIcon1"></i>
+                        </span>
                       <div class="invalid-feedback">
                         La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
@@ -414,10 +416,12 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
                   <div class="row mb-3">
                     <label for="yourPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
                     <div class="col-md-8 col-lg-9 position-relative"> <!-- Añadimos "position-relative" -->
-                      <input name="password" type="password" class="form-control" id="password" required>
-                      <span id="togglePassword2" class="position-absolute" style="right: 20px; top: 32%; transform: translateY(-50%); cursor: pointer;">
-                        <i class="bi bi-eye" id="eyeIcon2"></i>
-                      </span>
+                      <input name="password" type="password" class="form-control" id="yourPassword" required>
+                      <span id="togglePassword2" required  
+                          class="position-absolute" 
+                          style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                          <i class="bi bi-eye" id="eyeIcon2"></i>
+                        </span>
                       <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
                   </div>
@@ -489,32 +493,30 @@ verificarVeterinaria();   // Verificar que tenga el rol adecuado
 
   <!-- Script para el funcionamiento del ícono del ojo -->
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Selector para los campos de contraseña
-    const togglePassword1 = document.querySelector('#togglePassword1');
-    const passwordInput1 = document.querySelector('#claveVeterinaria');
-    const eyeIcon1 = document.querySelector('#eyeIcon1');
+  const togglePassword1 = document.querySelector('#togglePassword1');
+  const passwordInput1 = document.querySelector('#claveVeterinaria');
+  const eyeIcon1 = document.querySelector('#eyeIcon1');
 
-    const togglePassword2 = document.querySelector('#togglePassword2');
-    const passwordInput2 = document.querySelector('#password');
-    const eyeIcon2 = document.querySelector('#eyeIcon2');
+  const togglePassword2 = document.querySelector('#togglePassword2');
+  const passwordInput2 = document.querySelector('#yourPassword');
+  const eyeIcon2 = document.querySelector('#eyeIcon2');
 
-    // Evento para el primer campo de contraseña (Nueva contraseña)
-    togglePassword1.addEventListener('click', function () {
-      const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput1.setAttribute('type', type);
-      eyeIcon1.classList.toggle('bi-eye');
-      eyeIcon1.classList.toggle('bi-eye-slash');
-    });
-
-    // Evento para el segundo campo de contraseña (Confirmar contraseña)
-    togglePassword2.addEventListener('click', function () {
-      const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput2.setAttribute('type', type);
-      eyeIcon2.classList.toggle('bi-eye');
-      eyeIcon2.classList.toggle('bi-eye-slash');
-    });
+  // Alternar visibilidad de la contraseña (claveVeterinaria)
+  togglePassword1.addEventListener('click', function () {
+    const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput1.setAttribute('type', type);
+    eyeIcon1.classList.toggle('bi-eye');
+    eyeIcon1.classList.toggle('bi-eye-slash');
   });
+
+  // Alternar visibilidad de la contraseña (yourPassword)
+  togglePassword2.addEventListener('click', function () {
+    const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput2.setAttribute('type', type);
+    eyeIcon2.classList.toggle('bi-eye');
+    eyeIcon2.classList.toggle('bi-eye-slash');
+  });
+
   </script>
 
 

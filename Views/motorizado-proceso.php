@@ -118,17 +118,10 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
       <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="motorizado-solicitudes.php">
+          <i class="bi bi-house"></i>
+          <span>Home</span>
         </a>
-        <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="motorizado-solicitudes.php" >
-              <i class="bi bi-circle"></i><span>Solicitudes recibidas</span>
-            </a>
-          </li>
-          
-        </ul>
       </li><!-- End Solicitudes Nav -->
 
       <li class="nav-item">
@@ -171,9 +164,10 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
     <div class="pagetitle">
       <h1>Dashboard</h1>
       <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="Motorizado.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="motorizado-solicitudes.php">Home</a></li>
+          <li class="breadcrumb-item">Fase Solicitudes</li>
+          <li class="breadcrumb-item active">En Proceso</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

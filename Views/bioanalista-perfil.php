@@ -3,7 +3,7 @@ session_start();  // Esto es necesario para iniciar la sesión
 
 include('../Models/autenticacion.php');  // Incluir el archivo de autenticación
 verificarSesion();  // Verificar que esté logueado
-verificarRol(1);    // Verificar que tenga el rol adecuado
+verificarRol(3);    // Verificar que tenga el rol adecuado
 ?>
 <!-- Cargar las dependencias necesarias -->
 
@@ -20,7 +20,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Administrador Perfil</title>
+  <title>Motorizado Perfil</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -59,7 +59,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="administrador.php" class="logo d-flex align-items-center">
+      <a href="bioanalista.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Elemental lab</span>
       </a>
@@ -85,14 +85,14 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h6>
-              <span>Administrador</span>
+              <span>Bioanalista</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="administrador-perfil.php">
+              <a class="dropdown-item d-flex align-items-center" href="bioanalista-perfil.php">
                 <i class="bi bi-person"></i>
                 <span>Mi perfil</span>
               </a>
@@ -119,118 +119,27 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
+<!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="administrador.php">
-            <i class="bi bi-house"></i>
-            <span>Home</span>
-          </a>
-        </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="bioanalista.php">
+          <i class="bi bi-house"></i>
+          <span>Home</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="../Models/logout.php">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Cerrar Sesión</span>
+        </a>
+      </li><!-- End cerrar sesión Page Nav -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-person"></i><span>Usuarios</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="usuarios-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="administrador-usuariosActivos.php">
-                <i class="bi bi-circle"></i><span>Activos</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-usuariosInactivos.php">
-                <i class="bi bi-circle"></i><span>Inactivos</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Usuarios Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#solicitudes-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="solicitudes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="administrador-solicitudProceso.php">
-                <i class="bi bi-circle"></i><span>En proceso</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-solicitudRealizada.php">
-                <i class="bi bi-circle"></i><span>Realizadas</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-solicitudNoRealizada.php">
-                <i class="bi bi-circle"></i><span>No realizadas</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Solicitudes Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#zonas-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-map"></i><span>Zonas</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="zonas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="administrador-asignarZonas.php">
-                <i class="bi bi-circle"></i><span>Asignar Zona</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-zonasAsignadas.php">
-                <i class="bi bi-circle"></i><span>Zonas Asignadas</span>
-              </a>
-            </li>
-            <li>
-              <a href="administrador-ingresarZona.php">
-                <i class="bi bi-circle"></i><span>Ingresar Zonas</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Zonas Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#examenes-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-file-earmark-text"></i><span>Exámenes</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="examenes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-              <li>
-                  <a href="administrador-ingresarExamen.php">
-                      <i class="bi bi-circle"></i><span>Ingresar Exámenes</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="administrador-verExamen.php">
-                      <i class="bi bi-circle"></i><span>Ver Exámenes</span>
-                  </a>
-              </li>
-          </ul>
-      </li>    
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="administrador-resultados.php">
-            <i class="bi bi-check-circle"></i>
-            <span>Resultados enviados</span>
-          </a>
-        </li><!-- End Resultados Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link " href="../Models/logout.php">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Cerrar Sesión</span>
-          </a>
-        </li><!-- End cerrar sesión Page Nav -->
-
-      </ul>
+    </ul>
 
   </aside><!-- End Sidebar-->
-
 
   <main id="main" class="main">
 
@@ -238,8 +147,9 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
       <h1>perfil</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="administrador.php">Home</a></li>
-          <li class="breadcrumb-item active">Mi Perfil</li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">perfil</li>
+          <li class="breadcrumb-item active">Perfil</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -252,7 +162,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <img src="<?php echo $_SESSION['foto']; ?>" alt="" class="rounded-circle">
               <h2> <?php echo htmlspecialchars(obtenerNombreUsuario()); ?></h2>
-              <h3>Administrador</h3>
+              <h3>Bioanalista</h3>
             </div>
           </div>
 
@@ -313,7 +223,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Rol</div>
-                    <div class="col-lg-9 col-md-8">Administador</div>
+                    <div class="col-lg-9 col-md-8">Bioanalista</div>
                   </div>
 
                   
@@ -329,7 +239,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto</label>
                       <div class="col-md-8 col-lg-9">
-                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoUsuario" class="form-control" id="fotoUsuario" >
+                      <input type="file" accept=".jpg, .png, .gif, .jpeg" name="fotoUsuario" class="form-control" id="fotoUsuario" > 
                       </div>
                     </div>
 
@@ -377,7 +287,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                     <div class="row mb-3">
                       <label for="rol" class="col-md-4 col-lg-3 col-form-label">Rol</label>
                       <div class="col-md-8 col-lg-9">
-                      <input type="text" class="form-control" id="rol" name="rol" value="Administrador" disabled>
+                      <input type="text" class="form-control" id="rol" name="rol" value="Bioanalista" disabled>
                       </div>
                     </div>
 
@@ -436,38 +346,39 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
                   <form  id="cambiarClave" action="../Controllers/editarClave.php" method="POST">
 
 
-                    <div class="row mb-3 position-relative">
-                      <label for="claveUsuario" class="col-md-4 col-lg-3 col-form-label ">Nueva contraseña</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="claveUsuario" type="password" class="form-control" id="claveUsuario" required minlength="8" 
-                        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
-                        <span id="togglePassword1" required  
+                  <div class="row mb-3 position-relative">
+                    <label for="claveUsuario" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
+                    <div class="col-md-8 col-lg-9 position-relative">
+                      <input name="claveUsuario" type="password" class="form-control" id="claveUsuario" required minlength="8" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
+                      <span id="togglePassword1" required  
                           class="position-absolute" 
                           style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
                           <i class="bi bi-eye" id="eyeIcon1"></i>
                         </span>
-                        <div class="invalid-feedback">
-                          La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
-                      </div>
+                      <div class="invalid-feedback">
+                        La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.
                       </div>
                     </div>
+                  </div>
 
-                    <div class="row mb-3 position-relative">
-                      <label for="yourPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="yourPassword" required >
-                        <span id="togglePassword2" required  
+                  <div class="row mb-3 position-relative">
+                    <label for="password" class="col-md-4 col-lg-3 col-form-label">Confirmar contraseña</label>
+                    <div class="col-md-8 col-lg-9 position-relative">
+                      <input name="password" type="password" class="form-control" id="yourPassword" required>
+                      <span id="togglePassword2" required  
                           class="position-absolute" 
                           style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
                           <i class="bi bi-eye" id="eyeIcon2"></i>
                         </span>
-                        <div class="invalid-feedback">Las contraseñas no coinciden!</div>
-                      </div>
+                      <div class="invalid-feedback">Las contraseñas no coinciden!</div>
                     </div>
+                  </div>
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary" >Cambiar contraseña</button>
-                    </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                  </div>
+
+
                   </form><!-- End Cambiar contraseña -->
 
                 </div>
@@ -513,22 +424,24 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Script para validar contraseñas antes de enviar -->
   <script>
-    // Simple password confirmation validation
-    document.getElementById('cambiarClave').onsubmit = function() {
+  document.addEventListener("DOMContentLoaded", function () {
+    // Validación de contraseñas al enviar el formulario
+    document.getElementById('cambiarClave').onsubmit = function (event) {
       const password = document.getElementById('claveUsuario').value;
-      const confirmPassword = document.getElementById('yourPassword').value;
+      const confirmPassword = document.getElementById('password').value;
 
       if (password !== confirmPassword) {
         alert("Las contraseñas no coinciden. Por favor intenta de nuevo.");
-        return false;
+        event.preventDefault(); // Detener el envío del formulario
       }
-      return true;
     };
+  });
   </script>
 
-    <!-- Scrip para ocultar/mostrar la contraseña -->
-    <script>
+  <!-- Script para el funcionamiento del ícono del ojito -->
+  <script>
   const togglePassword1 = document.querySelector('#togglePassword1');
   const passwordInput1 = document.querySelector('#claveUsuario');
   const eyeIcon1 = document.querySelector('#eyeIcon1');
@@ -554,6 +467,7 @@ verificarRol(1);    // Verificar que tenga el rol adecuado
   });
 
   </script>
+
 
 </body>
 
