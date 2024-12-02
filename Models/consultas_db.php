@@ -794,7 +794,34 @@
             $conexion = $objConexion->get_conexion();
 
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarResultado = "SELECT  fechaResultado, archivo, idSolicitudResultado, idExamenSolicitud, nombreExamen FROM resultados LEFT JOIN solicitudes ON idSolicitudResultado = idSolicitud LEFT JOIN examen ON idExamenSolicitud = idExamen WHERE nitVeterinariaSolicitud = :nitVet  "; 
+            $consultarResultado = "SELECT 
+                                r.fechaResultado, 
+                                r.archivo, 
+                                r.idSolicitudResultado, 
+                                GROUP_CONCAT(e.nombreExamen SEPARATOR ' , ') AS examenes, -- Agrupa los nombres de los exámenes
+                                s.nitVeterinariaSolicitud AS nitVeterinaria, -- Referencia al campo 'nitVeterinariaSolicitud' de la tabla 'solicitudes'
+                                v.nombreVeterinaria
+                            FROM 
+                                resultados r
+                            LEFT JOIN 
+                                solicitudes s ON r.idSolicitudResultado = s.idSolicitud
+                            LEFT JOIN 
+                                veterinaria v ON s.nitVeterinariaSolicitud = v.nitVeterinaria
+                            LEFT JOIN 
+                                solicitudes_examenes se ON s.idSolicitud = se.idSolicitud -- Asociamos solicitudes con solicitudes_examenes
+                            LEFT JOIN 
+                                examen e ON se.idExamen = e.idExamen -- Asociamos solicitudes_examenes con examen
+                            WHERE 
+                                s.nitVeterinariaSolicitud = :nitVet -- Filtrar por el Nit de la veterinaria
+                            GROUP BY 
+                                r.fechaResultado, 
+                                r.archivo, 
+                                r.idSolicitudResultado, 
+                                s.nitVeterinariaSolicitud, 
+                                v.nombreVeterinaria
+                            ORDER BY 
+                                r.fechaResultado DESC;
+"; 
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarResultado);
@@ -824,7 +851,27 @@
             $conexion = $objConexion->get_conexion();
 
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarResultado = "SELECT  fechaResultado, archivo, idSolicitudResultado, idExamenSolicitud, nombreExamen, nitVeterinaria, nombreVeterinaria FROM resultados LEFT JOIN solicitudes ON idSolicitudResultado = idSolicitud LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria LEFT JOIN examen ON idExamenSolicitud = idExamen "; 
+            $consultarResultado = "SELECT 
+                    r.idResultado, 
+                    r.fechaResultado, 
+                    r.archivo, 
+                    r.idSolicitudResultado, 
+                    GROUP_CONCAT(e.nombreExamen SEPARATOR ' , ') AS examenes,  -- Agrupa los nombres de los exámenes
+                    s.nitVeterinariaSolicitud AS nitVeterinaria,  -- Aquí se referencia el campo 'nitVeterinariaSolicitud' de la tabla 'solicitudes'
+                    v.nombreVeterinaria
+                FROM resultados r
+                LEFT JOIN solicitudes s ON r.idSolicitudResultado = s.idSolicitud
+                LEFT JOIN veterinaria v ON s.nitVeterinariaSolicitud = v.nitVeterinaria
+                LEFT JOIN solicitudes_examenes se ON s.idSolicitud = se.idSolicitud  -- Asociamos solicitudes con solicitudes_examenes
+                LEFT JOIN examen e ON se.idExamen = e.idExamen  -- Asociamos solicitudes_examenes con examen
+                GROUP BY 
+                    r.fechaResultado, 
+                    r.archivo, 
+                    r.idSolicitudResultado, 
+                    s.nitVeterinariaSolicitud, 
+                    v.nombreVeterinaria
+                ORDER BY r.fechaResultado DESC;
+            "; 
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarResultado);

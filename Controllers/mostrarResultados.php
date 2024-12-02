@@ -15,9 +15,9 @@
                 <div class="col-md-4 result-card">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">'.$datosResultados['nombreExamen'].'</h5>
+                            <h5 class="card-title">'.$datosResultados['examenes'].'</h5>
                             <p class="text-muted" data-fecha="'.$datosResultados['fechaResultado'].'">Fecha de la prueba: '.$datosResultados['fechaResultado'].'</p>
-                            <a href="#" class="btn btn-primary">Descargar Resultado</a>
+                            <a href="../Controllers/descargarResultado.php?archivo=' . urlencode($datosResultados['archivo']) . '" class="btn btn-primary">Descargar Resultado</a>
                         </div>
                     </div>
                 </div>
@@ -38,19 +38,20 @@
         else{
             foreach ($Resultados as $datosResultados ){
                 //pintar o maquetar la informacion  
-                echo'
+                echo '
                 <div class="col-md-4 result-card">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Nit: '.$datosResultados['nitVeterinaria'].'</h5>
-                            <h4 class="card-title text-dark">Nombre Veterinaria: '.$datosResultados['nombreVeterinaria'].'</h4>
-                            <p>Nombre Exámen: '.$datosResultados['nombreExamen'].'</p>
-                            <p class="text-muted" data-fecha="'.$datosResultados['fechaResultado'].'">Fecha de la prueba: '.$datosResultados['fechaResultado'].'</p>
-                            <a href="#" class="btn btn-primary">Descargar Resultado</a>
+                            <h5 class="card-title">Nit: ' . $datosResultados['nitVeterinaria'] . '</h5>
+                            <h4 class="card-title text-dark">Nombre Veterinaria: ' . $datosResultados['nombreVeterinaria'] . '</h4>
+                            <p>Nombre Exámen: ' . $datosResultados['examenes'] . '</p>
+                            <p class="text-muted" data-fecha="' . $datosResultados['fechaResultado'] . '">Fecha de la prueba: ' . $datosResultados['fechaResultado'] . '</p>
+                            <a href="../Controllers/descargarResultado.php?archivo=' . urlencode($datosResultados['archivo']) . '" class="btn btn-primary">Descargar Resultado</a>
                         </div>
                     </div>
                 </div>
                 ';
+
             }
         }
     }
