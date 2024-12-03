@@ -189,29 +189,32 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
         <hr>
         <div class="row card">
           <div class="col-lg-12">
-            <table id="miTabla" class="table">
-              <tdead>
-                <tr style="text-align: center;">
-                  <th>Num <br>Solicitud</th>
-                  <th>Fecha Solicitud</th>
-                  <th>Fecha Recolección</th>
-                  <th>Veterinaria</th>
-                  <th>Dirección</th>
-                  <th>Teléfono</th>
-                  <th>Examen</th>
-                  <th>Urgencia</th>
-                  <th>Estado</th>
-                  <th>Fase</th>
-                </tr>
-            </tdead>
-            <tbody id="tbody">
+            <div class="table-responsive">
+              <table id="miTabla" class="table">
+                <tdead>
+                  <tr style="text-align: center;">
+                    <th>Num <br>Solicitud</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Fecha Recolección</th>
+                    <th>Veterinaria</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Examen</th>
+                    <th>Urgencia</th>
+                    <th>Estado</th>
+                    <th>Fase</th>
+                  </tr>
+                </tdead>
+                <tbody id="tbody">
               
                 <?php
                   cargarSolicitudesNoRealizadasMotorizado();
                 ?>
                 
-            </tbody>
-          </table>
+                </tbody>
+              </table>
+          </div>
+        </div>
 
 
           <div id="paginacion" class="d-flex align-items-center">

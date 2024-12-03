@@ -71,7 +71,7 @@ verificarRol(3);    // Verificar que tenga el rol adecuado
 
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
+            <!-- <i class="bi bi-search"></i> -->
           </a>
         </li><!-- icono de foto-->
 
@@ -352,7 +352,7 @@ verificarRol(3);    // Verificar que tenga el rol adecuado
                       <input name="claveUsuario" type="password" class="form-control" id="claveUsuario" required minlength="8" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
                       <span id="togglePassword1" required  
                           class="position-absolute" 
-                          style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                          style="right: 27px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
                           <i class="bi bi-eye" id="eyeIcon1"></i>
                         </span>
                       <div class="invalid-feedback">
@@ -367,7 +367,7 @@ verificarRol(3);    // Verificar que tenga el rol adecuado
                       <input name="password" type="password" class="form-control" id="yourPassword" required>
                       <span id="togglePassword2" required  
                           class="position-absolute" 
-                          style="right: 27px; top: 34%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                          style="right: 27px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
                           <i class="bi bi-eye" id="eyeIcon2"></i>
                         </span>
                       <div class="invalid-feedback">Las contraseñas no coinciden!</div>

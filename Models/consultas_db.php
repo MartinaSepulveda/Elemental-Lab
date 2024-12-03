@@ -518,6 +518,7 @@
             solicitudes.idSolicitud, 
             solicitudes.fechaSolicitud,
             solicitudes.fechaRecoleccion,  
+            solicitudes.idFaseSolicitud,
             GROUP_CONCAT(examen.nombreExamen SEPARATOR ' , ') AS examenes, -- Agrupa los nombres de los exámenes
             nivelurgencia.descripcionUrgencia,
             fase.descripcionFase 
@@ -527,11 +528,11 @@
             INNER JOIN examen ON solicitudes_examenes.idExamen = examen.idExamen 
             INNER JOIN nivelurgencia ON solicitudes.idUrgenciaSolicitud = nivelurgencia.idUrgencia 
             INNER JOIN fase ON solicitudes.idFaseSolicitud = fase.idFase  
-            WHERE fase.descripcionFase = 'En proceso' 
+            WHERE solicitudes.idFaseSolicitud = 1  
             AND solicitudes.nitVeterinariaSolicitud = :nitVeterinaria 
             GROUP BY solicitudes.idSolicitud, solicitudes.fechaSolicitud, solicitudes.fechaRecoleccion, 
                     nivelurgencia.descripcionUrgencia, fase.descripcionFase
-            ORDER BY solicitudes.idSolicitud DESC "; // Filtramos por el NIT de la veterinaria
+            ORDER BY solicitudes.idSolicitud DESC  "; // Filtramos por el NIT de la veterinaria
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
@@ -616,6 +617,7 @@
                         GROUP_CONCAT(examen.nombreExamen SEPARATOR ' , ') AS examenes, -- Agrupa los nombres de los exámenes
                         nivelurgencia.descripcionUrgencia,
                         estadosolicitud.descripcionEstadoSolicitud,
+                        solicitudes.idFaseSolicitud,
                         fase.descripcionFase
                     FROM solicitudes
                     LEFT JOIN veterinaria ON solicitudes.nitVeterinariaSolicitud = veterinaria.nitVeterinaria
@@ -626,6 +628,7 @@
                     LEFT JOIN fase ON solicitudes.idFaseSolicitud = fase.idFase
                     WHERE solicitudes.nitVeterinariaSolicitud = :nitVeterinaria
                         AND solicitudes.idEstadoSolicitudSoli IS NULL
+                        AND solicitudes.idFaseSolicitud = 1 
                     GROUP BY 
                         solicitudes.idSolicitud, 
                         solicitudes.fechaSolicitud, 

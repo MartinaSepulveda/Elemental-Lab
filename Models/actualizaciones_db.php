@@ -1107,7 +1107,7 @@
                 border-radius: 15px; /* Bordes redondeados */
             ">
                 <img src="../Views/assets/img/comprobado.png" alt="Icono de alerta" style="margin-bottom: 25px; margin-top: -10px; width: 40px; height: 40px;"> <!-- Se ajustan los márgenes -->
-                <span style="text-align: center;">Sus datos se actualizaron correctamente. </span>
+                <span style="text-align: center;">Sus datos se actualizaron correctamente. <br> Los cambios se reflejarán al volver a inciar sesión. </span>
                 <button onclick="closeAlert()" style="
                     background: none;
                     border: none;

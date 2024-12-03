@@ -170,7 +170,7 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
       <section class="section">
 
         <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-3">
+          <div class="col-lg-4 col-md-6 col-sm-3 mb-4">
             <label for="registrosxPag">Registros por página:</label> 
               <select id="registrosxPag">
                   <option value="5" selected>5</option>
@@ -187,10 +187,11 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
         <br>
         <hr>
         <div class="row card">
-          <div class="col-lg-12" class="soliMotorizado">
-            <table id="miTabla" class="table">
-              <tdead>
-                <tr style="text-align: center;">
+          <div class="col-lg-12" >
+            <div class="table-responsive">
+              <table id="miTabla" class="table">
+                <tdead>
+                  <tr style="text-align: center;">
                     <th>Num <br>Solicitud</th>
                     <th>Fecha Solicitud</th>
                     <th>Fecha Recolección</th>
@@ -201,16 +202,17 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
                     <th>Urgencia</th>
                     <th>Estado</th>
                     <th>Fase</th>
-                </tr>
-            </tdead>
-            <tbody id="tbody">
+                  </tr>
+                </tdead>
+                <tbody id="tbody">
             
-                <?php
-                  cargarSolicitudesMotorizado();
-                ?>
-                
-            </tbody>
-          </table>
+                  <?php
+                    cargarSolicitudesMotorizado();
+                  ?> 
+                </tbody>
+              </table>
+          </div>
+        </div>
 
 
           <div id="paginacion" class="d-flex align-items-center">
@@ -222,8 +224,8 @@ verificarRol(2);    // Verificar que tenga el rol adecuado
             </button>
             <span id="pageInfo"></span>
           </div>
-        </div>
-        </section>
+        </div> 
+      </section>
 
       </main><!-- End #main -->
 
