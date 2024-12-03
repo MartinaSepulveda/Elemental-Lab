@@ -61,6 +61,9 @@
                   <a href="index.html" class="logo d-flex align-items-center w-auto">
                     <img src="assets/img/NombreLogoTransparente.png" alt="logo Elemental" height="200px">
                   </a>
+                  <a href="seleccionarRegistro.html" class="position-absolute top-0 start-0 ms-3 mt-3 text-decoration-none">
+                    <i class="bi bi-arrow-left" style="font-size: 1.5rem; color: #000;"></i>
+                  </a>
                 </div>
 
                 <div class="card-body">
