@@ -461,7 +461,7 @@
             $objConexion = new Conexion();
             $conexion =$objConexion -> get_conexion();
 
-            $cancelarSolicitud = "UPDATE solicitudes SET idEstadoSolicitudSoli= 1 WHERE idSolicitud=:idSolicitud"; 
+            $cancelarSolicitud = "UPDATE solicitudes SET idEstadoSolicitudSoli= 1, idFaseSolicitud = 3 WHERE idSolicitud=:idSolicitud"; 
 
             // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
             $result = $conexion -> prepare($cancelarSolicitud);

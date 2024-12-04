@@ -2,7 +2,7 @@
 
 // instrucción de PHP para importar una clase de un namespace
 use FTP\Connection;
-    // session_start();
+    session_start();
 
     class Registros{
 

@@ -18,7 +18,7 @@
                     <td>'.$datossolicitudes['nombreVeterinaria'].'</td>
                     <td>'.$datossolicitudes['direccionVeterinaria'].'</td>
                     <td>'.$datossolicitudes['telefonoVeterinaria'].'</td>
-                    <td>'.$datossolicitudes['nombreExamen'].'</td>
+                    <td>'.$datossolicitudes['examenes'].'</td>
                     <td>'.$datossolicitudes['descripcionUrgencia'].'</td>
                     <td>'.$datossolicitudes['descripcionFase'].'</td>
                     <td>' . (!empty($datossolicitudes['descripcionEstadoSolicitud']) ? $datossolicitudes['descripcionEstadoSolicitud'] : '--') . '</td>
@@ -47,7 +47,7 @@
                     <td>'.$datossolicitudes['nombreVeterinaria'].'</td>
                     <td>'.$datossolicitudes['direccionVeterinaria'].'</td>
                     <td>'.$datossolicitudes['telefonoVeterinaria'].'</td>
-                    <td>'.$datossolicitudes['nombreExamen'].'</td>
+                    <td>'.$datossolicitudes['examenes'].'</td>
                     <td>'.$datossolicitudes['descripcionUrgencia'].'</td>
                     <td>'.$datossolicitudes['descripcionFase'].'</td>
                     <td>' . (!empty($datossolicitudes['descripcionEstadoSolicitud']) ? $datossolicitudes['descripcionEstadoSolicitud'] : '--') . '</td>
@@ -76,7 +76,7 @@
                     <td>'.$datossolicitudes['nombreVeterinaria'].'</td>
                     <td>'.$datossolicitudes['direccionVeterinaria'].'</td>
                     <td>'.$datossolicitudes['telefonoVeterinaria'].'</td>
-                    <td>'.$datossolicitudes['nombreExamen'].'</td>
+                    <td>'.$datossolicitudes['examenes'].'</td>
                     <td>'.$datossolicitudes['descripcionUrgencia'].'</td>
                     <td>'.$datossolicitudes['descripcionFase'].'</td>
                     <td>' . (!empty($datossolicitudes['descripcionEstadoSolicitud']) ? $datossolicitudes['descripcionEstadoSolicitud'] : '--') . '</td>
@@ -240,7 +240,7 @@
                         <td>' . $datossolicitudes['nombreVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['direccionVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
-                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['examenes'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>' . $estadoSolicitud . '</td>
                         <td>' . $datossolicitudes['descripcionFase'] . '</td>
@@ -280,7 +280,7 @@
                         <td>' . $datossolicitudes['nombreVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['direccionVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
-                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['examenes'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>' . $estadoSolicitud . '</td>
                         
@@ -328,7 +328,7 @@
                         <td>' . $datossolicitudes['nombreVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['direccionVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
-                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['examenes'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>' . $estadoSolicitud . '</td>
                         <td>' . $datossolicitudes['descripcionFase'] . '</td>
@@ -368,7 +368,7 @@
                         <td>' . $datossolicitudes['nombreVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['direccionVeterinaria'] . '</td>
                         <td>' . $datossolicitudes['telefonoVeterinaria'] . '</td>
-                        <td>' . $datossolicitudes['nombreExamen'] . '</td>
+                        <td>' . $datossolicitudes['examenes'] . '</td>
                         <td>' . $datossolicitudes['descripcionUrgencia'] . '</td>
                         <td>' . $estadoSolicitud . '</td>
                         <td>' . $datossolicitudes['descripcionFase'] . '</td>

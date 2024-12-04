@@ -64,7 +64,47 @@
 
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
-            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud, descripcionZonas FROM solicitudes LEFT JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN examen ON idExamenSolicitud=idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN fase ON idFaseSolicitud =idFase LEFT JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE idFaseSolicitud = 1 ";
+            $consultarExamen = "SELECT 
+                            solicitudes.idSolicitud, 
+                            solicitudes.fechaSolicitud,
+                            solicitudes.fechaRecoleccion,  
+                            solicitudes.idFaseSolicitud,
+                            veterinaria.nombreVeterinaria, 
+                            veterinaria.direccionVeterinaria, 
+                            veterinaria.telefonoVeterinaria,
+                            GROUP_CONCAT(examen.nombreExamen SEPARATOR ' , ') AS examenes, -- Agrupa los nombres de los exámenes
+                            nivelurgencia.descripcionUrgencia,
+                            fase.descripcionFase,
+                            estadosolicitud.descripcionEstadoSolicitud,
+                            zonas.descripcionZonas
+                        FROM solicitudes
+                        LEFT JOIN veterinaria 
+                            ON solicitudes.nitVeterinariaSolicitud = veterinaria.nitVeterinaria 
+                        LEFT JOIN solicitudes_examenes 
+                            ON solicitudes.idSolicitud = solicitudes_examenes.idSolicitud
+                        LEFT JOIN examen 
+                            ON solicitudes_examenes.idExamen = examen.idExamen 
+                        LEFT JOIN nivelurgencia 
+                            ON solicitudes.idUrgenciaSolicitud = nivelurgencia.idUrgencia 
+                        LEFT JOIN fase 
+                            ON solicitudes.idFaseSolicitud = fase.idFase
+                        LEFT JOIN estadosolicitud 
+                            ON solicitudes.idEstadoSolicitudSoli = estadosolicitud.idEstadoSolicitud
+                        LEFT JOIN zonas 
+                            ON veterinaria.idZonaVeterinaria = zonas.idZonas
+                        WHERE solicitudes.idFaseSolicitud = 1  
+                        GROUP BY 
+                            solicitudes.idSolicitud, 
+                            solicitudes.fechaSolicitud, 
+                            solicitudes.fechaRecoleccion, 
+                            nivelurgencia.descripcionUrgencia, 
+                            fase.descripcionFase,
+                            veterinaria.nombreVeterinaria, 
+                            veterinaria.direccionVeterinaria, 
+                            veterinaria.telefonoVeterinaria,
+                            estadosolicitud.descripcionEstadoSolicitud,
+                            zonas.descripcionZonas
+                        ORDER BY solicitudes.idSolicitud DESC ";
             // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
             $result = $conexion -> prepare($consultarExamen);
 
@@ -89,7 +129,46 @@
 
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
-            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud, descripcionZonas FROM solicitudes LEFT JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN examen ON idExamenSolicitud=idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN fase ON idFaseSolicitud =idFase LEFT JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE idFaseSolicitud = 2 ";
+            $consultarExamen = "SELECT solicitudes.idSolicitud, 
+                            solicitudes.fechaSolicitud,
+                            solicitudes.fechaRecoleccion,  
+                            solicitudes.idFaseSolicitud,
+                            veterinaria.nombreVeterinaria, 
+                            veterinaria.direccionVeterinaria, 
+                            veterinaria.telefonoVeterinaria,
+                            GROUP_CONCAT(examen.nombreExamen SEPARATOR ' , ') AS examenes, -- Agrupa los nombres de los exámenes
+                            nivelurgencia.descripcionUrgencia,
+                            fase.descripcionFase,
+                            estadosolicitud.descripcionEstadoSolicitud,
+                            zonas.descripcionZonas
+                        FROM solicitudes
+                        LEFT JOIN veterinaria 
+                            ON solicitudes.nitVeterinariaSolicitud = veterinaria.nitVeterinaria 
+                        LEFT JOIN solicitudes_examenes 
+                            ON solicitudes.idSolicitud = solicitudes_examenes.idSolicitud
+                        LEFT JOIN examen 
+                            ON solicitudes_examenes.idExamen = examen.idExamen 
+                        LEFT JOIN nivelurgencia 
+                            ON solicitudes.idUrgenciaSolicitud = nivelurgencia.idUrgencia 
+                        LEFT JOIN fase 
+                            ON solicitudes.idFaseSolicitud = fase.idFase
+                        LEFT JOIN estadosolicitud 
+                            ON solicitudes.idEstadoSolicitudSoli = estadosolicitud.idEstadoSolicitud
+                        LEFT JOIN zonas 
+                            ON veterinaria.idZonaVeterinaria = zonas.idZonas
+                        WHERE solicitudes.idFaseSolicitud = 2  
+                        GROUP BY 
+                            solicitudes.idSolicitud, 
+                            solicitudes.fechaSolicitud, 
+                            solicitudes.fechaRecoleccion, 
+                            nivelurgencia.descripcionUrgencia, 
+                            fase.descripcionFase,
+                            veterinaria.nombreVeterinaria, 
+                            veterinaria.direccionVeterinaria, 
+                            veterinaria.telefonoVeterinaria,
+                            estadosolicitud.descripcionEstadoSolicitud,
+                            zonas.descripcionZonas
+                        ORDER BY solicitudes.idSolicitud DESC ";
             // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
             $result = $conexion -> prepare($consultarExamen);
 
@@ -114,7 +193,46 @@
 
             // Definimos la consulta SQL a ejecutar y la guardamos en una variable
             
-            $consultarExamen = "SELECT nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionFase, descripcionEstadoSolicitud, descripcionZonas FROM solicitudes LEFT JOIN veterinaria ON nitVeterinariaSolicitud=nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN examen ON idExamenSolicitud=idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN fase ON idFaseSolicitud =idFase LEFT JOIN estadosolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud WHERE idFaseSolicitud = 3 ";
+            $consultarExamen = "SELECT solicitudes.idSolicitud, 
+                            solicitudes.fechaSolicitud,
+                            solicitudes.fechaRecoleccion,  
+                            solicitudes.idFaseSolicitud,
+                            veterinaria.nombreVeterinaria, 
+                            veterinaria.direccionVeterinaria, 
+                            veterinaria.telefonoVeterinaria,
+                            GROUP_CONCAT(examen.nombreExamen SEPARATOR ' , ') AS examenes, -- Agrupa los nombres de los exámenes
+                            nivelurgencia.descripcionUrgencia,
+                            fase.descripcionFase,
+                            estadosolicitud.descripcionEstadoSolicitud,
+                            zonas.descripcionZonas
+                        FROM solicitudes
+                        LEFT JOIN veterinaria 
+                            ON solicitudes.nitVeterinariaSolicitud = veterinaria.nitVeterinaria 
+                        LEFT JOIN solicitudes_examenes 
+                            ON solicitudes.idSolicitud = solicitudes_examenes.idSolicitud
+                        LEFT JOIN examen 
+                            ON solicitudes_examenes.idExamen = examen.idExamen 
+                        LEFT JOIN nivelurgencia 
+                            ON solicitudes.idUrgenciaSolicitud = nivelurgencia.idUrgencia 
+                        LEFT JOIN fase 
+                            ON solicitudes.idFaseSolicitud = fase.idFase
+                        LEFT JOIN estadosolicitud 
+                            ON solicitudes.idEstadoSolicitudSoli = estadosolicitud.idEstadoSolicitud
+                        LEFT JOIN zonas 
+                            ON veterinaria.idZonaVeterinaria = zonas.idZonas
+                        WHERE solicitudes.idFaseSolicitud = 3  
+                        GROUP BY 
+                            solicitudes.idSolicitud, 
+                            solicitudes.fechaSolicitud, 
+                            solicitudes.fechaRecoleccion, 
+                            nivelurgencia.descripcionUrgencia, 
+                            fase.descripcionFase,
+                            veterinaria.nombreVeterinaria, 
+                            veterinaria.direccionVeterinaria, 
+                            veterinaria.telefonoVeterinaria,
+                            estadosolicitud.descripcionEstadoSolicitud,
+                            zonas.descripcionZonas
+                        ORDER BY solicitudes.idSolicitud DESC ";
             // Preparamos lo necesario para ejecutar la consulta de SQL guardada en la anterior variable
             $result = $conexion -> prepare($consultarExamen);
 
@@ -667,17 +785,48 @@
             $conexion = $objConexion->get_conexion();
         
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, 
-                descripcionEstadoSolicitud, descripcionFase 
-                FROM solicitudes 
-                LEFT JOIN examen ON idExamenSolicitud = idExamen 
-                LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia 
-                LEFT JOIN Fase ON idFaseSolicitud = idFase 
-                LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud 
-                LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria 
-                LEFT JOIN zonas ON idZonaVeterinaria = idZonas 
-                LEFT JOIN usuarios ON idZonaUsuario = idZonas 
-                WHERE idUsuario = :idUsuario AND idZonaUsuario = idZonaVeterinaria AND idFaseSolicitud = 1";
+            $consultarExamen = "SELECT 
+                                s.idSolicitud, 
+                                s.fechaSolicitud, 
+                                s.fechaRecoleccion, 
+                                v.nombreVeterinaria, 
+                                v.direccionVeterinaria, 
+                                v.telefonoVeterinaria, 
+                                n.descripcionUrgencia, 
+                                es.descripcionEstadoSolicitud, 
+                                f.descripcionFase, 
+                                GROUP_CONCAT(e.nombreExamen SEPARATOR ' , ') AS examenes
+                            FROM solicitudes s
+                            LEFT JOIN nivelurgencia n 
+                                ON s.idUrgenciaSolicitud = n.idUrgencia
+                            LEFT JOIN solicitudes_examenes se 
+                                ON s.idSolicitud = se.idSolicitud
+                            LEFT JOIN examen e 
+                                ON se.idExamen = e.idExamen
+                            LEFT JOIN fase f 
+                                ON s.idFaseSolicitud = f.idFase
+                            LEFT JOIN estadosolicitud es 
+                                ON s.idEstadoSolicitudSoli = es.idEstadoSolicitud
+                            LEFT JOIN veterinaria v 
+                                ON s.nitVeterinariaSolicitud = v.nitVeterinaria
+                            LEFT JOIN zonas z 
+                                ON v.idZonaVeterinaria = z.idZonas
+                            LEFT JOIN usuarios u 
+                                ON u.idZonaUsuario = z.idZonas
+                            WHERE u.idUsuario = :idUsuario 
+                                AND s.idFaseSolicitud = 1 
+                                AND u.idZonaUsuario = v.idZonaVeterinaria
+                            GROUP BY 
+                                s.idSolicitud, 
+                                s.fechaSolicitud, 
+                                s.fechaRecoleccion, 
+                                v.nombreVeterinaria, 
+                                v.direccionVeterinaria, 
+                                v.telefonoVeterinaria, 
+                                n.descripcionUrgencia, 
+                                es.descripcionEstadoSolicitud, 
+                                f.descripcionFase
+                            ORDER BY s.idSolicitud DESC ";
         
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
@@ -707,7 +856,48 @@
             $conexion = $objConexion->get_conexion();
 
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes LEFT JOIN examen ON idExamenSolicitud = idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN Fase ON idFaseSolicitud = idFase LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN usuarios ON idZonaUsuario = idZonas WHERE idUsuario = :idUsuario AND idFaseSolicitud = 1 AND idZonaUsuario = idZonaVeterinaria "; // Filtramos por el NIT de la veterinaria
+            $consultarExamen = "SELECT 
+                                s.idSolicitud, 
+                                s.fechaSolicitud, 
+                                s.fechaRecoleccion, 
+                                v.nombreVeterinaria, 
+                                v.direccionVeterinaria, 
+                                v.telefonoVeterinaria, 
+                                n.descripcionUrgencia, 
+                                es.descripcionEstadoSolicitud, 
+                                f.descripcionFase, 
+                                GROUP_CONCAT(e.nombreExamen SEPARATOR ' , ') AS examenes
+                            FROM solicitudes s
+                            LEFT JOIN nivelurgencia n 
+                                ON s.idUrgenciaSolicitud = n.idUrgencia
+                            LEFT JOIN solicitudes_examenes se 
+                                ON s.idSolicitud = se.idSolicitud
+                            LEFT JOIN examen e 
+                                ON se.idExamen = e.idExamen
+                            LEFT JOIN fase f 
+                                ON s.idFaseSolicitud = f.idFase
+                            LEFT JOIN estadosolicitud es 
+                                ON s.idEstadoSolicitudSoli = es.idEstadoSolicitud
+                            LEFT JOIN veterinaria v 
+                                ON s.nitVeterinariaSolicitud = v.nitVeterinaria
+                            LEFT JOIN zonas z 
+                                ON v.idZonaVeterinaria = z.idZonas
+                            LEFT JOIN usuarios u 
+                                ON u.idZonaUsuario = z.idZonas
+                            WHERE u.idUsuario = :idUsuario 
+                                AND s.idFaseSolicitud = 1 
+                                AND u.idZonaUsuario = v.idZonaVeterinaria
+                            GROUP BY 
+                                s.idSolicitud, 
+                                s.fechaSolicitud, 
+                                s.fechaRecoleccion, 
+                                v.nombreVeterinaria, 
+                                v.direccionVeterinaria, 
+                                v.telefonoVeterinaria, 
+                                n.descripcionUrgencia, 
+                                es.descripcionEstadoSolicitud, 
+                                f.descripcionFase
+                            ORDER BY s.idSolicitud DESC "; // Filtramos por el NIT de la veterinaria
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
@@ -737,7 +927,34 @@
             $conexion = $objConexion->get_conexion();
 
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes LEFT JOIN examen ON idExamenSolicitud = idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN Fase ON idFaseSolicitud = idFase LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN usuarios ON idZonaUsuario = idZonas WHERE idUsuario = :idUsuario AND idFaseSolicitud = 2 AND idZonaUsuario = idZonaVeterinaria "; // Filtramos por el NIT de la veterinaria
+            $consultarExamen = "SELECT 
+                            s.idSolicitud, 
+                            s.fechaSolicitud, 
+                            s.fechaRecoleccion, 
+                            v.nombreVeterinaria, 
+                            v.direccionVeterinaria, 
+                            v.telefonoVeterinaria, 
+                            n.descripcionUrgencia, 
+                            es.descripcionEstadoSolicitud, 
+                            f.descripcionFase
+                        FROM solicitudes s
+                        LEFT JOIN nivelurgencia n 
+                            ON s.idUrgenciaSolicitud = n.idUrgencia
+                        LEFT JOIN fase f 
+                            ON s.idFaseSolicitud = f.idFase
+                        LEFT JOIN estadosolicitud es 
+                            ON s.idEstadoSolicitudSoli = es.idEstadoSolicitud
+                        LEFT JOIN veterinaria v 
+                            ON s.nitVeterinariaSolicitud = v.nitVeterinaria
+                        LEFT JOIN zonas z 
+                            ON v.idZonaVeterinaria = z.idZonas
+                        LEFT JOIN usuarios u 
+                            ON u.idZonaUsuario = z.idZonas
+                        WHERE u.idUsuario = :idUsuario 
+                        AND s.idFaseSolicitud = 2
+                        AND u.idZonaUsuario = v.idZonaVeterinaria
+                        ORDER BY s.idSolicitud DESC;
+"; // Filtramos por el NIT de la veterinaria
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
@@ -767,7 +984,38 @@
             $conexion = $objConexion->get_conexion();
 
             // Definimos la consulta SQL para traer solo las solicitudes en proceso de la veterinaria
-            $consultarExamen = "SELECT idSolicitud, fechaSolicitud, fechaRecoleccion, nombreVeterinaria, direccionVeterinaria, telefonoVeterinaria, nombreExamen, descripcionUrgencia, descripcionEstadoSolicitud, descripcionFase FROM solicitudes LEFT JOIN examen ON idExamenSolicitud = idExamen LEFT JOIN nivelurgencia ON idUrgenciaSolicitud = idUrgencia LEFT JOIN Fase ON idFaseSolicitud = idFase LEFT JOIN estadoSolicitud ON idEstadoSolicitudSoli = idEstadoSolicitud LEFT JOIN veterinaria ON nitVeterinariaSolicitud = nitVeterinaria LEFT JOIN zonas ON idZonaVeterinaria = idZonas LEFT JOIN usuarios ON idZonaUsuario = idZonas WHERE idUsuario = :idUsuario AND idFaseSolicitud = 3 AND idZonaUsuario = idZonaVeterinaria "; // Filtramos por el NIT de la veterinaria
+            $consultarExamen = "SELECT 
+                            s.idSolicitud, 
+                            s.fechaSolicitud, 
+                            s.fechaRecoleccion, 
+                            v.nombreVeterinaria, 
+                            v.direccionVeterinaria, 
+                            v.telefonoVeterinaria,  
+                            n.descripcionUrgencia, 
+                            es.descripcionEstadoSolicitud, 
+                            f.descripcionFase
+                        FROM solicitudes s
+                        LEFT JOIN solicitudes_examenes se 
+                            ON s.idSolicitud = se.idSolicitud
+                        LEFT JOIN examen e 
+                            ON se.idExamen = e.idExamen
+                        LEFT JOIN nivelurgencia n 
+                            ON s.idUrgenciaSolicitud = n.idUrgencia
+                        LEFT JOIN fase f 
+                            ON s.idFaseSolicitud = f.idFase
+                        LEFT JOIN estadosolicitud es 
+                            ON s.idEstadoSolicitudSoli = es.idEstadoSolicitud
+                        LEFT JOIN veterinaria v 
+                            ON s.nitVeterinariaSolicitud = v.nitVeterinaria
+                        LEFT JOIN zonas z 
+                            ON v.idZonaVeterinaria = z.idZonas
+                        LEFT JOIN usuarios u 
+                            ON u.idZonaUsuario = z.idZonas
+                        WHERE u.idUsuario = :idUsuario 
+                        AND s.idFaseSolicitud = 3
+                        AND u.idZonaUsuario = v.idZonaVeterinaria
+                        ORDER BY s.idSolicitud DESC;
+ "; // Filtramos por el NIT de la veterinaria
 
             // Preparamos la consulta
             $result = $conexion->prepare($consultarExamen);
